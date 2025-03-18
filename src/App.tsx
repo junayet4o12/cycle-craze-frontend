@@ -1,10 +1,12 @@
+import Navbar from "./components/navbar/Navbar"
 import { Button } from "./components/ui/button"
 
 function App() {
 
   return (
     <>
-     <Button>Click me</Button>
+      <Navbar />
+      <Button>Hello</Button>
     </>
   )
 }
