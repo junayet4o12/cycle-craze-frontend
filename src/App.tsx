@@ -1,4 +1,4 @@
-import Navbar from "./components/navbar/Navbar"
+import Navbar from "./components/modules/navbar/Navbar"
 import { Button } from "./components/ui/button"
 
 function App() {
