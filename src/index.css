@@ -1,5 +1,4 @@
 @import "tailwindcss";
-
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
@@ -117,5 +116,42 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+
+section {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;   /* 16px */
+  padding-right: 1rem;  /* 16px */
+}
+
+@media (min-width: 640px) {
+  section {
+    padding-left: 1.5rem;   /* 24px */
+    padding-right: 1.5rem;  /* 24px */
+  }
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-left: 2rem;   /* 32px */
+    padding-right: 2rem;  /* 32px */
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding-left: 2.5rem;   /* 40px */
+    padding-right: 2.5rem;  /* 40px */
+  }
+}
+
+@media (min-width: 1280px) {
+  section {
+    padding-left: 3rem;   /* 48px */
+    padding-right: 3rem;  /* 48px */
   }
 }

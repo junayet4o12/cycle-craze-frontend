@@ -8,7 +8,7 @@ import {
     SheetClose,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
-import Container from "../container/Container";
+import { Link } from "react-router-dom";
 
 interface NavItem {
     label: string;
@@ -27,15 +27,13 @@ const Navbar: FC = () => {
 
     return (
         <header className="sticky top-0 z-40 w-full border-b bg-background">
-            <Container>
+            <section>
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo and company name */}
-                    <div className="flex items-center gap-2">
-                        <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
-                            LC
-                        </div>
-                        <span className="text-lg font-semibold">LogoCompany</span>
-                    </div>
+                    <Link to={'/'} className="flex items-center gap-1">
+                        <img className="w-12 object-cover" src="/logo.png" alt="" />
+                        <span className="text-lg font-semibold">CycleCraze</span>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-6">
@@ -55,25 +53,20 @@ const Navbar: FC = () => {
                     </nav>
 
                     {/* Mobile Navigation */}
-                    <div className="md:hidden flex items-center">
+                    <div className="md:hidden flex items-center gap-1">
                         <ModeToggle />
 
                         <Sheet>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" aria-label="Menu">
+                                <Button variant="ghost" size="icon" aria-label="Menu" className="w-auto h-auto py-2.5 pl-2.5 hover:pr-2.5 duration-500 cursor-pointer">
                                     <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="right">
+                            <SheetContent side="right" className="px-4">
                                 <nav className="flex flex-col gap-4 mt-8">
                                     {navItems.map((item) => (
                                         <SheetClose asChild key={item.label}>
-                                            <a
-                                                href={item.href}
-                                                className="text-lg font-medium hover:text-primary transition-colors"
-                                            >
-                                                {item.label}
-                                            </a>
+                                            <Link to={`/${item.href}`}>{item.label}</Link>
                                         </SheetClose>
                                     ))}
                                 </nav>
@@ -81,7 +74,7 @@ const Navbar: FC = () => {
                         </Sheet>
                     </div>
                 </div>
-            </Container>
+            </section>
         </header>
     );
 };
