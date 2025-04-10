@@ -13,7 +13,7 @@ import { useUpdateMyDataMutation } from "@/redux/features/user/userApi";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { TUserData } from "@/types";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 
 const formSchema = z.object({
@@ -56,6 +56,7 @@ type PropTypes = {
 
 export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
     const [updateMyData, { isLoading, isError }] = useUpdateMyDataMutation()
+    const selectProfileRef = useRef<HTMLInputElement | null>(null)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -113,13 +114,15 @@ export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
                                             </Avatar>
                                             <Label htmlFor="profile">Upload Profile Image</Label>
                                             <Input
+                                                ref={selectProfileRef}
                                                 type="file"
                                                 accept="image/*"
                                                 autoComplete="profileImage"
                                                 disabled={isLoading}
-                                                className="bg-gray-50"
+                                                className="bg-gray-50 hidden"
                                                 onChange={(e) => field.onChange(e.target.files?.[0])}
                                             />
+                                            <Button onClick={()=> selectProfileRef.current?.click()} type="button" variant={"outline"} className="w-full sm:w-44">Select Image</Button>
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -203,11 +206,10 @@ export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
                         </Button>
                         <Button
                             className="flex items-center gap-1"
-                        // disabled={updateProfileMutation.isLoading}
+                            disabled={isLoading}
                         >
                             <Save size={16} />
-                            {/* {updateProfileMutation.isLoading ? "Saving..." : "Save Changes"} */}
-                            Save Changes
+                            {isLoading ? "Saving..." : "Save Changes"}
                         </Button>
                     </CardFooter>
                 </form>

@@ -6,7 +6,7 @@ export default function Profile() {
     const { data, isLoading, isError } = useMyDataQuery(undefined);
     const [imageLoading, setImageLoading] = useState(true);
 
-    const profile = data?.profile || '/public/default-user.png';
+    const profile = data?.data?.profile || '/public/default-user.png';
 
     // Handle image load complete
     const handleImageLoaded = () => {

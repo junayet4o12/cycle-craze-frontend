@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { LogOut, Menu, ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Profile from "@/components/profile";
+import { useTheme } from "@/providers/theme-provider";
 
 interface NavItem {
     label: string;
@@ -26,18 +27,24 @@ const navItems: NavItem[] = [
 ];
 
 const Navbar: FC = () => {
+    const { theme } = useTheme();
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectCurrentUser);
     const handleLogout = () => {
         dispatch(logout())
     }
+
+    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const logoUrl = theme === 'dark' ? '/logo.png' : theme === 'light' ? '/logo-black.png' : isSystemDark ? '/logo.png' : '/logo-black.png'
+
     return (
         <header className="sticky top-0 z-40 w-full border-b bg-background">
             <section className="!py-0">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo and company name */}
                     <Link to={'/'} className="flex items-center gap-1">
-                        <img className="w-12 object-cover" src="/logo.png" alt="" />
+                        <img className="w-12 object-cover" src={logoUrl} alt="" />
                         <span className="text-lg font-semibold">CycleCraze</span>
                     </Link>
 
@@ -76,7 +83,7 @@ const Navbar: FC = () => {
                                             <span>My Profile</span>
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link to="/orders">
+                                    <Link to="/my-orders">
                                         <DropdownMenuItem className="cursor-pointer">
                                             <span>My Orders</span>
                                         </DropdownMenuItem>
@@ -132,7 +139,7 @@ const Navbar: FC = () => {
                                                 </SheetClose>
                                             </div>
                                             <SheetClose asChild>
-                                                <Link to="/orders" className="text-sm font-medium py-2 block">
+                                                <Link to="/my-orders" className="text-sm font-medium py-2 block">
                                                     My Orders
                                                 </Link>
                                             </SheetClose>
