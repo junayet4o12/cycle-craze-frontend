@@ -48,7 +48,6 @@ export default function SignUp() {
     // Form submission handler
     const onSubmit = async (data: FormValues) => {
         const toastId = toast.loading('Creating your account...');
-        console.log(data);
 
         try {
             const res = await signUp(data).unwrap();

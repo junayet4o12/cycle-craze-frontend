@@ -126,6 +126,7 @@ section {
   margin-right: auto;
   padding-left: 1rem;   /* 16px */
   padding-right: 1rem;  /* 16px */
+ 
 }
 
 @media (min-width: 640px) {

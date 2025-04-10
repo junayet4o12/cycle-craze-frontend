@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Eye, EyeClosed, EyeOff, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAppDispatch } from '@/redux/hooks';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
@@ -43,7 +43,6 @@ export default function Login() {
     // Form submission handler
     const onSubmit = async (data: FormValues) => {
         const toastId = toast.loading('Logging in...');
-        console.log(data);
 
         try {
             const res = await login(data).unwrap();
@@ -109,7 +108,7 @@ export default function Login() {
                                                 className="bg-gray-50"
                                                 {...field}
                                             />
-                                           <PassShowingToggler showPass={showPass} setShowPass={setShowPass} />
+                                            <PassShowingToggler showPass={showPass} setShowPass={setShowPass} />
                                         </div>
                                     </FormControl>
                                     <FormMessage />

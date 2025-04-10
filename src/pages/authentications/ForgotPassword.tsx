@@ -22,7 +22,6 @@ type FormValues = z.infer<typeof formSchema>;
 export default function ForgotPassword() {
     const [forgotPassword, { isLoading, data, isSuccess, isError }] = useForgotPasswordMutation();
     const [userEmail, setUserEmail] = useState('')
-    console.log({ data, isSuccess, isError });
 
     // Initialize form with TypeScript types
     const form = useForm<FormValues>({
@@ -35,7 +34,6 @@ export default function ForgotPassword() {
     // Form submission handler
     const onSubmit = async (data: FormValues) => {
         const toastId = toast.loading('Sending reset link...');
-        console.log(data);
 
         try {
             await forgotPassword(data).unwrap();
