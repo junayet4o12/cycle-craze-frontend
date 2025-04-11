@@ -35,9 +35,8 @@ const Navbar: FC = () => {
     }
 
     const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const logoUrl = theme === 'dark' ? '/logo.png' : theme === 'light' ? '/logo-black.png' : isSystemDark ? '/logo.png' : '/logo-black.png'
 
+    const logoUrl = theme === 'dark' ? '/logo.png' : theme === 'light' ? '/logo-black.png' : isSystemDark ? '/logo.png' : '/logo-black.png'
     return (
         <header className="sticky top-0 z-40 w-full border-b bg-background">
             <section className="!py-0">
@@ -51,15 +50,23 @@ const Navbar: FC = () => {
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-6">
                         {navItems.map((item) => (
-                            <a
+                            <Link
                                 key={item.label}
-                                href={item.href}
+                                to={item.href}
                                 className="text-sm font-medium hover:text-primary transition-colors"
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
+                        {
+                            user && user?.role === 'admin' ? <Link
+                                to='/dashboard'
+                                className="text-sm font-medium hover:text-primary transition-colors"
+                            >
+                                Dashboard
+                            </Link> : ''
 
+                        }
                         {/* Cart Button */}
                         <Link to="/cart" className="relative">
                             <Button variant="ghost" size="icon" aria-label="Cart">
@@ -83,11 +90,18 @@ const Navbar: FC = () => {
                                             <span>My Profile</span>
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link to="/my-orders">
+                                    {user.role === 'user' && <Link to="/my-orders">
                                         <DropdownMenuItem className="cursor-pointer">
                                             <span>My Orders</span>
                                         </DropdownMenuItem>
-                                    </Link>
+                                    </Link>}
+                                    {
+                                        user && user.role === 'admin' ? <Link to="/dashboard">
+                                            <DropdownMenuItem className="cursor-pointer">
+                                                <span>Dashboard</span>
+                                            </DropdownMenuItem>
+                                        </Link> : ''
+                                    }
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" onClick={handleLogout}>
                                         <LogOut className="mr-2 h-4 w-4" />
@@ -174,6 +188,13 @@ const Navbar: FC = () => {
                                             </Link>
                                         </SheetClose>
                                     ))}
+                                    {
+                                        user && user.role === 'admin' ? <SheetClose asChild>
+                                            <Link to='/dashboard' className="text-sm font-medium py-2">
+                                                Dashboard
+                                            </Link>
+                                        </SheetClose> : ''
+                                    }
 
                                     {/* Cart in Mobile Menu */}
                                     <SheetClose asChild>
