@@ -8,6 +8,9 @@ const userApi = baseApi.injectEndpoints({
                 url: '/users/me',
                 method: 'GET'
             }),
+            transformResponse: (response: TResponseRedux<TUserData>) => {
+                return response
+            },
             providesTags: ['User'],
         }),
         updateMyData: builder.mutation({
@@ -16,9 +19,6 @@ const userApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 body: userInfo
             }),
-            transformResponse: (response: TResponseRedux<TUserData[]>) => {
-                return response
-            },
             invalidatesTags: ['User'],
         }),
     })

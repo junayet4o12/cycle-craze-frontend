@@ -30,7 +30,9 @@ export const uploadImageToCloudinary = async (imageFile: File | null | undefined
             return '';
         }
     } catch (error: any) {
-        toast.error(`Upload error: ${error.message || 'Something went wrong.'}`);
+        toast.error(`Upload error: ${error.message || 'Something went wrong.'}`, {
+            duration: 2000
+        });
         return '';
     }
 };

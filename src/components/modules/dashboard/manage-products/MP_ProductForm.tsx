@@ -20,8 +20,9 @@ type FormValues = z.infer<typeof productFormSchema>;
 type MP_ProductFormProps = {
     form: UseFormReturn<FormValues>;
     defaultImage: string;
+    isLoading: boolean;
 };
-export default function MP_ProductForm({ form, defaultImage }: MP_ProductFormProps) {
+export default function MP_ProductForm({ form, defaultImage, isLoading }: MP_ProductFormProps) {
     const imageRef = useRef<HTMLInputElement | null>(null)
     return (
         <div className="grid gap-4">
@@ -33,20 +34,20 @@ export default function MP_ProductForm({ form, defaultImage }: MP_ProductFormPro
                     <FormItem>
                         <FormControl>
                             <div className="flex items-center gap-4">
-                                <Avatar className="h-40 w-44 object-cover rounded-lg">
+                                <Avatar className="h-32 w-36 md:h-40 md:w-44 object-cover rounded-lg">
                                     <AvatarImage src={field.value ? URL.createObjectURL(field.value) : defaultImage} alt={defaultImage} className="object-cover" />
-                                    <AvatarFallback>{'/public/product-placeholder.png'.toUpperCase()}</AvatarFallback>
+                                    <AvatarFallback>{'/public/product-placeholder.png'.slice(0,2).toUpperCase()}</AvatarFallback>
                                 </Avatar>
                                 <Input
                                     ref={imageRef}
                                     type="file"
                                     accept="image/*"
                                     autoComplete="image"
-                                    // disabled={isLoading}
+                                    disabled={isLoading}
                                     className="bg-gray-50 hidden"
                                     onChange={(e) => field.onChange(e.target.files?.[0])}
                                 />
-                                <Button onClick={() => imageRef.current?.click()} type="button" variant={"outline"} className="w-full sm:w-44">Select Image</Button>
+                                <Button onClick={() => imageRef.current?.click()} type="button" variant={"outline"} className="w-44">Select Image</Button>
                             </div>
                         </FormControl>
                         <FormMessage />

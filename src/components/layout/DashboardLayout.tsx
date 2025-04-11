@@ -4,9 +4,9 @@ import Sidebar from "../modules/dashboard/Sidebar";
 
 export default function DashboardLayout() {
     return (
-        <div className="flex gap-2">
+        <div className="flex">
             <Sidebar />
-            <div className="w-full min-h-screen py-8">
+            <div className="w-full min-h-screen py-8 px-4">
                 <Outlet />
             </div>
         </div>
