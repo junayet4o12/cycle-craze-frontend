@@ -49,7 +49,7 @@ export default function AddProduct() {
     const onSubmit = async (data: z.infer<typeof productFormSchema>) => {
         const toastId = toast.loading('Product is creating...');
 
-        const productNewData: IProduct = {
+        const productNewData: Omit<IProduct, '_id'> = {
             brand: data.brand,
             price: data.price,
             category: data.category,
@@ -78,14 +78,6 @@ export default function AddProduct() {
             console.error(err);
             toast.error(errorMessageGenerator(err), { id: toastId });
         }
-        // Create a full product object with empty arrays for images and specifications
-
-
-
-        // toast.success("Bicycle added successfully!");
-        // console.log("Submitted data:", product);
-        // setIsDialogOpen(false);
-        // form.reset();
     };
 
     const handleCancel = () => {

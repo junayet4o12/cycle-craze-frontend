@@ -21,39 +21,41 @@ type MP_ProductFormProps = {
     form: UseFormReturn<FormValues>;
     defaultImage: string;
     isLoading: boolean;
+    isImageUpload?: boolean
 };
-export default function MP_ProductForm({ form, defaultImage, isLoading }: MP_ProductFormProps) {
+export default function MP_ProductForm({ form, defaultImage, isLoading, isImageUpload = true }: MP_ProductFormProps) {
     const imageRef = useRef<HTMLInputElement | null>(null)
     return (
         <div className="grid gap-4">
-            {/* Name and Brand */}
-            <FormField
-                control={form.control}
-                name="image"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormControl>
-                            <div className="flex items-center gap-4">
-                                <Avatar className="h-32 w-36 md:h-40 md:w-44 object-cover rounded-lg">
-                                    <AvatarImage src={field.value ? URL.createObjectURL(field.value) : defaultImage} alt={defaultImage} className="object-cover" />
-                                    <AvatarFallback>{'/public/product-placeholder.png'.slice(0,2).toUpperCase()}</AvatarFallback>
-                                </Avatar>
-                                <Input
-                                    ref={imageRef}
-                                    type="file"
-                                    accept="image/*"
-                                    autoComplete="image"
-                                    disabled={isLoading}
-                                    className="bg-gray-50 hidden"
-                                    onChange={(e) => field.onChange(e.target.files?.[0])}
-                                />
-                                <Button onClick={() => imageRef.current?.click()} type="button" variant={"outline"} className="w-44">Select Image</Button>
-                            </div>
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            {
+                isImageUpload && <FormField
+                    control={form.control}
+                    name="image"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <div className="flex items-center gap-4">
+                                    <Avatar className="h-32 w-36 md:h-40 md:w-44 object-cover rounded-lg">
+                                        <AvatarImage src={field.value ? URL.createObjectURL(field.value) : defaultImage} alt={defaultImage} className="object-cover" />
+                                        <AvatarFallback>{'/public/product-placeholder.png'.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                    </Avatar>
+                                    <Input
+                                        ref={imageRef}
+                                        type="file"
+                                        accept="image/*"
+                                        autoComplete="image"
+                                        disabled={isLoading}
+                                        className="bg-gray-50 hidden"
+                                        onChange={(e) => field.onChange(e.target.files?.[0])}
+                                    />
+                                    <Button onClick={() => imageRef.current?.click()} type="button" variant={"outline"} className="w-44">Select Image</Button>
+                                </div>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            }
             <div className="grid grid-cols-2 gap-4">
                 <FormField
                     control={form.control}

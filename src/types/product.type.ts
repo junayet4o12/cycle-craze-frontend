@@ -6,6 +6,7 @@ export type TSpecification = {
 }
 
 export interface IProduct {
+    _id: string;
     name: string;
     brand: string;
     price: number;

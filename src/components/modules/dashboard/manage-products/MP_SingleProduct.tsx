@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { IProduct } from "@/types";
 import { Pencil, Trash, FileText, Eye, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import StatusBadge from "./MP_StatusBadge";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { TableCell, TableRow } from "@/components/ui/table"
+import { TableCell, TableRow } from "@/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,16 +13,33 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-export default function MP_SingleProduct({ product, viewMode }: { product: IProduct, viewMode: 'grid' | 'table' }) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const openEditDialog = () => {
-    // setSelectedProduct(product)
-    setIsDialogOpen(true);
-  };
-
-  const handleDeleteProduct = () => {
-    // setProductList(productList.filter((product) => product.id !== id))
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useDeleteProductMutation } from "@/redux/features/product/productApi";
+import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
+import { toast } from "sonner";
+import EditProduct from "./EditProduct";
+export default function MP_SingleProduct({ product }: { product: IProduct }) {
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
+  const handleDeleteProduct = async () => {
+    const toastId = toast.loading(`"${product.name}" is Deleting from the database...`)
+    try {
+      await deleteProduct(product._id).unwrap();
+      console.log("Product deleted successfully");
+      toast.success("Product deleted successfully", { id: toastId })
+    } catch (error) {
+      toast.error(errorMessageGenerator(error), { id: toastId })
+    }
   };
 
   const handleViewDetails = () => {
@@ -38,123 +52,83 @@ export default function MP_SingleProduct({ product, viewMode }: { product: IProd
 
   return (
     <>
-      {viewMode === 'grid' ? <Card className="h-full flex flex-col shadow-sm hover:shadow-md transition-shadow duration-200">
-        {/* Product Image with Category Badge */}
-        <div className="relative">
-          <div className="h-52 w-full overflow-hidden">
-            <Avatar className="w-full h-full w-full object-cover rounded-lg">
-              <AvatarImage src={product.images[0] || "/public/product-placeholder.png"} alt="/public/product-placeholder.png" className="object-cover" />
-              <AvatarFallback>{product.name.slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-          </div>
-          <Badge className="absolute top-3 left-3 bg-primary/90 hover:bg-primary">
-            {product.category}
-          </Badge>
+      <TableRow>
+        <TableCell>
+          <Avatar className="h-10 w-10 w-full object-cover rounded-lg">
+            <AvatarImage src={product.images[0] || "/public/product-placeholder.png"} alt="product" className="object-cover" />
+            <AvatarFallback>{product.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+          </Avatar>
+        </TableCell>
+        <TableCell className="font-medium">{product.name}</TableCell>
+        <TableCell>{product.category}</TableCell>
+        <TableCell>৳{product.price}</TableCell>
+        <TableCell>{product.quantity}</TableCell>
+        <TableCell>
           <StatusBadge quantity={product.quantity} />
-        </div>
+        </TableCell>
+        <TableCell className="text-right">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <MoreHorizontal className="h-4 w-4" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
+                <Eye className="mr-2 h-4 w-4" />
+                View Details
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
+                <FileText className="mr-2 h-4 w-4" />
+                Specifications
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer"
+                onClick={() => {
+                  setTimeout(() => {
+                    setIsEditOpen(true);
+                  }, 50); // ⏱ slight delay lets the dropdown fully close
+                }}
+              >
+                <Pencil className="mr-2 h-4 w-4" />
+                Edit Product
+              </DropdownMenuItem>
 
-        {/* Product Information */}
-        <CardHeader>
-          <CardTitle className="text-lg font-medium line-clamp-1">{product.name}</CardTitle>
-        </CardHeader>
-
-        <CardContent className="flex-grow">
-          <div className="flex justify-between items-center mb-3">
-            <p className="font-semibold text-lg">${product.price.toFixed(2)}</p>
-            <p className="text-sm text-muted-foreground">Stock: {product.quantity}</p>
-          </div>
-          <p className="text-sm text-muted-foreground line-clamp-2">
-            {product.description || "No description available for this product."}
-          </p>
-        </CardContent>
-
-        <Separator />
-
-        {/* Action Buttons */}
-        <CardFooter className="grid grid-cols-2 gap-3 pt-4">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center"
-            onClick={handleViewDetails}
-          >
-            <Eye className="mr-2 h-4 w-4" />
-            View Details
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center"
-            onClick={handleViewSpecifications}
-          >
-            <FileText className="mr-2 h-4 w-4" />
-            Specifications
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center"
-            onClick={openEditDialog}
-          >
-            <Pencil className="mr-2 h-4 w-4" />
-            Edit Product
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center justify-center text-destructive hover:text-destructive hover:bg-destructive/10"
-            onClick={handleDeleteProduct}
-          >
-            <Trash className="mr-2 h-4 w-4" />
-            Delete
-          </Button>
-        </CardFooter>
-      </Card> :
-        <TableRow>
-          <TableCell>
-            <Avatar className="h-10 w-10 w-full object-cover rounded-lg">
-              <AvatarImage src={product.images[0] || "/public/product-placeholder.png"} alt="/public/product-placeholder.png" className="object-cover" />
-              <AvatarFallback>{product.name.slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-          </TableCell>
-          <TableCell className="font-medium">{product.name}</TableCell>
-          <TableCell>{product.category}</TableCell>
-          <TableCell>${product.price.toFixed(2)}</TableCell>
-          <TableCell>{product.quantity}</TableCell>
-          <TableCell>
-            <StatusBadge quantity={product.quantity} />
-          </TableCell>
-          <TableCell className="text-right">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="h-4 w-4" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={openEditDialog}>
-                  <Eye className="mr-2 h-4 w-4" />
-                  View Details
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleDeleteProduct}>
-                  <FileText className="mr-2 h-4 w-4" />
-                  Specifications
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleDeleteProduct}>
-                  <Pencil className="mr-2 h-4 w-4" />
-                  Edit Product
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleDeleteProduct}>
-                  <Trash className="mr-2 h-4 w-4" />
-                  Delete
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </TableCell>
-        </TableRow>}
+              <DropdownMenuItem
+                className="cursor-pointer text-red-600 focus:text-red-600"
+                onClick={() => {
+                  setTimeout(() => {
+                    setIsDeleteDialogOpen(true);
+                  }, 50); // ⏱ slight delay lets the dropdown fully close
+                }}
+              >
+                <Trash className="mr-2 h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </TableCell>
+      </TableRow>
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the product:{" "}
+              <span className="font-semibold">{product.name}</span>.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteProduct} disabled={isDeleting}>
+              {isDeleting ? "Deleting..." : "Yes, Delete"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <EditProduct isDialogOpen={isEditOpen} setIsDialogOpen={setIsEditOpen} product={product} />
     </>
   );
 }
