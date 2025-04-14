@@ -17,13 +17,18 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import MP_ProductForm from "./MP_ProductForm";
 import { useUpdateProductMutation } from "@/redux/features/product/productApi";
 import { IProduct } from "@/types";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { updateProductFormSchema } from "@/schemas/product-form-schema";
-export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: { isDialogOpen: boolean, setIsDialogOpen: Dispatch<React.SetStateAction<boolean>>, product: IProduct }) {
+type PropsType = {
+  isDialogOpen: boolean;
+  setIsDialogOpen: Dispatch<SetStateAction<boolean>>;
+  product: IProduct;
+}
+export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: PropsType) {
   const [updateProduct, { isLoading, isError }] = useUpdateProductMutation()
   const form = useForm<z.infer<typeof updateProductFormSchema>>({
     resolver: zodResolver(updateProductFormSchema),
@@ -40,7 +45,7 @@ export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: 
   });
 
   const onSubmit = async (data: z.infer<typeof updateProductFormSchema>) => {
-    
+
 
     const productNewData: Omit<IProduct, '_id' | 'images' | 'specifications'> = {
       brand: data.brand,
@@ -56,7 +61,7 @@ export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: 
     const toastId = toast.loading('Product is updating...');
 
     try {
-      await updateProduct({productId: product._id, updatedData: productNewData}).unwrap();
+      await updateProduct({ productId: product._id, updatedData: productNewData }).unwrap();
       toast.success('Product updated successfully!', { id: toastId, duration: 2000 });
       setIsDialogOpen(false)
     } catch (err) {

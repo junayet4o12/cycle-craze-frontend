@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { IProduct } from "@/types";
-import { Pencil, Trash, FileText, Eye, MoreHorizontal } from "lucide-react";
+import { Pencil, Trash, FileText, Eye, MoreHorizontal, GalleryVerticalEnd } from "lucide-react";
 import { useState } from "react";
 import StatusBadge from "./MP_StatusBadge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,9 +27,11 @@ import { useDeleteProductMutation } from "@/redux/features/product/productApi";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
 import EditProduct from "./EditProduct";
+import MP_ProductGallery from "./MP_ProductGallery";
 export default function MP_SingleProduct({ product }: { product: IProduct }) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false)
+  const [galleryOpen, setGalleryOpen] = useState(false)
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
   const handleDeleteProduct = async () => {
     const toastId = toast.loading(`"${product.name}" is Deleting from the database...`)
@@ -81,6 +83,18 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
                 <Eye className="mr-2 h-4 w-4" />
                 View Details
               </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer"
+                onClick={() => {
+                  setTimeout(() => {
+                    setGalleryOpen(true);
+                  }, 50); // ⏱ slight delay lets the dropdown fully close
+                }}
+              >
+                <GalleryVerticalEnd className="mr-2 h-4 w-4"
+
+                />
+                Gallery
+              </DropdownMenuItem>
               <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
                 <FileText className="mr-2 h-4 w-4" />
                 Specifications
@@ -129,6 +143,7 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
         </AlertDialogContent>
       </AlertDialog>
       <EditProduct isDialogOpen={isEditOpen} setIsDialogOpen={setIsEditOpen} product={product} />
+      <MP_ProductGallery isDialogOpen={galleryOpen} setIsDialogOpen={setGalleryOpen} images={product.images} productId={product._id} />
     </>
   );
 }
