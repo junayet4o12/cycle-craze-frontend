@@ -7,7 +7,7 @@ export default function AuthLayout() {
 
                 <div className='grid md:grid-cols-2 !px-0'>
                     <img
-                        src="/public/auth-banner.jpg"
+                        src="/auth-banner.jpg"
                         alt="Bicycle in scenic path"
                         className="w-full h-full object-cover fixed md:relative top-0 left-0"
                     />

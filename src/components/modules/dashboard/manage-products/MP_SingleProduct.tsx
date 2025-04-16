@@ -57,7 +57,7 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
       <TableRow>
         <TableCell>
           <Avatar className="h-10 w-10 w-full object-cover rounded-lg">
-            <AvatarImage src={product.images[0] || "/public/product-placeholder.png"} alt="product" className="object-cover" />
+            <AvatarImage src={product.images[0] || "/product-placeholder.png"} alt="product" className="object-cover" />
             <AvatarFallback>{product.name.slice(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
         </TableCell>

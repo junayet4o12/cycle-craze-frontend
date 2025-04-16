@@ -37,7 +37,7 @@ export default function MP_ProductForm({ form, defaultImage, isLoading, isImageU
                                 <div className="flex items-center gap-4">
                                     <Avatar className="h-32 w-36 md:h-40 md:w-44 object-cover rounded-lg">
                                         <AvatarImage src={field.value ? URL.createObjectURL(field.value) : defaultImage} alt={defaultImage} className="object-cover" />
-                                        <AvatarFallback>{'/public/product-placeholder.png'.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                        <AvatarFallback>{'/product-placeholder.png'.slice(0, 2).toUpperCase()}</AvatarFallback>
                                     </Avatar>
                                     <Input
                                         ref={imageRef}

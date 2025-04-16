@@ -85,7 +85,7 @@ export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: 
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <MP_ProductForm form={form} defaultImage="/public/product-placeholder.png" isLoading={isLoading} isImageUpload={false} />
+            <MP_ProductForm form={form} defaultImage="/product-placeholder.png" isLoading={isLoading} isImageUpload={false} />
 
             {/* Footer */}
             <DialogFooter className="pt-2 flex justify-end gap-2">

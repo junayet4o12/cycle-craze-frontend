@@ -109,7 +109,7 @@ export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
                                     <FormControl>
                                         <div className="flex flex-col items-center gap-2">
                                             <Avatar className="w-24 h-24 object-cover">
-                                                <AvatarImage src={field.value ? URL.createObjectURL(field.value) : (userData.profile || '/public/default-user.png')} alt={userData.name} className="object-cover" />
+                                                <AvatarImage src={field.value ? URL.createObjectURL(field.value) : (userData.profile || '/default-user.png')} alt={userData.name} className="object-cover" />
                                                 <AvatarFallback>{userData?.name?.substring(0, 2)?.toUpperCase()}</AvatarFallback>
                                             </Avatar>
                                             <Label htmlFor="profile">Upload Profile Image</Label>

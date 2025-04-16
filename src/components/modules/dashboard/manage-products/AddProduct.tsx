@@ -104,7 +104,7 @@ export default function AddProduct() {
 
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        <MP_ProductForm form={form} defaultImage="/public/product-placeholder.png" isLoading={isLoading} />
+                        <MP_ProductForm form={form} defaultImage="/product-placeholder.png" isLoading={isLoading} />
 
                         {/* Footer */}
                         <DialogFooter className="pt-2 flex justify-end gap-2">

@@ -94,7 +94,7 @@ export default function Profile() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row gap-6">
               <Avatar className="w-24 h-24">
-                <AvatarImage className="object-cover" src={userData.profile || "/public/default-user.png"} alt={userData.name} />
+                <AvatarImage className="object-cover" src={userData.profile || "/default-user.png"} alt={userData.name} />
                 <AvatarFallback>{userData?.name?.substring(0, 2)?.toUpperCase()}</AvatarFallback>
               </Avatar>
 

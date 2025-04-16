@@ -33,7 +33,7 @@ export default function MP_ProductGallery({ images: incomingImages, isDialogOpen
         incomingImages.map((item) => ({
             id: item,
             src: item,
-            alt: '/public/product-placeholder.png',
+            alt: '/product-placeholder.png',
         }))
     );
     const [currentImage, setCurrentImage] = useState<ImageType | null>(null);
