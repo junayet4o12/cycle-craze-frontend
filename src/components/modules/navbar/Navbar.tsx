@@ -21,7 +21,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    { label: "About", href: "/about" },
+    { label: "Shop", href: "/shop" },
     { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },
 ];
@@ -38,7 +38,7 @@ const Navbar: FC = () => {
 
     const logoUrl = theme === 'dark' ? '/logo.png' : theme === 'light' ? '/logo-black.png' : isSystemDark ? '/logo.png' : '/logo-black.png'
     return (
-        <header className="sticky top-0 z-40 w-full border-b bg-background">
+        <header className="sticky top-0 z-40 w-full border-b bg-background h-[68px]">
             <section className="!py-0">
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo and company name */}

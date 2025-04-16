@@ -7,6 +7,7 @@ import UserLayout from "@/components/layout/UserLayout";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { dashboardRoutes } from "./dashboard.routes";
 import ProtectedRoutes from "@/components/private_routes/protected-routes";
+import Home from "@/pages/base-pages/Home";
 
 const router = createBrowserRouter([
     {
@@ -15,9 +16,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <UserLayout />,
+                element: <Home />
+            },
+            {
+                path: '',
+                element: <ProtectedRoutes><UserLayout /></ProtectedRoutes>,
                 children: userRoutes
-            }
+            },
         ]
     },
     {
