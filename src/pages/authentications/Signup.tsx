@@ -59,7 +59,6 @@ export default function SignUp() {
             toast.success('Account created successfully!', { id: toastId, duration: 2000 })
             navigate('/'); // Redirect to dashboard after signup
         } catch (err) {
-            console.log(err);
 
             toast.error(errorMessageGenerator(err), { id: toastId });
         }

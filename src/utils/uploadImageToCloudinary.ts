@@ -5,7 +5,6 @@ const cloud_name = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
 const upload_preset = import.meta.env.VITE_CLOUDINARY_IMAGE_PRESET
 
 export const uploadImageToCloudinary = async (imageFile: File | null | undefined): Promise<string> => {
-    console.log(imageFile);
     
     if (!imageFile) {
         toast.error('No image file provided');

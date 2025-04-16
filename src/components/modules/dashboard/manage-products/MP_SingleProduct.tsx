@@ -28,16 +28,17 @@ import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
 import EditProduct from "./EditProduct";
 import MP_ProductGallery from "./MP_ProductGallery";
+import MP_EditSpecification from "./MP_EditSpecification";
 export default function MP_SingleProduct({ product }: { product: IProduct }) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [galleryOpen, setGalleryOpen] = useState(false)
+  const [specificationOpen, setSpecificationOpen] = useState(false)
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
   const handleDeleteProduct = async () => {
     const toastId = toast.loading(`"${product.name}" is Deleting from the database...`)
     try {
       await deleteProduct(product._id).unwrap();
-      console.log("Product deleted successfully");
       toast.success("Product deleted successfully", { id: toastId })
     } catch (error) {
       toast.error(errorMessageGenerator(error), { id: toastId })
@@ -79,10 +80,10 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
+              {/* <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
                 <Eye className="mr-2 h-4 w-4" />
                 View Details
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem className="cursor-pointer"
                 onClick={() => {
                   setTimeout(() => {
@@ -95,7 +96,13 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
                 />
                 Gallery
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer" onClick={() => { }}>
+              <DropdownMenuItem className="cursor-pointer"
+                onClick={() => {
+                  setTimeout(() => {
+                    setSpecificationOpen(true);
+                  }, 50); // ⏱ slight delay lets the dropdown fully close
+                }}
+              >
                 <FileText className="mr-2 h-4 w-4" />
                 Specifications
               </DropdownMenuItem>
@@ -111,7 +118,7 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                className="cursor-pointer text-red-600 focus:text-red-600"
+                className="cursor-pointer text-primary"
                 onClick={() => {
                   setTimeout(() => {
                     setIsDeleteDialogOpen(true);
@@ -144,6 +151,7 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
       </AlertDialog>
       <EditProduct isDialogOpen={isEditOpen} setIsDialogOpen={setIsEditOpen} product={product} />
       <MP_ProductGallery isDialogOpen={galleryOpen} setIsDialogOpen={setGalleryOpen} images={product.images} productId={product._id} />
+      <MP_EditSpecification isDialogOpen={specificationOpen} setIsDialogOpen={setSpecificationOpen} product={product} />
     </>
   );
 }

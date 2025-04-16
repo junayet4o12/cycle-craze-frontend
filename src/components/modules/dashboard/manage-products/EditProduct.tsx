@@ -57,7 +57,6 @@ export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: 
       quantity: data.quantity,
       wheelSize: data.wheelSize,
     }
-    console.log(productNewData);
     const toastId = toast.loading('Product is updating...');
 
     try {

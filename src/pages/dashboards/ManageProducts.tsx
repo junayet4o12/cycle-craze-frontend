@@ -39,7 +39,6 @@ export default function ManageProducts() {
   const isLoadingData = isLoading || isFetching;
   const products = data?.data || [];
   const meta = data?.meta;
-  console.log(meta);
 
   const nameSorting = sort === 'name' ? 'name' : sort === '-name' ? '-name' : ''
 
@@ -55,7 +54,6 @@ export default function ManageProducts() {
   };
 
   const handleFilterCategory = (category: (typeof productCategories[number]) | 'all') => {
-    console.log(category);
 
     if (category === 'all') {
       searchParams.delete('category')
@@ -68,7 +66,6 @@ export default function ManageProducts() {
   const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
     const searchingText = e.target.searchTerm.value;
-    console.log(searchingText);
 
     if (!searchingText) {
       searchParams.delete('searchTerm');
@@ -91,7 +88,6 @@ export default function ManageProducts() {
   const handlePriceRangeChange = (value: number[]) => {
     setPriceRange(value)
 
-    console.log(value);
 
   }
   const handlePriceRangeFilter = () => {
