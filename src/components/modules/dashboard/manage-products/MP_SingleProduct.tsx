@@ -44,13 +44,13 @@ export default function MP_SingleProduct({ product }: { product: IProduct }) {
     }
   };
 
-  const handleViewDetails = () => {
-    // Implementation for viewing product details
-  };
+  // const handleViewDetails = () => {
+  //   // Implementation for viewing product details
+  // };
 
-  const handleViewSpecifications = () => {
-    // Implementation for viewing product specifications
-  };
+  // const handleViewSpecifications = () => {
+  //   // Implementation for viewing product specifications
+  // };
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { LogOut, Menu, ShoppingCart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

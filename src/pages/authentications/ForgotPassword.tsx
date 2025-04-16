@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { ArrowRight, CheckCircle, Loader2, RefreshCw } from 'lucide-react';
+import { ArrowRight, CheckCircle, Loader2} from 'lucide-react';
 import { toast } from 'sonner';
 import { useForgotPasswordMutation } from '@/redux/features/auth/authApi';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { errorMessageGenerator } from '@/utils/errorMessageGenerator';
 
 // Define the form schema with zod
 const formSchema = z.object({
@@ -41,7 +42,7 @@ export default function ForgotPassword() {
             setUserEmail(data.email)
             form.reset(); // Clear the form
         } catch (err) {
-            toast.error('Failed to send reset link. Please verify your email.', { id: toastId });
+            toast.error(errorMessageGenerator(err), { id: toastId });
         }
     };
 
