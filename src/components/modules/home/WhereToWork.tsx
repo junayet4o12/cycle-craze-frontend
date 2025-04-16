@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function WhereToWork() {
     return (
-        <div className="grid md:grid-cols-2 py-10 xl:py-20 bg-foreground">
+        <div className="grid md:grid-cols-2 py-10 md:py-0 bg-foreground">
 
             <div className="space-y-6 px-8 text-accent max-w-xl md:ml-auto flex flex-col justify-center">
                 <h2 className="uppercase"> Where to?
