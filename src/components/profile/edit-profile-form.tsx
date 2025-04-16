@@ -55,7 +55,7 @@ type PropTypes = {
 }
 
 export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
-    const [updateMyData, { isLoading, isError }] = useUpdateMyDataMutation()
+    const [updateMyData, { isLoading }] = useUpdateMyDataMutation()
     const selectProfileRef = useRef<HTMLInputElement | null>(null)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

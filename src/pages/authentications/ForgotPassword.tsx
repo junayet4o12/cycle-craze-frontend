@@ -20,7 +20,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function ForgotPassword() {
-    const [forgotPassword, { isLoading, data, isSuccess, isError }] = useForgotPasswordMutation();
+    const [forgotPassword, { isLoading, isSuccess }] = useForgotPasswordMutation();
     const [userEmail, setUserEmail] = useState('')
 
     // Initialize form with TypeScript types

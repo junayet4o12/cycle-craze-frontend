@@ -31,7 +31,7 @@ import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 // Component
 export default function AddProduct() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [createProducts, { isLoading, isError }] = useCreateProductMutation()
+    const [createProducts, { isLoading }] = useCreateProductMutation()
     const form = useForm<z.infer<typeof productFormSchema>>({
         resolver: zodResolver(productFormSchema),
         defaultValues: {

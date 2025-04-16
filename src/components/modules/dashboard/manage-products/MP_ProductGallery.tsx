@@ -25,7 +25,7 @@ type ImageType = {
 };
 
 export default function MP_ProductGallery({ images: incomingImages, isDialogOpen, setIsDialogOpen, productId }: PropsType) {
-    const [updateProduct, { isLoading, isError }] = useUpdateProductMutation()
+    const [updateProduct, { isLoading }] = useUpdateProductMutation()
 
     const [imageViewOpen, setImageViewOpen] = useState<boolean>(false);
     const [showDropIndicator, setShowDropIndicator] = useState<boolean>(false);
@@ -201,7 +201,7 @@ export default function MP_ProductGallery({ images: incomingImages, isDialogOpen
                                                 alt={img.alt}
                                                 className="w-full h-full object-cover"
                                             />
-                                            <div className="absolute inset-0 transition-all flex justify-end ">
+                                            <div className="absolute max-w-max right-0 top-0 transition-all flex justify-end bg-card pl-1 pb-1 rounded-bl-md">
                                                 <Button
                                                     variant="outline"
                                                     size="icon"

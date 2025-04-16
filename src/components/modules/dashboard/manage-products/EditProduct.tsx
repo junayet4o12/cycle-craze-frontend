@@ -29,7 +29,7 @@ type PropsType = {
   product: IProduct;
 }
 export default function EditProduct({ isDialogOpen, setIsDialogOpen, product }: PropsType) {
-  const [updateProduct, { isLoading, isError }] = useUpdateProductMutation()
+  const [updateProduct, { isLoading }] = useUpdateProductMutation()
   const form = useForm<z.infer<typeof updateProductFormSchema>>({
     resolver: zodResolver(updateProductFormSchema),
     defaultValues: {
