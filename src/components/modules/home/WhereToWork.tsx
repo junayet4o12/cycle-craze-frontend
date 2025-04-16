@@ -5,7 +5,7 @@ export default function WhereToWork() {
     return (
         <div className="grid md:grid-cols-2 pt-10 xl:pt-20 bg-foreground ">
 
-            <div className="space-y-6 mt-10 px-8 text-accent max-w-xl ml-auto flex flex-col justify-center">
+            <div className="space-y-6 mt-10 px-8 text-accent max-w-xl md:ml-auto flex flex-col justify-center">
                 <h2 className="uppercase"> Where to?
                     <br />
                     <span className="text-primary">work</span>
