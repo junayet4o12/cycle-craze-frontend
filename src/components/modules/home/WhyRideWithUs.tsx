@@ -39,9 +39,9 @@ const whyRideWithUs = [
 
 export default function WhyRideWithUs() {
     return (
-        <div className="grid md:grid-cols-2 py-10 xl:py-20">
+        <div className="grid md:grid-cols-2 pt-10 xl:pt-20">
             <img className="w-[90%] xl:w-[80%] object-cover hidden md:block" src="/why-ride-banner.png" alt="" />
-            <div className="space-y-6 mt-10 px-8">
+            <div className="space-y-6 mt-10 px-8 pb-8 ">
                 <h2 className="uppercase">Why Ride <span className="text-primary">With Us?</span></h2>
                 <div className="space-y-6">
                     {whyRideWithUs.map((item, index) => (
