@@ -3,6 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
+
+const ShopNowBtn = () => {
+    return <Button className="max-w-max h-12 px-7 text-white border border-input/50 hover:bg-white/5 hover:text-white " variant="ghost">
+        Shop Now
+    </Button >
+}
 export default function Hero() {
     return (
         <Swiper
@@ -18,13 +24,13 @@ export default function Hero() {
             <SwiperSlide>
                 <div className="relative overflow-hidden">
                     <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 px-8 bg-black/40">
-                        <h6 className="text-white text-lg">For a better ride</h6>
-                        <h1 className="text-white text-4xl md:text-5xl font-semibold">
-                            Find Your <span className="text-primary">Mountain</span> Bike Here
-                        </h1>
-                        <Button className="max-w-max" variant="outline" size="lg">
-                            Shop Now
-                        </Button>
+                        <section className="space-y-4 w-full">
+                            <h6 className="text-white">For a better ride</h6>
+                            <h1 className="text-white">
+                                Find Your <span className="text-primary">Mountain</span> Bike Here
+                            </h1>
+                            <ShopNowBtn />
+                        </section>
                     </div>
                     <img
                         src="/hero-banner-2.jpg"
@@ -36,15 +42,13 @@ export default function Hero() {
             <SwiperSlide>
                 <div className="relative overflow-hidden">
                     <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 px-8 bg-black/40 items-center">
-                       <div className=" space-y-4">
-                            <h6 className="text-white text-lg">For a better ride</h6>
-                            <h1 className="text-white text-4xl md:text-5xl font-semibold">
+                        <div className=" space-y-4">
+                            <h6 className="text-white">For a better ride</h6>
+                            <h1 className="text-white">
                                 Find Your <span className="text-primary">Mountain</span> Bike Here
                             </h1>
-                            <Button className="max-w-max" variant="outline" size="lg">
-                                Shop Now
-                            </Button>
-                       </div>
+                            <ShopNowBtn />
+                        </div>
                     </div>
                     <img
                         src="/hero-banner-1.jpg"
