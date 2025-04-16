@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { IProduct } from "@/types";
-import { Pencil, Trash, FileText, Eye, MoreHorizontal, GalleryVerticalEnd } from "lucide-react";
+import { Pencil, Trash, FileText,  MoreHorizontal, GalleryVerticalEnd } from "lucide-react";
 import { useState } from "react";
 import StatusBadge from "./MP_StatusBadge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
