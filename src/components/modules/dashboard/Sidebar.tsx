@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/redux/hooks';
 import { logout } from '@/redux/features/auth/authSlice';
 import { dashboardItems } from '@/utils/sidebar-item-and-routes-generator';
 import { SidebarItems } from '@/types';
+import { SidebarModeToggle } from '@/components/sidebar-mode-toggle';
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -92,6 +93,7 @@ export default function Sidebar() {
               </div>
             );
           })}
+           <SidebarModeToggle collapsed={collapsed} />
           <div onClick={handleLogout}
             className={`flex items-center text-primary cursor-pointer rounded-md text-sm h-10 hover:bg-muted  ${collapsed ? "justify-center px-3.5 w-max" : "justify-start px-3 w-full"}`}>
             <span className="flex items-center">
@@ -99,6 +101,7 @@ export default function Sidebar() {
               {!collapsed && <span className="ml-3">Logout</span>}
             </span>
           </div>
+         
         </nav>
       </div>
     </div>

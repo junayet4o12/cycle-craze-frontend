@@ -1,14 +1,23 @@
-import { IProduct, TResponseRedux } from "@/types";
+import { IProduct, TQueryParams, TResponseRedux } from "@/types";
 import { baseApi } from "../../api/baseApi";
 
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // GET /products
     products: builder.query({
-      query: () => ({
-        url: "/products",
-        method: "GET",
-      }),
+      query: (args: TQueryParams[] | undefined) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item) => {
+            params.append(item?.name as string, item?.value as string);
+          })
+        }
+        return {
+          url: "/products",
+          method: "GET",
+          params: params
+        }
+      },
       providesTags: ["Products"],
       transformResponse: (response: TResponseRedux<IProduct[]>) => {
         return {

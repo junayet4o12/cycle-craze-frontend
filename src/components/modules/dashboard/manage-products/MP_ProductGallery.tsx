@@ -36,7 +36,6 @@ export default function MP_ProductGallery({ images: incomingImages, isDialogOpen
             alt: '/public/product-placeholder.png',
         }))
     );
-    console.log(images);
     const [currentImage, setCurrentImage] = useState<ImageType | null>(null);
     const [draggedItem, setDraggedItem] = useState<number | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
