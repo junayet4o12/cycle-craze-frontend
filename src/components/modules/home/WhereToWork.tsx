@@ -17,7 +17,7 @@ export default function WhereToWork() {
                     <Button className="hover:!bg-transparent hover:text-accent" variant={"ghost"}>Shop Now</Button>
                 </div>
             </div>
-            <img className="object-cover hidden md:block ml-auto w-[90%] xl:w-[80%]" src="/public/where-to-work-banner.png" alt="" />
+            <img className="object-cover hidden md:block ml-auto w-[90%] xl:w-[80%]" src="/where-to-work-banner.png" alt="" />
         </div>
     );
 }
