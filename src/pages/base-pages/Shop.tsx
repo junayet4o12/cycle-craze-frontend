@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { SlidersHorizontal, Grid, ListFilter, X } from "lucide-react";
+import { SlidersHorizontal,  ListFilter, X } from "lucide-react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 // Import shadcn/ui components
 import { Button } from "@/components/ui/button";
