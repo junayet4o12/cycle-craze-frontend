@@ -85,7 +85,6 @@ export default function Shop() {
     setSearchParams(new URLSearchParams());
     setPriceRange([0, 100000]);
   };
-  console.log(gridNumber);
   return (
     <section className="py-8">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
