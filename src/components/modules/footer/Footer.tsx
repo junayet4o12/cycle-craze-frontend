@@ -34,9 +34,9 @@ export default function Footer() {
                         <h3 className="text-xl font-bold">Shop</h3>
                         <ul className="space-y-2">
                             <li><Link to="/shop" className="text-sm text-muted-foreground hover:text-accent-foreground">All Bikes</Link></li>
-                            <li><Link to="/shop?category=mountain" className="text-sm text-muted-foreground hover:text-accent-foreground">Mountain Bikes</Link></li>
-                            <li><Link to="/shop?category=hybrid" className="text-sm text-muted-foreground hover:text-accent-foreground">Hybrid Bikes</Link></li>
-                            <li><Link to="/shop?category=electric" className="text-sm text-muted-foreground hover:text-accent-foreground">Electric Bikes</Link></li>
+                            <li><Link to="/shop?category=Mountain" className="text-sm text-muted-foreground hover:text-accent-foreground">Mountain Bikes</Link></li>
+                            <li><Link to="/shop?category=Hybrid" className="text-sm text-muted-foreground hover:text-accent-foreground">Hybrid Bikes</Link></li>
+                            <li><Link to="/shop?category=Electric" className="text-sm text-muted-foreground hover:text-accent-foreground">Electric Bikes</Link></li>
                         </ul>
                     </div>
 
