@@ -10,7 +10,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSearchParams } from "react-router-dom";
 
-export default function DefaultPagination({ meta }: { meta: TMeta }) {
+export default function DefaultPagination({ meta, showItemPerPage = true }: { meta: TMeta, showItemPerPage?: boolean }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const currentLimit = searchParams.get("limit") || String(meta.limit);
 
@@ -69,21 +69,24 @@ export default function DefaultPagination({ meta }: { meta: TMeta }) {
                 </PaginationContent>
             </Pagination>
             {/* Limit Selector */}
-            <div className="flex items-center gap-2 ml-auto">
-                <span className="text-sm text-muted-foreground">Items per page:</span>
-                <Select defaultValue={currentLimit} onValueChange={handleLimitChange}>
-                    <SelectTrigger className="w-[80px] h-9">
-                        <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {[2,5, 10, 20, 50, 100].map((option) => (
-                            <SelectItem key={option} value={String(option)}>
-                                {option}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-            </div>
+            {
+                showItemPerPage && <div className="flex items-center gap-2 ml-auto">
+                    <span className="text-sm text-muted-foreground">Items per page:</span>
+                    <Select defaultValue={currentLimit} onValueChange={handleLimitChange}>
+                        <SelectTrigger className="w-[80px] h-9">
+                            <SelectValue placeholder="Select" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {[2, 5, 10, 20, 30, 50, 100].map((option) => (
+                                <SelectItem key={option} value={String(option)}>
+                                    {option}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            }
+
 
 
         </div>

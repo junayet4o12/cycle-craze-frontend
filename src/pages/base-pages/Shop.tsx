@@ -1,26 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { Search, SlidersHorizontal, Grid, ListFilter, X, ChevronRight, ChevronLeft } from "lucide-react";
-
+import { SlidersHorizontal, Grid, ListFilter, X } from "lucide-react";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 // Import shadcn/ui components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Import your existing code dependencies
 import { productCategories, productFrameMaterial } from "@/constant/product.const";
 import { useProductsQuery } from "@/redux/features/product/productApi";
 import { TQueryParams } from "@/types";
 import ProductCard from "@/components/modules/shop/ProductCard";
 import Shop_FilterPanel from "@/components/modules/shop/Shop_FilterPanel";
+import SearchProducts from "@/components/search-products";
+import DefaultPagination from "@/components/default-pagination";
+import { GridToggler } from "@/components/modules/shop/GridToggler";
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [gridNumber, setGridNumber] = useState<number>(3)
+  const [gridNumberSmallDevice, setGridNumberSmallDevice] = useState<number>(2)
   const location = useLocation();
   const queries = new URLSearchParams(location.search);
   const [priceRange, setPriceRange] = useState<number[]>([0, 100000]);
@@ -34,15 +37,7 @@ export default function Shop() {
   const sort = searchParams.get('sort') || '';
   const categoryFilter = searchParams.get('category') || '';
   const frameFilter = searchParams.get('frameMaterial') || '';
-  const searchingTextParams = searchParams.get('searchTerm') || '';
   const currentPriceRange = searchParams.get('priceRange')?.split('-').map(Number) || [0, 100000];
-
-  // Initialize price range from URL if available
-  useEffect(() => {
-    if (searchParams.get('priceRange')) {
-      setPriceRange(currentPriceRange);
-    }
-  }, []);
 
   const params: TQueryParams[] | undefined = queryArray.length > 0 ? queryArray : [];
   const finalParams = [...params, { name: 'fields', value: 'name,price,category,images,quantity,brand,frameMaterial,specifications' }];
@@ -79,20 +74,6 @@ export default function Shop() {
     setSearchParams(searchParams);
   };
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const searchingText = formData.get('searchTerm') as string;
-
-    if (!searchingText) {
-      searchParams.delete('searchTerm');
-    } else {
-      searchParams.set('searchTerm', searchingText);
-    }
-    setSearchParams(searchParams);
-  };
-
-
 
   const handleResetPriceRange = () => {
     setPriceRange([0, 100000]);
@@ -104,27 +85,13 @@ export default function Shop() {
     setSearchParams(new URLSearchParams());
     setPriceRange([0, 100000]);
   };
-
-
-
-  // Filter panels component to avoid duplication between desktop and mobile views
-
-
+  console.log(gridNumber);
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Header with search and sort */}
+    <section className="py-8">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-        <form onSubmit={handleSearch} className="w-full md:w-auto relative">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              name="searchTerm"
-              placeholder="Search products..."
-              defaultValue={searchingTextParams}
-              className="pl-10 w-full md:w-80"
-            />
-          </div>
-        </form>
+        <div className="w-full md:w-80">
+          <SearchProducts />
+        </div>
 
         <div className="flex items-center gap-4 self-end md:self-auto">
           <Select value={sort} onValueChange={handleNameSorting}>
@@ -147,9 +114,9 @@ export default function Shop() {
                 <SlidersHorizontal className="h-4 w-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80">
+            <SheetContent side="left" className="w-80 px-4 py-8">
               <h2 className="text-lg font-semibold mb-6">Filters</h2>
-              <ScrollArea className="h-[calc(100vh-8rem)] pb-10">
+              <ScrollArea className="h-[calc(100vh-8rem)]">
                 <Shop_FilterPanel priceRange={priceRange} setPriceRange={setPriceRange} />
               </ScrollArea>
             </SheetContent>
@@ -216,9 +183,9 @@ export default function Shop() {
 
       <div className="flex flex-col md:flex-row gap-6">
         {/* Desktop Filters Sidebar */}
-        <div className="hidden md:block w-64 shrink-0">
-          <Card>
-            <CardContent className="p-6">
+        <div className="hidden md:block w-64 shrink-0 relative">
+          <Card className="sticky top-24">
+            <CardContent className="px-4">
               <h2 className="text-lg font-semibold mb-6">Filters</h2>
               <Shop_FilterPanel priceRange={priceRange} setPriceRange={setPriceRange} />
             </CardContent>
@@ -264,46 +231,40 @@ export default function Shop() {
                   Showing <span className="font-medium text-foreground">{products.length}</span> products
                   {meta?.total && products.length !== meta.total && ` of ${meta.total}`}
                 </p>
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon" className="hidden sm:flex">
-                    <Grid className="h-4 w-4" />
-                  </Button>
-                </div>
+                <div className="hidden lg:block"><GridToggler gridNumber={gridNumber} setGridNumber={setGridNumber} /></div>
+                <div className="lg:hidden"><GridToggler gridNumber={gridNumberSmallDevice} setGridNumber={setGridNumberSmallDevice} totalGrid={2} increaseBy={1} /></div>
               </div>
+              
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((product) => <ProductCard product={product} key={product._id} />)}
-              </div>
-
-              {/* Pagination */}
-              {meta?.totalPage && meta.totalPage > 1 && (
-                <div className="flex items-center justify-center mt-10">
-                  <div className="flex items-center gap-2">
-                    <Button variant="outline" size="icon" disabled={meta.page === 1}>
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-
-                    {Array.from({ length: meta.totalPage }, (_, i) => i + 1).map((page) => (
-                      <Button
-                        key={page}
-                        variant={meta.page === page ? "default" : "outline"}
-                        size="icon"
-                        className="w-9 h-9"
+              <LayoutGroup>
+                <motion.div
+                  layout
+                  className={`grid grid-cols-${gridNumberSmallDevice} lg:grid-cols-${gridNumber} gap-4 sm:gap-6`}
+                >
+                  <AnimatePresence>
+                    {products.map((product) => (
+                      <motion.div
+                        key={product._id}
+                        layout
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        {page}
-                      </Button>
+                        <ProductCard product={product} />
+                      </motion.div>
                     ))}
+                  </AnimatePresence>
+                </motion.div>
+              </LayoutGroup>
 
-                    <Button variant="outline" size="icon" disabled={meta.page === meta.totalPage}>
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              )}
+              {
+                meta && <DefaultPagination meta={meta} showItemPerPage={false} />
+              }
             </>
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

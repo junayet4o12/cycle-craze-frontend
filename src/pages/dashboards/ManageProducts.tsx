@@ -1,5 +1,5 @@
-import { ArrowDown, ArrowUp, ChevronDown, ChevronsUpDown, ChevronUp, Package, Search, X } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { ArrowDown, ArrowUp, ChevronDown, ChevronsUpDown, ChevronUp, Package, X } from "lucide-react";
+import { useState } from "react";
 
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -7,7 +7,6 @@ import MP_SingleProduct from "@/components/modules/dashboard/manage-products/MP_
 import AddProduct from "@/components/modules/dashboard/manage-products/AddProduct";
 import { useProductsQuery } from "@/redux/features/product/productApi";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { productCategories } from "@/constant/product.const";
 import { TQueryParams } from "@/types";
@@ -15,6 +14,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Slider } from "@/components/ui/slider";
 import DefaultPagination from "@/components/default-pagination";
+import SearchProducts from "@/components/search-products";
 
 
 export default function ManageProducts() {
@@ -30,7 +30,6 @@ export default function ManageProducts() {
   }));
   const sort = searchParams.get('sort') || '';
   const categoryFilter = searchParams.get('category') || ''
-  const searchingTextParams = searchParams.get('searchTerm') || ''
 
   const params: TQueryParams[] | undefined = queryArray.length > 0 ? queryArray : undefined;
 
@@ -62,19 +61,6 @@ export default function ManageProducts() {
     }
     setSearchParams(searchParams);
   };
-
-  const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const searchingText = e.target.searchTerm.value;
-
-    if (!searchingText) {
-      searchParams.delete('searchTerm');
-    } else {
-      searchParams.set('searchTerm', searchingText)
-    }
-    setSearchParams(searchParams);
-
-  }
 
   const handleSearchSort = (type: '' | 'price' | '-price') => {
     if (!type) {
@@ -117,10 +103,7 @@ export default function ManageProducts() {
 
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <form onSubmit={handleSearch} className="flex gap-2">
-          <Input name="searchTerm" defaultValue={searchingTextParams} placeholder="Search products..." />
-          <Button variant={"outline"} size={"icon"}><Search /></Button>
-        </form>
+        <SearchProducts />
 
 
         {/* <div className="col-span-1  flex flex-col gap-1">

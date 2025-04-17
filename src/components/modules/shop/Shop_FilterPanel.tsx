@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { productCategories, productFrameMaterial } from "@/constant/product.const";
-import { X } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
 import { useSearchParams } from "react-router-dom";
 type PropsType = {
@@ -44,10 +43,6 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
         const priceRangeText = priceRange.join("-");
         searchParams.set("priceRange", priceRangeText);
         setSearchParams(searchParams);
-    };
-    const handleClearAllFilters = () => {
-        setSearchParams(new URLSearchParams());
-        setPriceRange([0, 100000]);
     };
     return (
         <>
@@ -163,17 +158,6 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
                     ))}
                 </div>
             </div>
-
-            <Separator className="my-6" />
-
-            <Button
-                variant="outline"
-                className="w-full"
-                onClick={handleClearAllFilters}
-            >
-                <X className="mr-2 h-4 w-4" />
-                Clear All Filters
-            </Button>
         </>
     );
 }
