@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 
 export default function WhereToWork() {
@@ -13,8 +14,8 @@ export default function WhereToWork() {
                 <h6>Power and Style Unite.</h6>
                 <p>Leo integer malesuada nunc vel risus commodo viverra. Imperdiet proin fermentum leo vel orci porta non. Felis eget velit aliquet sagittis id consectetur purus ut faucibus..</p>
                 <div className="space-x-2">
-                    <Button variant={"ghost"} className="border border-primary hover:!bg-transparent hover:text-accent">Discover Now</Button>
-                    <Button className="hover:!bg-transparent hover:text-accent" variant={"ghost"}>Shop Now</Button>
+                   <Link to={'/shop'}> <Button variant={"ghost"} className="border border-primary hover:!bg-transparent hover:text-accent">Discover Now</Button></Link>
+                   <Link to={'/shop'}> <Button className="hover:!bg-transparent hover:text-accent" variant={"ghost"}>Shop Now</Button></Link>
                 </div>
             </div>
             <img className="object-cover hidden md:block ml-auto w-[90%] xl:w-[80%]" src="/where-to-work-banner.png" alt="" />

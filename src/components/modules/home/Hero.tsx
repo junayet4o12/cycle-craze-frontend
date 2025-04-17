@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
+import { Link } from "react-router-dom";
 
 const ShopNowBtn = () => {
-    return <Button className="max-w-max  sm:h-12 sm:px-7 text-white border border-input/50 hover:bg-white/5 hover:text-white " variant="ghost">
-        Shop Now
-    </Button >
+    return <Link to={'/shop'}>
+        <Button className="max-w-max  sm:h-12 sm:px-7 text-white border border-input/50 hover:bg-white/5 hover:text-white " variant="ghost">
+            Shop Now
+        </Button >
+    </Link>
 }
 export default function Hero() {
     return (
