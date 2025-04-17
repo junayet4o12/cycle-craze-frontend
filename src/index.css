@@ -148,6 +148,7 @@
   p {
     @apply text-sm md:text-base leading-relaxed;
   }
+  
 }
 
 
@@ -196,4 +197,9 @@ section {
     padding-right: 3rem;
     /* 48px */
   }
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
 }

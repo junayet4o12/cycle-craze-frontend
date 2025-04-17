@@ -27,9 +27,11 @@ export default function Profile() {
             
             {/* Error state */}
             {isError && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-full">
-                    <div className="text-red-500">Failed to load profile</div>
-                </div>
+                <img 
+                src='/default-user.png' 
+                alt="Profile"
+                className={`w-full h-full object-cover rounded-full transition-opacity duration-300`}
+            />
             )}
             
             {/* Image with loading state */}

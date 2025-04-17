@@ -6,6 +6,8 @@ import {
     SheetContent,
     SheetTrigger,
     SheetClose,
+    SheetDescription,
+    SheetTitle,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Link } from "react-router-dom";
@@ -43,7 +45,7 @@ const Navbar: FC = () => {
                 <div className="flex h-16 items-center justify-between">
                     {/* Logo and company name */}
                     <Link to={'/'} className="flex items-center gap-1">
-                        <img className="w-12 object-cover" src={logoUrl} alt="" />
+                        <img className="w-9 object-cover" src={logoUrl} alt="" />
                         <span className="text-lg font-semibold">CycleCraze</span>
                     </Link>
 
@@ -140,6 +142,8 @@ const Navbar: FC = () => {
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="right" className="px-4">
+                                <SheetDescription className="hidden"></SheetDescription>
+                                <SheetTitle className="hidden" />
                                 <nav className="flex flex-col gap-4 mt-8">
                                     {/* Authentication in Mobile Menu */}
                                     {user ? (
@@ -181,8 +185,8 @@ const Navbar: FC = () => {
                                     )}
 
                                     {/* Regular Nav Items */}
-                                    {navItems.map((item) => (
-                                        <SheetClose asChild key={item.label}>
+                                    {navItems.map((item, idx) => (
+                                        <SheetClose  asChild key={idx}>
                                             <Link to={item.href} className="text-sm font-medium py-2">
                                                 {item.label}
                                             </Link>

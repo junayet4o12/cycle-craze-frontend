@@ -45,10 +45,10 @@ export default function WhyRideWithUs() {
                 <h2 className="uppercase">Why Ride <span className="text-primary">With Us?</span></h2>
                 <div className="space-y-6">
                     {whyRideWithUs.map((item, index) => (
-                        <div className="flex gap-4">
+                        <div key={index} className="flex gap-4">
                             <div className="w-5 h-0.5 bg-primary mt-4.5"></div>
                             <div
-                                key={index}
+                                
                                 className="space-y-2"
                             >
                                 <h4 className="text-primary font-semibold">{item.title}</h4>
