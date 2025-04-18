@@ -34,6 +34,12 @@ const productApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: (_result, _error, productId) => [{ type: "Products", id: productId }],
+      transformResponse: (response: TResponseRedux<IProduct>) => {
+
+        return {
+          data: response.data,
+        };
+      },
     }),
 
     // POST /products

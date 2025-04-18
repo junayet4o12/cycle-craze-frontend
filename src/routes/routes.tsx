@@ -9,6 +9,7 @@ import { dashboardRoutes } from "./dashboard.routes";
 import ProtectedRoutes from "@/components/private_routes/protected-routes";
 import Home from "@/pages/base-pages/Home";
 import Shop from "@/pages/base-pages/Shop";
+import ProductDetails from "@/pages/product-details/ProductDetails";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: 'shop',
                 element: <Shop />
+            },
+            {
+                path: 'product-details/:id',
+                element: <ProductDetails />
             },
             {
                 path: '',

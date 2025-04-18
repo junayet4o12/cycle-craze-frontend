@@ -11,7 +11,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from './redux/store.ts'
 import 'swiper/css';
 import 'swiper/css/navigation';
-
+import 'react-photo-view/dist/react-photo-view.css';
+import 'react-inner-image-zoom/lib/styles.min.css'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
