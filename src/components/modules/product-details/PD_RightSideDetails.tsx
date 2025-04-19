@@ -128,7 +128,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                     </TabsList>
                     <TabsContent value="description" className="text-sm">
                         <div className="prose prose-sm max-w-none">
-                            <p>{product.description}</p>
+                            <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
                         </div>
                     </TabsContent>
                     <TabsContent value="specifications">

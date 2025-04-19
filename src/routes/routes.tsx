@@ -10,6 +10,8 @@ import ProtectedRoutes from "@/components/private_routes/protected-routes";
 import Home from "@/pages/base-pages/Home";
 import Shop from "@/pages/base-pages/Shop";
 import ProductDetails from "@/pages/product-details/ProductDetails";
+import Services from "@/pages/base-pages/Services";
+import Contact from "@/pages/base-pages/Contact";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
             {
                 path: 'product-details/:id',
                 element: <ProductDetails />
+            },
+            {
+                path: 'services',
+                element: <Services />
+            },
+            {
+                path: 'contact',
+                element: <Contact />
             },
             {
                 path: '',

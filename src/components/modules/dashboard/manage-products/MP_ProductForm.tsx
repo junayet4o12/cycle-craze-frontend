@@ -7,13 +7,13 @@ import {
 } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { UseFormReturn } from "react-hook-form";
 import { productFormSchema } from "@/schemas/product-form-schema";
 import { z } from "zod";
+import TextEditor from "../../editor/TextEditor";
 
 
 type FormValues = z.infer<typeof productFormSchema>;
@@ -21,7 +21,7 @@ type MP_ProductFormProps = {
     form: UseFormReturn<FormValues>;
     defaultImage: string;
     isLoading: boolean;
-    isImageUpload?: boolean
+    isImageUpload?: boolean;
 };
 export default function MP_ProductForm({ form, defaultImage, isLoading, isImageUpload = true }: MP_ProductFormProps) {
     const imageRef = useRef<HTMLInputElement | null>(null)
@@ -218,11 +218,7 @@ export default function MP_ProductForm({ form, defaultImage, isLoading, isImageU
                     <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                            <Textarea
-                                placeholder="Enter bicycle description"
-                                rows={4}
-                                {...field}
-                            />
+                            <TextEditor value={field.value} onChange={field.onChange} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
