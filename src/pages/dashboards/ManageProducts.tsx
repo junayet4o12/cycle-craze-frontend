@@ -15,11 +15,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Slider } from "@/components/ui/slider";
 import DefaultPagination from "@/components/default-pagination";
 import SearchProducts from "@/components/search-products";
-import TextEditor from "@/components/modules/editor/TextEditor";
 
 
 export default function ManageProducts() {
-  const [value, setValue] = useState('')
   const [searchParams, setSearchParams] = useSearchParams();
   const [priceDropdownOpen, setPriceDropdownOpen] = useState(false);
   const location = useLocation();
@@ -90,9 +88,6 @@ export default function ManageProducts() {
     setSearchParams(searchParams);
     setPriceDropdownOpen(false); // 👈 close the dropdown
   };
-  const handleChangeEditor = (v: string) => {
-    setValue(v)
-  }
   return (
     <div className="container mx-auto py-6 space-y-6">
       {/* Top header */}
