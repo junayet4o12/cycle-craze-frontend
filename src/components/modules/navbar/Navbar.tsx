@@ -122,12 +122,7 @@ const Navbar: FC = () => {
                     {/* Mobile Navigation */}
                     <div className="md:hidden flex items-center gap-2">
                         {/* Cart Button for Mobile */}
-                        <Link to="/cart" className="relative">
-                            <Button variant="ghost" size="icon" aria-label="Cart">
-                                <ShoppingCart className="h-5 w-5" />
-                                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-4 h-4 text-xs flex items-center justify-center">0</span>
-                            </Button>
-                        </Link>
+                       <MyCartBtn/>
 
                         <ModeToggle />
 
