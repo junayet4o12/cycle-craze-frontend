@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/auth/authSlice'
+import cartReducer from './features/cart/cartSlice'
 import { baseApi } from './api/baseApi'
 import {
   persistReducer,
@@ -12,16 +13,22 @@ import {
   REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-const persistConfig = {
+const authPersistConfig = {
   key: 'auth',
   storage,
 }
+const cartPersistConfig = {
+  key: 'cart',
+  storage,
+}
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer)
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer)
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer)
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
+    cart: persistedCartReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     serializableCheck: {

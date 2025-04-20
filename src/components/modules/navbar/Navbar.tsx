@@ -16,6 +16,7 @@ import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Profile from "@/components/profile";
 import { useTheme } from "@/providers/theme-provider";
+import MyCartBtn from "./MyCartBtn";
 
 interface NavItem {
     label: string;
@@ -70,12 +71,7 @@ const Navbar: FC = () => {
 
                         }
                         {/* Cart Button */}
-                        <Link to="/cart" className="relative">
-                            <Button variant="ghost" size="icon" aria-label="Cart">
-                                <ShoppingCart className="h-5 w-5" />
-                                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground rounded-full w-4 h-4 text-xs flex items-center justify-center">0</span>
-                            </Button>
-                        </Link>
+                        <MyCartBtn/>
 
                         {/* Authentication */}
                         {user ? (

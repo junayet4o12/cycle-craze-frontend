@@ -6,11 +6,14 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { IProduct } from "@/types"
+import { CartProduct, IProduct } from "@/types"
+import { useAppDispatch } from "@/redux/hooks"
+import { addProduct } from "@/redux/features/cart/cartSlice"
+import { toast } from "sonner"
 
 export default function PD_RightSideDetails({ product }: { product: IProduct }) {
-    const [quantity, setQuantity] = useState(4)
-
+    const [quantity, setQuantity] = useState(1)
+    const dispatch = useAppDispatch()
     const incrementQuantity = () => {
         setQuantity((prev) => prev + 1)
     }
@@ -20,7 +23,19 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
             setQuantity((prev) => prev - 1)
         }
     }
-
+    const handleAddToCart = () => {
+        const cartProduct: CartProduct = {
+            _id: product._id,
+            image: product.images[0],
+            name: product.name,
+            orderQuantity: quantity,
+            price: product.price,
+            brand: product.brand
+        }
+        dispatch(addProduct(cartProduct))
+        toast.success('Product Has added to cart!!')
+        setQuantity(1)
+    }
     return (
         <Card className="w-full border-none shadow-none">
             <CardContent className="p-6">
@@ -45,10 +60,10 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                 <div className="space-y-4">
                     <div className="flex items-center gap-3">
                         <div className="flex items-center border rounded-md">
-                            <Button 
-                                variant="ghost" 
-                                size="icon" 
-                                className="h-8 w-8 rounded-none" 
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 rounded-none"
                                 onClick={decrementQuantity}
                             >
                                 -
@@ -59,10 +74,10 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                                 onChange={(e) => setQuantity(Number(e.target.value))}
                                 className="w-12 h-8 text-center border-0 p-0 focus-visible:ring-0"
                             />
-                            <Button 
-                                variant="ghost" 
-                                size="icon" 
-                                className="h-8 w-8 rounded-none" 
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 rounded-none"
                                 onClick={incrementQuantity}
                             >
                                 +
@@ -74,7 +89,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <Button className="flex-1">Add to Cart</Button>
+                        <Button onClick={handleAddToCart} className="flex-1">Add to Cart</Button>
                         <Button variant="secondary" className="flex-1">Buy it now</Button>
                     </div>
                 </div>
@@ -150,7 +165,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                                 <span className="font-medium">Wheel Size:</span>
                                 <span>{product.wheelSize}"</span>
                             </div>
-                            
+
                             {/* Dynamic specifications */}
                             <Separator className="my-3" />
                             <h3 className="font-medium mb-2">Additional Specifications</h3>
