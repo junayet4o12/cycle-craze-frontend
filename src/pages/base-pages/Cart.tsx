@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { MinusIcon, PlusIcon, Trash2Icon, ShoppingCartIcon } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const dispatch = useAppDispatch();
@@ -198,7 +199,7 @@ export default function Cart() {
           </div>
           <div className="text-right">
             <p className="text-lg font-semibold">Total: ৳{totalPrice}</p>
-            <Button className="mt-2">Proceed to Checkout</Button>
+            <Link to={'/checkout'}><Button className="mt-2">Proceed to Checkout</Button></Link>
           </div>
         </CardFooter>
       </Card>

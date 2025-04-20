@@ -171,11 +171,15 @@ export default function MyCartBtn() {
                                 <span className="text-sm font-medium">৳{totalPrice}</span>
                             </div>
                             <p className="text-xs text-gray-500">Shipping and taxes calculated at checkout</p>
-                            <SheetClose asChild>
-                                <Button className="w-full">
-                                    Checkout
-                                </Button>
-                            </SheetClose>
+                           <div>
+                                <SheetClose className="" asChild>
+                                   <Link to={'/checkout'}>
+                                        <Button className="w-full">
+                                            Checkout
+                                        </Button>
+                                   </Link>
+                                </SheetClose>
+                           </div>
                             <SheetClose asChild>
                                 <Button variant="outline" className="w-full">
                                     Continue Shopping
