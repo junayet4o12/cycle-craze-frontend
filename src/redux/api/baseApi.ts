@@ -4,10 +4,11 @@ import { logout, setUser } from "../features/auth/authSlice";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
 
-// https://bi-cicle-backend.vercel.app
-// http://localhost:5000
+const backendApi = `https://bi-cicle-backend.vercel.app/api`
+// const backendApi = `http://localhost:5000/api`
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api',
+    baseUrl: backendApi,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -27,7 +28,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
     }
     if (result.error?.status === 401) {
         console.log('sending refresh token');
-        const res = await fetch('http://localhost:5000/api/auth/refresh-token', {
+        const res = await fetch(`${backendApi}/auth/refresh-token`, {
             method: 'POST',
             credentials: 'include'
         })
