@@ -14,7 +14,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Slider } from "@/components/ui/slider";
 import DefaultPagination from "@/components/default-pagination";
-import SearchProducts from "@/components/search-products";
+import SearchItems from "@/components/search-items";
 
 
 export default function ManageProducts() {
@@ -101,13 +101,7 @@ export default function ManageProducts() {
 
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <SearchProducts />
-
-
-        {/* <div className="col-span-1  flex flex-col gap-1">
-          <label className="text-sm font-medium">Price Range</label>
-          <Slider defaultValue={[0, 1000]} max={2000} step={10} />
-        </div> */}
+        <SearchItems placeholder="Search Products..." />
       </div>
 
       {/* Table */}

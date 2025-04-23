@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 
 
-export default function SearchProducts() {
+export default function SearchItems({ placeholder = 'Search...' }: { placeholder?: string }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchingTextParams = searchParams.get('searchTerm') || ''
     const handleSearch = (e: ChangeEvent<HTMLFormElement>) => {
@@ -22,7 +22,7 @@ export default function SearchProducts() {
     }
     return (
         <form onSubmit={handleSearch} className="flex gap-2">
-            <Input name="searchTerm" defaultValue={searchingTextParams} placeholder="Search products..." />
+            <Input name="searchTerm" defaultValue={searchingTextParams} placeholder={placeholder} />
             <Button variant={"outline"} size={"icon"}><Search /></Button>
         </form>
     );

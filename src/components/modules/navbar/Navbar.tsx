@@ -88,11 +88,13 @@ const Navbar: FC = () => {
                                             <span>My Profile</span>
                                         </DropdownMenuItem>
                                     </Link>
-                                    {user.role === 'user' && <Link to="/my-orders">
+                                    {/* {user.role === 'user' &&  */}
+                                    <Link to="/my-orders">
                                         <DropdownMenuItem className="cursor-pointer">
                                             <span>My Orders</span>
                                         </DropdownMenuItem>
-                                    </Link>}
+                                    </Link>
+                                    {/* } */}
                                     {
                                         user && user.role === 'admin' ? <Link to="/dashboard">
                                             <DropdownMenuItem className="cursor-pointer">

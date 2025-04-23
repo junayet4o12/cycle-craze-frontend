@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
+  Home,
   LogOut,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -93,7 +94,24 @@ export default function Sidebar() {
               </div>
             );
           })}
-           <SidebarModeToggle collapsed={collapsed} />
+          <NavLink
+            to={'/'}
+            className={({ isActive }) =>
+              cn(
+                "flex items-center rounded-md text-sm h-10",
+                collapsed ? "justify-center px-3.5 w-max" : "justify-start px-3 w-full",
+                isActive
+                  ? "bg-muted text-[#E63946] font-semibold"
+                  : "hover:bg-muted"
+              )
+            }
+          >
+            <span className="flex items-center">
+              <Home size={18} />
+              {!collapsed && <span className="ml-3">Home</span>}
+            </span>
+          </NavLink>
+          <SidebarModeToggle collapsed={collapsed} />
           <div onClick={handleLogout}
             className={`flex items-center text-primary cursor-pointer rounded-md text-sm h-10 hover:bg-muted  ${collapsed ? "justify-center px-3.5 w-max" : "justify-start px-3 w-full"}`}>
             <span className="flex items-center">
@@ -101,7 +119,7 @@ export default function Sidebar() {
               {!collapsed && <span className="ml-3">Logout</span>}
             </span>
           </div>
-         
+
         </nav>
       </div>
     </div>

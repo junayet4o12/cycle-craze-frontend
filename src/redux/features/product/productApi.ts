@@ -7,9 +7,11 @@ const productApi = baseApi.injectEndpoints({
     products: builder.query({
       query: (args: TQueryParams[] | undefined) => {
         const params = new URLSearchParams();
+        
+        
         if (args) {
           args.forEach((item) => {
-            params.append(item?.name as string, item?.value as string);
+            params.append(item.name as string, item.value as string);
           })
         }
         return {

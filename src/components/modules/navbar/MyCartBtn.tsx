@@ -68,7 +68,7 @@ export default function MyCartBtn() {
             <SheetContent className="w-[90%] sm:max-w-md flex flex-col px-4 py-8">
                 <SheetHeader className="border-b pb-4 px-0">
                     <SheetTitle className="flex items-center justify-between">
-                        <h5 className="font-semibold text-2xl">Your Cart ({cartProducts.length})</h5>
+                        <span className="font-semibold text-2xl">Your Cart ({cartProducts.length})</span>
                         {cartProducts.length > 0 && (
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>

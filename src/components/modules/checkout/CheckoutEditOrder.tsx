@@ -67,7 +67,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium truncate">{product.name}</p>
-                                    <p className="text-xs text-gray-500">${product.price.toFixed(2)} each</p>
+                                    <p className="text-xs text-gray-500">৳{product.price.toFixed(2)} each</p>
 
                                     <div className="flex items-center justify-between mt-2">
                                         <div className="flex items-center space-x-1">
@@ -125,7 +125,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
                                     </div>
                                 </div>
                                 <p className="font-medium text-sm">
-                                    ${(product.price * product.orderQuantity).toFixed(2)}
+                                ৳{(product.price * product.orderQuantity)}
                                 </p>
                             </div>
                             <Separator />
@@ -136,7 +136,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
                 <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                         <span>Subtotal</span>
-                        <span>${totalPayment.toFixed(2)}</span>
+                        <span>৳{totalPayment}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                         <span>Shipping</span>
@@ -152,7 +152,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
 
                 <div className="flex justify-between font-semibold">
                     <span>Total</span>
-                    <span>${totalPayment.toFixed(2)}</span>
+                    <span>৳{totalPayment}</span>
                 </div>
             </CardContent>
         </Card>

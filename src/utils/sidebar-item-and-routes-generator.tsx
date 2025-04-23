@@ -1,5 +1,6 @@
 import Analytics from '@/pages/dashboards/Analytics';
 import Dashboard from '@/pages/dashboards/Dashboard';
+import ManageOrders from '@/pages/dashboards/ManageOrders';
 import ManageProducts from '@/pages/dashboards/ManageProducts';
 import { DashBoardItemsData, SidebarItems } from '@/types';
 import {
@@ -12,6 +13,7 @@ import {
     Users,
     LayoutDashboard,
     PackageSearch,
+    SquareChartGantt,
 } from 'lucide-react';
 
 
@@ -71,6 +73,12 @@ const dashBoardItemsData: DashBoardItemsData[] = [
         icon: <PackageSearch size={18} />,
         path: 'manage-product',
         component: <ManageProducts/>
+    },
+    {
+        title: 'Manage Orders',
+        icon: <SquareChartGantt size={18} />,
+        path: 'manage-order',
+        component: <ManageOrders/>
     },
 ];
 

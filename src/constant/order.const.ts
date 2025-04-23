@@ -1,0 +1,1 @@
+export const order_status = ['PENDING', 'SHIPPED', 'DELIVERED'] as const 

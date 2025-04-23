@@ -16,9 +16,9 @@ import { useProductsQuery } from "@/redux/features/product/productApi";
 import { TQueryParams } from "@/types";
 import ProductCard from "@/components/modules/shop/ProductCard";
 import Shop_FilterPanel from "@/components/modules/shop/Shop_FilterPanel";
-import SearchProducts from "@/components/search-products";
 import DefaultPagination from "@/components/default-pagination";
 import { GridToggler } from "@/components/modules/shop/GridToggler";
+import SearchItems from "@/components/search-items";
 
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -89,7 +89,7 @@ export default function Shop() {
     <section className="py-8">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
         <div className="w-full md:w-80">
-          <SearchProducts />
+          <SearchItems placeholder="Search Products..." />
         </div>
 
         <div className="flex items-center gap-4 self-end md:self-auto">
