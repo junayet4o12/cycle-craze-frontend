@@ -23,7 +23,6 @@ export interface IOrder {
     transactionId: string;
     paidStatus: boolean;
 }
-}
 
 export type OrderDataType = {
     products: {
@@ -36,4 +35,4 @@ export type OrderDataType = {
     name: string;
     contact: string;
     email?: string;
-   
+}
