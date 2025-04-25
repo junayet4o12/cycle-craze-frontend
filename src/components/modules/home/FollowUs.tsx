@@ -15,8 +15,8 @@ export default function FollowUs() {
                 <h3 className="uppercase pb-4">Follow us @Cycle_craze</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {
-                        allImages.map((item, idx) => <div className="w-full h-full relative group">
-                            <img key={idx} src={item} className="w-full aspect-square" />
+                        allImages.map((item, idx) => <div key={idx} className="w-full h-full relative group">
+                            <img  src={item} className="w-full aspect-square" />
                            <div className="w-full h-full bg-black/20 absolute top-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-200"> <Instagram/></div>
                         </div>)
                     }

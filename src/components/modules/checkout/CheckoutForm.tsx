@@ -1,25 +1,22 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { errorMessageGenerator } from '@/utils/errorMessageGenerator';
+import {  useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
-import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { clearCart, selectCurrentCartProducts } from '@/redux/features/cart/cartSlice';
+import { selectCurrentCartProducts } from '@/redux/features/cart/cartSlice';
 import { OrderDataType, TUserData } from '@/types';
-import { useCreateOrderMutation } from '@/redux/features/order/orderApi';
+import { useCheckoutMutation} from '@/redux/features/order/orderApi';
 import { CreditCard, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { checkoutFormSchema } from '@/schemas/checkout-form-schema';
 type FormValues = z.infer<typeof checkoutFormSchema>;
 
 export default function CheckoutForm({ userData }: { userData: TUserData | undefined }) {
-    const [createOrder, { isLoading: isCreateOrderLoading }] = useCreateOrderMutation()
+    const [checkout, { isLoading: isCheckoutLoading }] = useCheckoutMutation()
     const cartProducts = useAppSelector(selectCurrentCartProducts);
-    const dispatch = useAppDispatch()
     const form = useForm<FormValues>({
         resolver: zodResolver(checkoutFormSchema),
         defaultValues: {
@@ -62,15 +59,8 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
         }
 
 
-
-        const toastId = toast.loading('Ordering...')
-        try {
-            await createOrder(orderData).unwrap()
-            toast.success(`Order created successfully. Now, it's on processing...`, { id: toastId })
-            dispatch(clearCart())
-        } catch (error) {
-            toast.error(errorMessageGenerator(error), { id: toastId })
-        }
+        const result = await checkout(orderData).unwrap()
+        window.location.replace(result.data)
     };
     return (
         <Form {...form}>
@@ -84,7 +74,7 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                             <FormControl>
                                 <Input
                                     placeholder="John Doe"
-                                    disabled={isCreateOrderLoading}
+                                    disabled={isCheckoutLoading}
                                     className="bg-gray-50"
                                     {...field}
                                 />
@@ -103,7 +93,7 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                             <FormControl>
                                 <Input
                                     placeholder="+1 (555) 123-4567"
-                                    disabled={isCreateOrderLoading}
+                                    disabled={isCheckoutLoading}
                                     className="bg-gray-50"
                                     {...field}
                                 />
@@ -122,7 +112,7 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                             <FormControl>
                                 <Textarea
                                     placeholder="123 Main St, Apt 4B, City, State, ZIP"
-                                    disabled={isCreateOrderLoading}
+                                    disabled={isCheckoutLoading}
                                     className="bg-gray-50 min-h-24"
                                     {...field}
                                 />
@@ -146,9 +136,9 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                 <Button
                     type="submit"
                     className="w-full mt-6"
-                    disabled={isCreateOrderLoading}
+                    disabled={isCheckoutLoading}
                 >
-                    {isCreateOrderLoading ? (
+                    {isCheckoutLoading ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             Processing...

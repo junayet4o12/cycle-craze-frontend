@@ -26,6 +26,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { order_status } from "@/constant/order.const";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 
 export default function MyOrders() {
@@ -83,9 +85,11 @@ export default function MyOrders() {
             <p className="text-gray-600">You haven't placed any orders yet.</p>
           </CardContent>
           <CardFooter className="flex justify-center">
-            <a href="/products" className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded">
+            <Link to="/shop">
+            <Button>
               Start Shopping
-            </a>
+            </Button>
+            </Link>
           </CardFooter>
         </Card>
       </section>

@@ -14,6 +14,7 @@ import Services from "@/pages/base-pages/Services";
 import Contact from "@/pages/base-pages/Contact";
 import Cart from "@/pages/base-pages/Cart";
 import Checkout from "@/pages/base-pages/Checkout";
+import OrderSuccess from "@/pages/base-pages/OrderSuccess";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: 'checkout',
                 element: <Checkout />
+            },
+            {
+                path: 'checkout/success/:tranId',
+                element: <OrderSuccess />
             },
             {
                 path: '',

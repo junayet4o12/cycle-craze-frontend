@@ -56,9 +56,9 @@ const orderApi = baseApi.injectEndpoints({
       }),
     }),
 
-    createOrder: builder.mutation({
+    checkout: builder.mutation({
       query: (orderData) => ({
-        url: "/orders",
+        url: "/orders/checkout",
         method: "POST",
         body: orderData,
       }),
@@ -110,9 +110,9 @@ export const {
   useOrdersQuery,
   useMyOrdersQuery,
   useOrderQuery,
-  useCreateOrderMutation,
   useUpdateOrderMutation,
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
   useTotalRevenueQuery,
+  useCheckoutMutation
 } = orderApi;
