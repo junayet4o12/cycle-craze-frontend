@@ -46,7 +46,7 @@ export default function Footer() {
                         <ul className="space-y-2">
                             <li><Link to="/about-us" className="text-sm text-muted-foreground hover:text-accent-foreground">About Us</Link></li>
                             <li><Link to="/faqs" className="text-sm text-muted-foreground hover:text-accent-foreground">FAQs</Link></li>
-                            <li><Link to="/contact-us" className="text-sm text-muted-foreground hover:text-accent-foreground">Contact Us</Link></li>
+                            <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-accent-foreground">Contact Us</Link></li>
                         </ul>
                     </div>
 
@@ -57,7 +57,7 @@ export default function Footer() {
                             <h3 className="text-xl font-bold">Address Office</h3>
                             <div className="flex items-start space-x-2">
                                 <Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
-                                <span className="text-sm text-muted-foreground">info@e-plazashop.com</span>
+                                <span className="text-sm text-muted-foreground">muhammadjunayetmaruf@gmail.com</span>
                             </div>
                             <div className="flex items-start space-x-2">
                                 <MapPin className="h-5 w-5 text-muted-foreground mt-0.5" />
