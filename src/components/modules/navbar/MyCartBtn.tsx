@@ -28,9 +28,10 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function MyCartBtn() {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const cartProducts = useAppSelector(selectCurrentCartProducts);
 
@@ -103,7 +104,9 @@ export default function MyCartBtn() {
                             <h3 className="text-lg font-medium">Your cart is empty</h3>
                             <p className="text-sm text-gray-500">Add some products to your cart to see them here.</p>
                             <SheetClose asChild>
-                                <Button variant="outline">Continue Shopping</Button>
+                                <Button 
+                                 onClick={() => navigate("/shop")}
+                                variant="outline">Continue Shopping</Button>
                             </SheetClose>
                         </div>
                     ) : (
@@ -171,26 +174,28 @@ export default function MyCartBtn() {
                                 <span className="text-sm font-medium">৳{totalPrice}</span>
                             </div>
                             <p className="text-xs text-gray-500">Shipping and taxes calculated at checkout</p>
-                           <div>
+                            <div>
                                 <SheetClose className="" asChild>
-                                   <Link to={'/checkout'}>
+                                    <Link to={'/checkout'}>
                                         <Button className="w-full">
                                             Checkout
                                         </Button>
-                                   </Link>
+                                    </Link>
                                 </SheetClose>
-                           </div>
+                            </div>
                             <SheetClose asChild>
-                                <Button variant="outline" className="w-full">
-                                    Continue Shopping
-                                </Button>
+                                    <Button 
+                                     onClick={() => navigate("/shop")}
+                                    variant="outline" className="w-full">
+                                        Continue Shopping
+                                    </Button>
                             </SheetClose>
 
-                           <div className="text-center">
+                            <div className="text-center">
                                 <SheetClose asChild>
                                     <Link className="underline hover:text-primary" to="/cart">View Cart</Link>
                                 </SheetClose>
-                           </div>
+                            </div>
 
                         </div>
                     </SheetFooter>

@@ -55,6 +55,16 @@ const orderApi = baseApi.injectEndpoints({
         data: response.data,
       }),
     }),
+    orderByTranId: builder.query({
+      query: (tranId: string) => ({
+        url: `/orders/success/${tranId}`,
+        method: "GET",
+      }),
+      providesTags: (_result, _error, orderId) => [{ type: "Orders", id: orderId }],
+      transformResponse: (response: TResponseRedux<IOrder>) => ({
+        data: response.data,
+      }),
+    }),
 
     checkout: builder.mutation({
       query: (orderData) => ({
@@ -114,5 +124,6 @@ export const {
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
   useTotalRevenueQuery,
-  useCheckoutMutation
+  useCheckoutMutation,
+  useOrderByTranIdQuery
 } = orderApi;

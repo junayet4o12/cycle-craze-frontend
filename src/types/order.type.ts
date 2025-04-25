@@ -6,6 +6,7 @@ export interface IOrderedProduct {
     product: IProduct;
     quantity: number;
     name: string;
+    price: number;
 }
 export interface IOrder {
     _id: string;
@@ -19,6 +20,9 @@ export interface IOrder {
     totalPrice: number;
     createdAt: Date;
     updatedAt: Date;
+    transactionId: string;
+    paidStatus: boolean;
+}
 }
 
 export type OrderDataType = {
@@ -32,4 +36,4 @@ export type OrderDataType = {
     name: string;
     contact: string;
     email?: string;
-}
+   
