@@ -16,7 +16,7 @@ import CheckoutEditOrder from '@/components/modules/checkout/CheckoutEditOrder';
 import { useMyDataQuery } from '@/redux/features/user/userApi';
 import { useCurrentToken } from '@/redux/features/auth/authSlice';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useCreateOrderMutation } from '@/redux/features/order/orderApi';
+import { useCheckoutMutation } from '@/redux/features/order/orderApi';
 import CheckoutForm from '@/components/modules/checkout/CheckoutForm';
 
 
@@ -29,7 +29,7 @@ export default function Checkout() {
     skip: !token
   })
   const userData = data?.data
-  const [, { isLoading: isCreateOrderLoading }] = useCreateOrderMutation()
+  const [, { isLoading: isCreateOrderLoading }] = useCheckoutMutation()
   const cartProducts = useAppSelector(selectCurrentCartProducts);
   if (cartProducts.length === 0) {
     return (
