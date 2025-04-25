@@ -1,14 +1,14 @@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import {  useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { selectCurrentCartProducts } from '@/redux/features/cart/cartSlice';
 import { OrderDataType, TUserData } from '@/types';
-import { useCheckoutMutation} from '@/redux/features/order/orderApi';
+import { useCheckoutMutation } from '@/redux/features/order/orderApi';
 import { CreditCard, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { checkoutFormSchema } from '@/schemas/checkout-form-schema';
@@ -60,6 +60,8 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
 
 
         const result = await checkout(orderData).unwrap()
+        console.log(result.data);
+
         window.location.replace(result.data)
     };
     return (
