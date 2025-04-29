@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { backendApi } from "@/constant/backendApi.const";
+import { config } from "@/config/config";
 import { decreaseQuantity, increaseQuantity, removeProduct } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { CartProduct } from "@/types";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 type PropsType = {
     product: CartProduct
 }
+const backend_api = config.backend_api
 export default function MCB_SingleProduct({ product }: PropsType) {
     const [isLoading, setIsLoading] = useState(false)
     const [productQuantity, setProductQuantity] = useState<null | number>(null)
@@ -21,7 +22,7 @@ export default function MCB_SingleProduct({ product }: PropsType) {
             const productId = product._id
             try {
                 setIsLoading(true)
-                const { data } = await axios.get(`${backendApi}/products/${productId}?fields=quantity,isDeleted`);
+                const { data } = await axios.get(`${backend_api}/products/${productId}?fields=quantity,isDeleted`);
                 const productData = data.data
                 if (!productData || productData.isDeleted || productData.quantity < 1) {
                     setIsLoading(false)

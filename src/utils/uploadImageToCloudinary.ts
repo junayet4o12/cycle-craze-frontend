@@ -1,8 +1,9 @@
+import { config } from '@/config/config';
 import { toast } from 'sonner';
 
 
-const cloud_name = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-const upload_preset = import.meta.env.VITE_CLOUDINARY_IMAGE_PRESET
+const cloud_name = config.cloudinary_cloud_name
+const upload_preset = config.cloudinary_image_preset
 
 export const uploadImageToCloudinary = async (imageFile: File | null | undefined): Promise<string> => {
     

@@ -3,12 +3,12 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
-import { backendApi } from "@/constant/backendApi.const";
-
+import { config } from "@/config/config";
+const backend_api = config.backend_api
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: backendApi,
+    baseUrl: backend_api,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
@@ -28,7 +28,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
     }
     if (result.error?.status === 401) {
         console.log('sending refresh token');
-        const res = await fetch(`${backendApi}/auth/refresh-token`, {
+        const res = await fetch(`${backend_api}/auth/refresh-token`, {
             method: 'POST',
             credentials: 'include'
         })

@@ -13,7 +13,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { backendApi } from "@/constant/backendApi.const";
 import { decreaseQuantity, increaseQuantity, removeProduct } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { CartProduct } from "@/types";
@@ -23,22 +22,23 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { MinusIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton"; // Make sure Skeleton is imported!
+import { config } from "@/config/config";
 
 type PropsType = {
     product: CartProduct;
 };
-
+const backend_api = config.backend_api
 export default function CartRow({ product }: PropsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [productQuantity, setProductQuantity] = useState<null | number>(null);
     const dispatch = useAppDispatch();
-
+    
     const handleIncrease = async () => {
         if (!productQuantity) {
             const productId = product._id;
             try {
                 setIsLoading(true);
-                const { data } = await axios.get(`${backendApi}/products/${productId}?fields=quantity,isDeleted`);
+                const { data } = await axios.get(`${backend_api}/products/${productId}?fields=quantity,isDeleted`);
                 const productData = data.data;
                 if (!productData || productData.isDeleted || productData.quantity < 1) {
                     setIsLoading(false);

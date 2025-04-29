@@ -18,13 +18,14 @@ import { useAppDispatch } from '@/redux/hooks';
 import { decreaseQuantity, increaseQuantity, removeProduct } from '@/redux/features/cart/cartSlice';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { backendApi } from '@/constant/backendApi.const';
 import { Skeleton } from '@/components/ui/skeleton';
+import { config } from '@/config/config';
 type PropsType = {
     product: CartProduct;
     isProcessing: boolean;
     productsLength: number;
 }
+const backend_api = config.backend_api
 export default function CEO_SingleProduct({ product, isProcessing, productsLength }: PropsType) {
     const [isLoading, setIsLoading] = useState(false)
     const [productQuantity, setProductQuantity] = useState<null | number>(null)
@@ -34,7 +35,7 @@ export default function CEO_SingleProduct({ product, isProcessing, productsLengt
             const productId = product._id
             try {
                 setIsLoading(true)
-                const { data } = await axios.get(`${backendApi}/products/${productId}?fields=quantity,isDeleted`);
+                const { data } = await axios.get(`${backend_api}/products/${productId}?fields=quantity,isDeleted`);
                 const productData = data.data
                 if (!productData || productData.isDeleted || productData.quantity < 1) {
                     setIsLoading(false)
