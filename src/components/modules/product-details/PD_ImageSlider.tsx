@@ -12,34 +12,35 @@ const PD_ImageSlider = ({ images }: { images: string[] }) => {
             <div className="relative w-full max-w-3xl mx-auto">
 
                 {/* Slide Image */}
-                <div className="overflow-hidden relative rounded-lg flex sliderParent">
+                <PhotoProvider>
+                    <div className="overflow-hidden relative rounded-lg flex sliderParent">
 
-                    <PhotoProvider>
                         <PhotoView src={images[currentIndex]}>
                             <Button className='absolute right-2 bottom-2 bg-muted-foreground z-10 text-accent hover:bg-muted-foreground'>
                                 <Expand className='cursor-pointer size-5' />
                             </Button>
                         </PhotoView>
-                    </PhotoProvider>
 
-                    <div
-                        className="flex transition-transform ease-in-out duration-700  w-full aspect-[5/3]"
-                        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-                    >
-                        {images.map((slide, index) => (
-                            <div key={index} className='w-full flex-shrink-0 h-full flex justify-center items-center'>
-                                <InnerImageZoom
-                                    src={slide}
-                                    zoomType="hover"
-                                    zoomScale={1.5}
-                                    className='w-full'
-                                // alt={`Slide ${currentIndex + 1}`}
-                                />
-                            </div>
-                        ))}
+                        <div
+                            className="flex transition-transform ease-in-out duration-700  w-full aspect-[5/3]"
+                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                        >
+                            {images.map((slide, index) => (
+                                <PhotoView key={index} src={slide}>
+                                    <div className='w-full flex-shrink-0 h-full flex justify-center items-center'>
+                                        <InnerImageZoom
+                                            src={slide}
+                                            zoomType="hover"
+                                            zoomScale={1.5}
+                                            className='w-full'
+                                        // alt={`Slide ${currentIndex + 1}`}
+                                        />
+                                    </div>
+                                </PhotoView>
+                            ))}
+                        </div>
                     </div>
-                </div>
-
+                </PhotoProvider>
                 {/* Indicators */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {images.map((_, index) => (

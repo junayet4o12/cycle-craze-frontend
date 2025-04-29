@@ -20,13 +20,13 @@ export function GridToggler({ className, gridNumber, setGridNumber, totalGrid = 
     }
 
     return (
-        <div className={cn("flex items-center", className)}>
+        <div className={cn("flex items-center rounded-md overflow-hidden border border-input", className)}>
             {[...Array(totalGrid)].map((_, i) => i).map((index) => (
                 <Toggle
                     // ref={ref}
                     key={index}
                     className={cn(
-                        "cursor-pointer flex h-7 !max-w-max items-center justify-center gap-1 rounded-md border border-input bg-background py-2 !px-0 transition-all rounded-none",
+                        "cursor-pointer flex h-7 !max-w-max items-center justify-center gap-1 rounded-sm bg-background py-2 !px-0 transition-all rounded-none",
                         gridNumber === index + increaseBy && "bg-foreground"
                     )}
                     pressed={gridNumber === index + increaseBy}
