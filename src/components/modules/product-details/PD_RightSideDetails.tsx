@@ -31,8 +31,8 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
             price: product.price,
             brand: product.brand
         }
-        dispatch(addProduct({product: cartProduct, quantity: product.quantity}))
-       
+        dispatch(addProduct({ product: cartProduct, quantity: product.quantity }))
+
         setQuantity(1)
     }
     return (
@@ -166,14 +166,19 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                             </div>
 
                             {/* Dynamic specifications */}
-                            <Separator className="my-3" />
-                            <h3 className="font-medium mb-2">Additional Specifications</h3>
-                            {product.specifications.map((spec, index) => (
-                                <div key={index} className="grid grid-cols-2 text-sm">
-                                    <span className="font-medium">{spec.key}:</span>
-                                    <span>{spec.value}</span>
-                                </div>
-                            ))}
+                            {
+                                product.specifications.length > 0 && <>
+                                    <Separator className="my-3" />
+                                    <h3 className="font-medium mb-2">Additional Specifications</h3>
+                                    {product.specifications.map((spec, index) => (
+                                        <div key={index} className="grid grid-cols-2 text-sm">
+                                            <span className="font-medium">{spec.key}:</span>
+                                            <span>{spec.value}</span>
+                                        </div>
+                                    ))}
+                                </>
+                            }
+
                         </div>
                     </TabsContent>
                 </Tabs>

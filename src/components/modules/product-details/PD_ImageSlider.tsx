@@ -2,6 +2,7 @@ import { Expand } from 'lucide-react';
 import { useState } from 'react';
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import InnerImageZoom from 'react-inner-image-zoom';
+import { Button } from '@/components/ui/button';
 const PD_ImageSlider = ({ images }: { images: string[] }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,13 +13,15 @@ const PD_ImageSlider = ({ images }: { images: string[] }) => {
 
                 {/* Slide Image */}
                 <div className="overflow-hidden relative rounded-lg flex sliderParent">
-                    <div className=' absolute right-6 bottom-0 bg-accent text-xl  p-1 z-10'>
-                        <PhotoProvider>
-                            <PhotoView src={images[currentIndex]}>
-                                <Expand className='cursor-pointer' />
-                            </PhotoView>
-                        </PhotoProvider>
-                    </div>
+
+                    <PhotoProvider>
+                        <PhotoView src={images[currentIndex]}>
+                            <Button className='absolute right-2 bottom-2 bg-muted-foreground z-10 text-accent hover:bg-muted-foreground'>
+                                <Expand className='cursor-pointer size-5' />
+                            </Button>
+                        </PhotoView>
+                    </PhotoProvider>
+
                     <div
                         className="flex transition-transform ease-in-out duration-700  w-full aspect-[5/3]"
                         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -30,7 +33,7 @@ const PD_ImageSlider = ({ images }: { images: string[] }) => {
                                     zoomType="hover"
                                     zoomScale={1.5}
                                     className='w-full'
-                                    // alt={`Slide ${currentIndex + 1}`}
+                                // alt={`Slide ${currentIndex + 1}`}
                                 />
                             </div>
                         ))}
@@ -52,8 +55,8 @@ const PD_ImageSlider = ({ images }: { images: string[] }) => {
 
             <div className='flex flex-wrap gap-2 py-3 items-center justify-center'>
                 {
-                    images.map((item, idx) => <div onClick={() => setCurrentIndex(idx)} className={`border-2 transition-all cursor-pointer duration-300 ${idx === currentIndex ? ' border-primary' : 'border-transparent'} p-1 rounded-sm`} key={idx}>
-                        <img className='w-20 h-12  object-cover' src={item} alt="" />
+                    images.map((item, idx) => <div onClick={() => setCurrentIndex(idx)} className={`border-2 transition-all cursor-pointer duration-300 ${idx === currentIndex ? ' border-primary' : 'border-transparent'} p-1 rounded-md`} key={idx}>
+                        <img className='w-20 h-12  object-cover rounded-sm' src={item} alt="" />
                     </div>)
                 }
             </div>
