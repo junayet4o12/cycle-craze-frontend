@@ -1,9 +1,6 @@
 import { selectCurrentCartProducts } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  increaseQuantity,
-  decreaseQuantity,
-  removeProduct,
   clearCart
 } from "@/redux/features/cart/cartSlice";
 import { Button } from "@/components/ui/button";
@@ -30,7 +27,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { MinusIcon, PlusIcon, Trash2Icon, ShoppingCartIcon } from "lucide-react";
+import { Trash2Icon, ShoppingCartIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import CartRow from "@/components/modules/cart/CartRow";
