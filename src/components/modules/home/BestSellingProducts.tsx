@@ -35,10 +35,10 @@ export default function BestSellingProducts() {
                 </div>
             </div>
 
-            <div className="relative">
+            <div className="relative mt-8">
                 {isLoading || isFetching ? (
                     // 🔄 Show skeletons while loading
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 ">
                         {Array.from({ length: 4 }).map((_, idx) => (
                             <Card key={idx} className="overflow-hidden bg-transparent border-none">
                                 <CardContent className="p-4">
@@ -70,22 +70,26 @@ export default function BestSellingProducts() {
                         {bikes?.map((bike, idx) => (
                             <SwiperSlide key={idx}>
                                 <Link to={`/product-details/${bike._id}`}>
-                                    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-md bg-transparent border-none">
+                                    <Card className="group relative overflow-hidden border bg-background shadow-sm transition-all duration-300 hover:shadow-md rounded-2xl">
                                         <CardContent className="p-4">
-                                            <div className="relative">
+                                            <div className="relative h-40 rounded-xl overflow-hidden">
                                                 <img
                                                     src={bike.images[0]}
                                                     alt={bike.name}
-                                                    className="mx-auto h-40 w-full object-cover rounded-lg"
+                                                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                                                 />
                                             </div>
-                                            <div className="mt-4 text-center">
-                                                <p className="font-medium">{bike.name}</p>
-                                                <p className="text-lg font-bold">৳{bike.price}</p>
+                                            <div className="mt-4 text-center space-y-1">
+                                                <p className="text-sm font-semibold text-foreground truncate">{bike.name}</p>
+                                                <p className="text-lg font-bold text-primary">৳{bike.price}</p>
                                             </div>
                                         </CardContent>
-                                        <CardFooter className="flex justify-center p-4 sm:opacity-0 transition-all duration-300 group-hover:opacity-100">
-                                            <Button variant="outline" className="flex items-center gap-2">
+
+                                        <CardFooter className="flex justify-center p-4">
+                                            <Button
+                                                variant="outline"
+                                                className="flex items-center gap-2 hover:bg-accent hover:text-accent-foreground"
+                                            >
                                                 Add To Cart <ShoppingBag size={16} />
                                             </Button>
                                         </CardFooter>

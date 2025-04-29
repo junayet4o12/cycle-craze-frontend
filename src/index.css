@@ -217,5 +217,10 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-
+.swiper-slide {
+  height: auto !important;
+}
+.swiper-wrapper {
+  padding-bottom: 8px;
+}
 

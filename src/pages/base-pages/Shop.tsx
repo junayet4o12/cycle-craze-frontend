@@ -88,7 +88,7 @@ export default function Shop() {
   return (
     <section className="py-8">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-        <div className="w-full md:w-80">
+        <div className="w-full md:w-96">
           <SearchItems placeholder="Search Products..." />
         </div>
 
