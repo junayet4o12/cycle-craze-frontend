@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div>
       <Hero/>
-      <FeaturedCategories/>
+     <div className="pt-8"> <FeaturedCategories/></div>
       <BestSellingProducts/>
       <WhyRideWithUs/>
       <WhereToWork/>
-      <FeedBack />
+     <div className="py-8"> <FeedBack /></div>
       <FollowUs/>
     </div>
   );
