@@ -12,7 +12,8 @@ export interface IOrder {
     _id: string;
     products: IOrderedProduct[];
     status: TOrderStatus;
-    payment: number;
+    paymentMethod: typeof paymentMethod[number];
+    payment?: number;
     address: string;
     name: string;
     email?: string;
@@ -20,8 +21,9 @@ export interface IOrder {
     totalPrice: number;
     createdAt: Date;
     updatedAt: Date;
-    transactionId: string;
+    transactionId?: string;
     paidStatus: boolean;
+    deliveryCharge: number;
 }
 
 export type OrderDataType = {

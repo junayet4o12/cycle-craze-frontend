@@ -91,12 +91,12 @@ export default function OS_OrderDetails({ orderData }: { orderData: IOrder }) {
                             </div>
                             <div className="flex justify-between">
                                 <p className="text-sm text-gray-500">Shipping</p>
-                                <p className="text-sm">---</p>
+                                <p className="text-sm">৳{orderData.deliveryCharge}</p>
                             </div>
                             <Separator />
                             <div className="flex justify-between">
                                 <p className="font-medium">Total</p>
-                                <p className="font-medium">৳{orderData.totalPrice}</p>
+                                <p className="font-medium">৳{orderData.totalPrice + orderData.deliveryCharge}</p>
                             </div>
                         </div>
                     </div>

@@ -110,8 +110,8 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
                 />
 
                 <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">${priceRange[0].toLocaleString()}</span>
-                    <span className="text-sm font-medium">${priceRange[1].toLocaleString()}</span>
+                    <span className="text-sm font-medium">৳{priceRange[0].toLocaleString()}</span>
+                    <span className="text-sm font-medium">৳{priceRange[1].toLocaleString()}</span>
                 </div>
 
                 <Button onClick={handlePriceRangeFilter} size="sm" className="w-full mt-2">

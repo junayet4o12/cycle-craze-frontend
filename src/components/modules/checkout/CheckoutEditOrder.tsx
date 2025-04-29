@@ -5,6 +5,7 @@ import {
     selectCurrentCartProducts,
 } from '@/redux/features/cart/cartSlice';
 import CEO_SingleProduct from './CEO_SingleProduct';
+import { deliveryCharge } from '@/constant/order.const';
 export default function CheckoutEditOrder({ isProcessing }: { isProcessing: boolean }) {
     const cartProducts = useAppSelector(selectCurrentCartProducts);
     // Quantity handler
@@ -34,7 +35,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
                     </div>
                     <div className="flex justify-between text-sm">
                         <span>Shipping</span>
-                        <span>Calculated at next step</span>
+                        <span>৳{deliveryCharge}</span>
                     </div>
                 </div>
 
@@ -42,7 +43,7 @@ export default function CheckoutEditOrder({ isProcessing }: { isProcessing: bool
 
                 <div className="flex justify-between font-semibold">
                     <span>Total</span>
-                    <span>৳{totalPayment}</span>
+                    <span>৳{totalPayment + deliveryCharge}</span>
                 </div>
             </CardContent>
         </Card>

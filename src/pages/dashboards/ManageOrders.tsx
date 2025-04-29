@@ -22,7 +22,7 @@ export default function ManageOrders() {
     const statusFilter = searchParams.get('status') || ''
     const params: TQueryParams[] | undefined = queryArray.length > 0 ? queryArray : undefined;
 
-    const { data, isLoading} = useOrdersQuery(params);
+    const { data, isLoading } = useOrdersQuery(params);
 
     const isLoadingData = isLoading;
     const orders = data?.data || [];
@@ -64,11 +64,10 @@ export default function ManageOrders() {
                     <TableHeader>
                         <TableRow>
                             <TableHead className="w-[80px]">No.</TableHead>
-                            <TableHead>Name </TableHead>
-                            <TableHead>Contact</TableHead>
-                            <TableHead>Email</TableHead>
-                            <TableHead>Status</TableHead>
+                            <TableHead>Contact Details</TableHead>
+                            <TableHead>Payment Details</TableHead>
                             <TableHead>Total Price</TableHead>
+                            <TableHead>Status</TableHead>
                             <TableHead>Ordered At</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
@@ -96,9 +95,6 @@ export default function ManageOrders() {
                                     <TableCell>
                                         <Skeleton className="h-4 w-12" />
                                     </TableCell>
-                                    <TableCell>
-                                        <Skeleton className="h-4 w-14 rounded-full" />
-                                    </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">
                                             <Skeleton className="h-8 w-8 rounded-md" />
@@ -114,19 +110,13 @@ export default function ManageOrders() {
                     <TableRow>
                         <TableHead className="w-[80px]">No.</TableHead>
                         <TableHead className="cursor-pointer">
-                            <div onClick={() => handleSorting(sort === 'name' ? '-name' : sort === '-name' ? '' : 'name')} className="flex gap-2 items-center justify-between">
-                                Name
-                                {sort === 'name' && <ChevronUp size={16} />}
-                                {sort === '-name' && <ChevronDown size={16} />}
-                                {(sort !== 'name' && sort !== '-name') && <ChevronsUpDown size={16} />}
-                            </div>
+                            Contact Details
                         </TableHead>
                         <TableHead className="cursor-pointer">
-
-                            Contact
+                            Payment Details
                         </TableHead>
                         <TableHead className="cursor-pointer">
-                            Email
+                            Total Price
                         </TableHead>
                         <TableHead>
                             <DropdownMenu>
@@ -145,9 +135,7 @@ export default function ManageOrders() {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </TableHead>
-                        <TableHead className="cursor-pointer">
-                            Total Price
-                        </TableHead>
+
                         <TableHead>
                             <div onClick={() => handleSorting(sort === 'createdAt' ? '-createdAt' : sort === '-createdAt' ? '' : 'createdAt')} className="flex gap-2 items-center justify-between cursor-pointer">
                                 Ordered At
