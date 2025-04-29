@@ -3,9 +3,9 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
+import { backendApi } from "@/constant/backendApi.const";
 
-const backendApi = `https://bi-cicle-backend.vercel.app/api`
-// const backendApi = `http://localhost:5000/api`
+
 
 const baseQuery = fetchBaseQuery({
     baseUrl: backendApi,

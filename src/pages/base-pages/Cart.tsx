@@ -15,7 +15,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow
@@ -34,6 +33,7 @@ import {
 import { MinusIcon, PlusIcon, Trash2Icon, ShoppingCartIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import CartRow from "@/components/modules/cart/CartRow";
 
 export default function Cart() {
   const dispatch = useAppDispatch();
@@ -44,20 +44,7 @@ export default function Cart() {
     0
   );
 
-  const handleIncrease = (id: string) => {
-    dispatch(increaseQuantity(id));
-  };
 
-  const handleDecrease = (id: string) => {
-    dispatch(decreaseQuantity(id));
-  };
-
-  const handleRemove = (id: string) => {
-    if (id) {
-      dispatch(removeProduct(id));
-      toast.success("Product removed from cart");
-    }
-  };
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -116,77 +103,7 @@ export default function Cart() {
             </TableHeader>
             <TableBody>
               {cartProducts.map((product) => (
-                <TableRow key={product._id}>
-                  <TableCell className="py-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden">
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = "/api/placeholder/64/64";
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-sm">{product.name}</h3>
-                        <p className="text-xs text-gray-500">{product.brand}</p>
-                      </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>৳{product.price}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => handleDecrease(product._id)}
-                        disabled={product.orderQuantity <= 1}
-                      >
-                        <MinusIcon className="h-4 w-4" />
-                      </Button>
-                      <span className="w-8 text-center">{product.orderQuantity}</span>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => handleIncrease(product._id)}
-                      >
-                        <PlusIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                  <TableCell>৳{product.price * product.orderQuantity}</TableCell>
-                  <TableCell>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                        >
-                          <Trash2Icon className="h-4 w-4" />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Remove product</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Are you sure you want to remove <strong>{product.name}</strong> from your cart?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction onClick={() => handleRemove(product._id)}>
-                            Remove
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </TableCell>
-                </TableRow>
+               <CartRow key={product._id} product={product} />
               ))}
             </TableBody>
           </Table>
@@ -194,7 +111,7 @@ export default function Cart() {
         <CardFooter className="flex justify-between items-center p-6 border-t">
           <div>
             <p className="text-sm text-gray-500">
-              Shipping and taxes will be calculated at checkout
+              Shipping will be calculated at checkout
             </p>
           </div>
           <div className="text-right">

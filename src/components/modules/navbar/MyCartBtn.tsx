@@ -10,13 +10,10 @@ import {
 } from "@/components/ui/sheet";
 import {
     selectCurrentCartProducts,
-    increaseQuantity,
-    decreaseQuantity,
-    removeProduct,
     clearCart
 } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { ShoppingCart, MinusIcon, PlusIcon, Trash2Icon, ShoppingBagIcon } from "lucide-react";
+import { ShoppingCart, Trash2Icon, ShoppingBagIcon } from "lucide-react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -29,6 +26,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Link, useNavigate } from "react-router-dom";
+import MCB_SingleProduct from "./MCB_SingleProduct";
 
 export default function MyCartBtn() {
     const navigate = useNavigate()
@@ -40,17 +38,7 @@ export default function MyCartBtn() {
         0
     );
 
-    const handleIncrease = (id: string) => {
-        dispatch(increaseQuantity(id));
-    };
 
-    const handleDecrease = (id: string) => {
-        dispatch(decreaseQuantity(id));
-    };
-
-    const handleRemove = (id: string) => {
-        dispatch(removeProduct(id));
-    };
 
     const handleClearCart = () => {
         dispatch(clearCart());
@@ -104,63 +92,15 @@ export default function MyCartBtn() {
                             <h3 className="text-lg font-medium">Your cart is empty</h3>
                             <p className="text-sm text-gray-500">Add some products to your cart to see them here.</p>
                             <SheetClose asChild>
-                                <Button 
-                                 onClick={() => navigate("/shop")}
-                                variant="outline">Continue Shopping</Button>
+                                <Button
+                                    onClick={() => navigate("/shop")}
+                                    variant="outline">Continue Shopping</Button>
                             </SheetClose>
                         </div>
                     ) : (
                         <ul className="divide-y">
                             {cartProducts.map((product) => (
-                                <li key={product._id} className="py-4">
-                                    <div className="flex items-start gap-4">
-                                        <div className="h-16 w-16 bg-gray-100 rounded overflow-hidden flex-shrink-0">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="h-full w-full object-cover"
-                                                onError={(e) => {
-                                                    e.currentTarget.src = "/api/placeholder/64/64";
-                                                }}
-                                            />
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="text-sm font-medium truncate">{product.name}</h4>
-                                            <p className="text-xs text-gray-500">{product.brand}</p>
-                                            <div className="mt-1 flex items-center justify-between">
-                                                <p className="text-sm font-medium">৳{product.price}</p>
-                                                <div className="flex items-center space-x-1">
-                                                    <Button
-                                                        variant="outline"
-                                                        size="icon"
-                                                        className="h-6 w-6"
-                                                        onClick={() => handleDecrease(product._id)}
-                                                        disabled={product.orderQuantity <= 1}
-                                                    >
-                                                        <MinusIcon className="h-3 w-3" />
-                                                    </Button>
-                                                    <span className="w-6 text-center text-sm">{product.orderQuantity}</span>
-                                                    <Button
-                                                        variant="outline"
-                                                        size="icon"
-                                                        className="h-6 w-6"
-                                                        onClick={() => handleIncrease(product._id)}
-                                                    >
-                                                        <PlusIcon className="h-3 w-3" />
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="text-gray-400 hover:text-red-500"
-                                            onClick={() => handleRemove(product._id)}
-                                        >
-                                            <Trash2Icon className="h-4 w-4" />
-                                        </Button>
-                                    </div>
-                                </li>
+                                <MCB_SingleProduct product={product} key={product._id} />
                             ))}
                         </ul>
                     )}
@@ -173,7 +113,7 @@ export default function MyCartBtn() {
                                 <span className="text-sm font-medium">Subtotal</span>
                                 <span className="text-sm font-medium">৳{totalPrice}</span>
                             </div>
-                            <p className="text-xs text-gray-500">Shipping and taxes calculated at checkout</p>
+                            <p className="text-xs text-gray-500">Shipping calculated at checkout</p>
                             <div>
                                 <SheetClose className="" asChild>
                                     <Link to={'/checkout'}>
@@ -184,11 +124,11 @@ export default function MyCartBtn() {
                                 </SheetClose>
                             </div>
                             <SheetClose asChild>
-                                    <Button 
-                                     onClick={() => navigate("/shop")}
+                                <Button
+                                    onClick={() => navigate("/shop")}
                                     variant="outline" className="w-full">
-                                        Continue Shopping
-                                    </Button>
+                                    Continue Shopping
+                                </Button>
                             </SheetClose>
 
                             <div className="text-center">

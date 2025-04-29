@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CartProduct, IProduct } from "@/types"
 import { useAppDispatch } from "@/redux/hooks"
 import { addProduct } from "@/redux/features/cart/cartSlice"
-import { toast } from "sonner"
 
 export default function PD_RightSideDetails({ product }: { product: IProduct }) {
     const [quantity, setQuantity] = useState(1)
@@ -32,8 +31,8 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
             price: product.price,
             brand: product.brand
         }
-        dispatch(addProduct(cartProduct))
-        toast.success('Product Has added to cart!!')
+        dispatch(addProduct({product: cartProduct, quantity: product.quantity}))
+       
         setQuantity(1)
     }
     return (

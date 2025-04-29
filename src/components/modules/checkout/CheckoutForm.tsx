@@ -9,9 +9,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { selectCurrentCartProducts } from '@/redux/features/cart/cartSlice';
 import { OrderDataType, TUserData } from '@/types';
 import { useCheckoutMutation } from '@/redux/features/order/orderApi';
-import { CreditCard, Loader2 } from 'lucide-react';
+import { Banknote, CreditCard, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { checkoutFormSchema } from '@/schemas/checkout-form-schema';
+import { toast } from 'sonner';
+import { errorMessageGenerator } from '@/utils/errorMessageGenerator';
 type FormValues = z.infer<typeof checkoutFormSchema>;
 
 export default function CheckoutForm({ userData }: { userData: TUserData | undefined }) {
@@ -22,7 +24,7 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
         defaultValues: {
             name: '',
             contact: '',
-            address: '',
+            address: ''
         },
     });
 
@@ -53,16 +55,29 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
             address: data.address,
             name: data.name,
             contact: data.contact,
+            paymentMethod: data.paymentMethod
         };
         if (userData?.email) {
             orderData.email = userData?.email
         }
 
+        const toastId = toast.loading('Checkout is on processing...')
+        try {
 
-        const result = await checkout(orderData).unwrap()
-        console.log(result.data);
+            const result = await checkout(orderData).unwrap()    
+            if (orderData.paymentMethod === 'Cash On Delivery') {
+                const id = result.data._id
+                window.location.replace(`/checkout/COD/success/${id}`)
+            } else {
+                window.location.replace(result.data)
+            }
+           
+            toast.success('Checkout succeeded..', { id: toastId })
+        } catch (error) {
+            console.log(error);
 
-        window.location.replace(result.data)
+            toast.error(errorMessageGenerator(error), { id: toastId })
+        }
     };
     return (
         <Form {...form}>
@@ -123,18 +138,36 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                         </FormItem>
                     )}
                 />
-
-                <div className="mt-6 pt-4 border-t">
-                    <h3 className="text-lg font-medium mb-4">Payment Method</h3>
-                    <div className="flex items-center space-x-2 p-3 border rounded-md bg-gray-50">
-                        <CreditCard className="h-5 w-5 text-primary" />
-                        <span>Cash on Delivery</span>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-2">
-                        You'll pay when your order is delivered
-                    </p>
-                </div>
-
+                <FormField
+                    control={form.control}
+                    name="paymentMethod"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Select Payment Method</FormLabel>
+                            <FormControl>
+                                <div className='grid grid-cols-2 gap-2'>
+                                    <Button
+                                        type='button'
+                                        variant={field.value === "Cash On Delivery" ? "default" : "outline"}
+                                        onClick={() => field.onChange('Cash On Delivery')}
+                                    >
+                                        <Banknote className="h-5 w-5" />
+                                        Cash On Delivery
+                                    </Button>
+                                    <Button
+                                        type='button'
+                                        variant={field.value === "Online Payment" ? "default" : "outline"}
+                                        onClick={() => field.onChange('Online Payment')}
+                                    >
+                                        <CreditCard className="h-5 w-5" />
+                                        Online Payment
+                                    </Button>
+                                </div>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <Button
                     type="submit"
                     className="w-full mt-6"

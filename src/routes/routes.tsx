@@ -14,7 +14,8 @@ import Services from "@/pages/base-pages/Services";
 import Contact from "@/pages/base-pages/Contact";
 import Cart from "@/pages/base-pages/Cart";
 import Checkout from "@/pages/base-pages/Checkout";
-import OrderSuccess from "@/pages/base-pages/OrderSuccess";
+import OP_Success from "@/pages/base-pages/OrderSuccess/OP_Success";
+import COD_Success from "@/pages/base-pages/OrderSuccess/COD_Success";
 
 const router = createBrowserRouter([
     {
@@ -50,8 +51,12 @@ const router = createBrowserRouter([
                 element: <Checkout />
             },
             {
-                path: 'checkout/success/:tranId',
-                element: <OrderSuccess />
+                path: 'checkout/OP/success/:tranId',
+                element: <OP_Success />
+            },
+            {
+                path: 'checkout/COD/success/:id',
+                element: <COD_Success />
             },
             {
                 path: '',

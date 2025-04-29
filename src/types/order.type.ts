@@ -1,4 +1,4 @@
-import { order_status } from "@/constant/order.const";
+import { order_status, paymentMethod } from "@/constant/order.const";
 import { IProduct } from "./product.type";
 
 export type TOrderStatus = typeof order_status[number]
@@ -35,4 +35,5 @@ export type OrderDataType = {
     name: string;
     contact: string;
     email?: string;
+    paymentMethod: typeof paymentMethod[number];
 }

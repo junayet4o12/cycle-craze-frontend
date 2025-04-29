@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { CartProduct } from "@/types";
+import { toast } from "sonner";
 
 type TCartState = {
   products: CartProduct[]
@@ -14,22 +15,30 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addProduct: (state, action: PayloadAction<CartProduct>) => {
-      const product = action.payload;
-      console.log(product, state);
-
-      const existing = state.products.find(item => item?._id === product._id);
-      if (existing) {
-        existing.orderQuantity += product.orderQuantity;
+    addProduct: (state, action: PayloadAction<{ product: CartProduct; quantity: number; }>) => {
+      const product = action.payload.product;
+      const quantity = action.payload.quantity;
+      if (quantity < 1) {
+        toast.error('Product is out of stock..')
       } else {
-        state.products.push(product);
+        const existing = state.products.find(item => item?._id === product._id);
+        if (existing) {
+          const totalQuantity = existing.orderQuantity + product.orderQuantity;
+          existing.orderQuantity = totalQuantity > quantity ? quantity : totalQuantity
+        } else {
+          const newProduct = product;
+          newProduct.orderQuantity = newProduct.orderQuantity > quantity ? quantity : newProduct.orderQuantity
+          state.products.push(newProduct);
+        }
+        toast.success('Product Has added to cart!!')
       }
+
     },
 
-    increaseQuantity: (state, action: PayloadAction<string>) => {
-      const id = action.payload;
+    increaseQuantity: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
+      const { id, quantity } = action.payload;
       const item = state.products.find(product => product._id === id);
-      if (item) {
+      if (item && item.orderQuantity < quantity) {
         item.orderQuantity += 1;
       }
     },
