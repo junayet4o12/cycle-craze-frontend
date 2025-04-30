@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, Package, X } from "lucide-react";
+import { ChevronsUpDown, Package} from "lucide-react";
 import { useState } from "react";
 
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
