@@ -48,7 +48,7 @@ export default function Hero() {
                         <div className="space-y-2 sm:space-y-4">
                             <h6 className="text-white">For a better ride</h6>
                             <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                                Find Your <span className="text-primary">Mountain</span> Bike Here
+                                Find Your <span className="text-primary">Mountain</span> <br className="block sm:hidden" /> Bike Here
                             </h1>
                             <ShopNowBtn />
                         </div>

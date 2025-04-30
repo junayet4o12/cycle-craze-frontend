@@ -1,14 +1,6 @@
 import { FC } from "react";
-import { LogOut, Menu, ShoppingCart, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-    Sheet,
-    SheetContent,
-    SheetTrigger,
-    SheetClose,
-    SheetDescription,
-    SheetTitle,
-} from "@/components/ui/sheet";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -17,6 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import Profile from "@/components/profile";
 import { useTheme } from "@/providers/theme-provider";
 import MyCartBtn from "./MyCartBtn";
+import Shop_FilterSheet from "../shop/Shop_FilterSheet";
 
 interface NavItem {
     label: string;
@@ -71,7 +64,7 @@ const Navbar: FC = () => {
 
                         }
                         {/* Cart Button */}
-                        <MyCartBtn/>
+                        <MyCartBtn />
 
                         {/* Authentication */}
                         {user ? (
@@ -124,85 +117,10 @@ const Navbar: FC = () => {
                     {/* Mobile Navigation */}
                     <div className="md:hidden flex items-center gap-2">
                         {/* Cart Button for Mobile */}
-                       <MyCartBtn/>
+                        <MyCartBtn />
 
                         <ModeToggle />
-
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" aria-label="Menu" className="w-auto h-auto py-2.5 pl-2.5 hover:pr-2.5 duration-500 cursor-pointer">
-                                    <Menu className="h-5 w-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="right" className="px-4">
-                                <SheetDescription className="hidden"></SheetDescription>
-                                <SheetTitle className="hidden" />
-                                <nav className="flex flex-col gap-4 mt-8">
-                                    {/* Authentication in Mobile Menu */}
-                                    {user ? (
-                                        <div className="mb-4 pb-4 border-b">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <div className="w-10 h-10 rounded-full overflow-hidden border border-muted">
-                                                    <Profile />
-                                                </div>
-                                                <SheetClose asChild>
-                                                    <Link to="/profile" className="text-sm font-medium">My Profile</Link>
-                                                </SheetClose>
-                                            </div>
-                                            <SheetClose asChild>
-                                                <Link to="/my-orders" className="text-sm font-medium py-2 block">
-                                                    My Orders
-                                                </Link>
-                                            </SheetClose>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                className="w-full justify-start text-destructive hover:text-destructive mt-2 px-0"
-                                                onClick={handleLogout}
-                                            >
-                                                <LogOut className="mr-2 h-4 w-4" />
-                                                <span>Log out</span>
-                                            </Button>
-                                        </div>
-                                    ) : (
-                                        <div className="mb-4 pb-4 border-b">
-                                            <SheetClose asChild>
-                                                <Link to="/auth/login">
-                                                    <Button variant="outline" size="sm" className="w-full flex items-center justify-center gap-2">
-                                                        <User className="h-4 w-4" />
-                                                        Login
-                                                    </Button>
-                                                </Link>
-                                            </SheetClose>
-                                        </div>
-                                    )}
-
-                                    {/* Regular Nav Items */}
-                                    {navItems.map((item, idx) => (
-                                        <SheetClose  asChild key={idx}>
-                                            <Link to={item.href} className="text-sm font-medium py-2">
-                                                {item.label}
-                                            </Link>
-                                        </SheetClose>
-                                    ))}
-                                    {
-                                        user && user.role === 'admin' ? <SheetClose asChild>
-                                            <Link to='/dashboard' className="text-sm font-medium py-2">
-                                                Dashboard
-                                            </Link>
-                                        </SheetClose> : ''
-                                    }
-
-                                    {/* Cart in Mobile Menu */}
-                                    <SheetClose asChild>
-                                        <Link to="/cart" className="text-sm font-medium py-2 flex items-center gap-2">
-                                            <ShoppingCart className="h-4 w-4" />
-                                            My Cart
-                                        </Link>
-                                    </SheetClose>
-                                </nav>
-                            </SheetContent>
-                        </Sheet>
+                        <Shop_FilterSheet/>
                     </div>
                 </div>
             </section>

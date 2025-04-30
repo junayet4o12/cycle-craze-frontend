@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, ChevronDown, ChevronsUpDown, ChevronUp, Package, X } from "lucide-react";
+import { Check, ChevronsUpDown, Package, X } from "lucide-react";
 import { useState } from "react";
 
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
@@ -7,7 +7,6 @@ import MP_SingleProduct from "@/components/modules/dashboard/manage-products/MP_
 import AddProduct from "@/components/modules/dashboard/manage-products/AddProduct";
 import { useProductsQuery } from "@/redux/features/product/productApi";
 
-import { Button } from "@/components/ui/button";
 import { productCategories } from "@/constant/product.const";
 import { TQueryParams } from "@/types";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -15,11 +14,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Slider } from "@/components/ui/slider";
 import DefaultPagination from "@/components/default-pagination";
 import SearchItems from "@/components/search-items";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 
 
 export default function ManageProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [priceDropdownOpen, setPriceDropdownOpen] = useState(false);
   const location = useLocation();
   const queries = new URLSearchParams(location.search);
   const [priceRange, setPriceRange] = useState([0, 100000]) // example range
@@ -38,15 +38,12 @@ export default function ManageProducts() {
   const products = data?.data || [];
   const meta = data?.meta;
 
-  const nameSorting = sort === 'name' ? 'name' : sort === '-name' ? '-name' : ''
 
-  const handleNameSorting = () => {
-    if (!nameSorting) {
-      searchParams.set('sort', 'name');
-    } else if (nameSorting === 'name') {
-      searchParams.set('sort', '-name');
-    } else if (nameSorting === '-name') {
+  const handleSorting = (value: string) => {
+    if (value === "none") {
       searchParams.delete('sort');
+    } else {
+      searchParams.set('sort', value);
     }
     setSearchParams(searchParams);
   };
@@ -61,15 +58,6 @@ export default function ManageProducts() {
     setSearchParams(searchParams);
   };
 
-  const handleSearchSort = (type: '' | 'price' | '-price') => {
-    if (!type) {
-      searchParams.delete('sort');
-    } else {
-      searchParams.set('sort', type);
-    }
-    setSearchParams(searchParams);
-  }
-
   const handlePriceRangeChange = (value: number[]) => {
     setPriceRange(value)
 
@@ -79,14 +67,12 @@ export default function ManageProducts() {
     const priceRangeText = priceRange.join("-");
     searchParams.set("priceRange", priceRangeText);
     setSearchParams(searchParams);
-    setPriceDropdownOpen(false); // 👈 close the dropdown
   };
 
   const handleResetPriceRange = () => {
     setPriceRange([0, 100000]);
     searchParams.delete("priceRange");
     setSearchParams(searchParams);
-    setPriceDropdownOpen(false); // 👈 close the dropdown
   };
   return (
     <div className="container mx-auto py-6 space-y-6">
@@ -100,9 +86,45 @@ export default function ManageProducts() {
       </div>
 
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <SearchItems placeholder="Search Products..." />
-      </div>
+     <div className="space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <SearchItems placeholder="Search Products..." />
+          <Select value={sort} onValueChange={handleSorting}>
+            <SelectTrigger className="w-40 ml-auto">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="none">Featured</SelectItem>
+              <SelectItem value="price">Price: Low to High</SelectItem>
+              <SelectItem value="-price">Price: High to Low</SelectItem>
+              <SelectItem value="name">Name: A-Z</SelectItem>
+              <SelectItem value="-name">Name: Z-A</SelectItem>
+            </SelectContent>
+  
+          </Select>
+  
+        </div>
+        <div className="w-48 ml-auto">
+          <div className="w-full">
+            <div className="text-xs text-muted-foreground mb-2 flex justify-between">
+              <span>৳{priceRange[0]}</span>
+              <span>৳{priceRange[1]}</span>
+            </div>
+            <Slider
+              value={priceRange}
+              onValueChange={handlePriceRangeChange}
+              min={0}
+              max={100000}
+              step={10}
+              className="w-full"
+            />
+          </div>
+          <div className="text-end flex mt-2 justify-end">
+            <Button onClick={handleResetPriceRange} variant={"ghost"} size={"sm"}>Reset</Button>
+            <Button onClick={handlePriceRangeFilter} variant={"outline"} size={"sm"}>Apply</Button>
+          </div>
+        </div>
+     </div>
 
       {/* Table */}
       <div className="rounded-lg border shadow-sm p-4">
@@ -157,14 +179,7 @@ export default function ManageProducts() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[80px]">Image</TableHead>
-                <TableHead className="cursor-pointer">
-                  <div onClick={handleNameSorting} className="flex gap-2 items-center justify-between">
-                    Name
-                    {nameSorting === 'name' && <ChevronUp size={16} />}
-                    {nameSorting === '-name' && <ChevronDown size={16} />}
-                    {!nameSorting && <ChevronsUpDown size={16} />}
-                  </div>
-                </TableHead>
+                <TableHead> Name</TableHead>
                 <TableHead className="cursor-pointer">
 
                   <DropdownMenu>
@@ -183,49 +198,7 @@ export default function ManageProducts() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableHead>
-                <TableHead className="cursor-pointer">
-                  <DropdownMenu open={priceDropdownOpen} onOpenChange={setPriceDropdownOpen}>
-                    <DropdownMenuTrigger className="w-full cursor-pointer">
-                      <div className="flex gap-2 items-center justify-between">
-                        Price <ChevronsUpDown size={16} />
-                      </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-60 p-2">
-                      <DropdownMenuLabel>Sort by Price</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => handleSearchSort("")}>
-                        <X className="w-4 h-4 mr-2" /> Default
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleSearchSort("price")}>
-                        <ArrowUp className="w-4 h-4 mr-2" /> Low to High
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleSearchSort("-price")}>
-                        <ArrowDown className="w-4 h-4 mr-2" /> High to Low
-                      </DropdownMenuItem>
-
-                      <DropdownMenuSeparator />
-                      <DropdownMenuLabel>Filter by Range</DropdownMenuLabel>
-                      <div className="px-2 py-3">
-                        <div className="text-xs text-muted-foreground mb-2 flex justify-between">
-                          <span>৳{priceRange[0]}</span>
-                          <span>৳{priceRange[1]}</span>
-                        </div>
-                        <Slider
-                          value={priceRange}
-                          onValueChange={handlePriceRangeChange}
-                          min={0}
-                          max={100000}
-                          step={10}
-                          className="w-full"
-                        />
-                        <div className="text-end space-x-2 mt-2">
-                          <Button onClick={handleResetPriceRange} variant="ghost" size="sm">Reset</Button>
-                          <Button onClick={handlePriceRangeFilter} variant="outline" size="sm">Save</Button>
-                        </div>
-                      </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableHead>
+                <TableHead>Price</TableHead>
                 <TableHead>Stock</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>

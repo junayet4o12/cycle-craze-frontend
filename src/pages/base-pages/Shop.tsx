@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { SlidersHorizontal,  ListFilter, X } from "lucide-react";
+import { ListFilter, X } from "lucide-react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 // Import shadcn/ui components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -19,7 +17,6 @@ import Shop_FilterPanel from "@/components/modules/shop/Shop_FilterPanel";
 import DefaultPagination from "@/components/default-pagination";
 import { GridToggler } from "@/components/modules/shop/GridToggler";
 import SearchItems from "@/components/search-items";
-
 export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [gridNumber, setGridNumber] = useState<number>(3)
@@ -27,7 +24,6 @@ export default function Shop() {
   const location = useLocation();
   const queries = new URLSearchParams(location.search);
   const [priceRange, setPriceRange] = useState<number[]>([0, 100000]);
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const queryArray: TQueryParams[] = Array.from(queries.entries()).map(([key, value]) => ({
     name: key,
@@ -88,38 +84,23 @@ export default function Shop() {
   return (
     <section className="py-8">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-        <div className="w-full md:w-96">
-          <SearchItems placeholder="Search Products..." />
-        </div>
+        <div className="flex w-full gap-5 justify-between">
+          <div className="w-full max-w-96">
+            <SearchItems placeholder="Search Products..." />
+          </div>
 
-        <div className="flex items-center gap-4 self-end md:self-auto">
-          <Select value={sort} onValueChange={handleNameSorting}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="none">Featured</SelectItem>
-              <SelectItem value="price">Price: Low to High</SelectItem>
-              <SelectItem value="-price">Price: High to Low</SelectItem>
-              <SelectItem value="name">Name: A-Z</SelectItem>
-              <SelectItem value="-name">Name: Z-A</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {/* Mobile filter trigger */}
-          <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden">
-                <SlidersHorizontal className="h-4 w-4" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-80 px-4 py-8">
-              <h2 className="text-lg font-semibold mb-6">Filters</h2>
-              <ScrollArea className="h-[calc(100vh-8rem)]">
-                <Shop_FilterPanel priceRange={priceRange} setPriceRange={setPriceRange} />
-              </ScrollArea>
-            </SheetContent>
-          </Sheet>
+          <Select  value={sort} onValueChange={handleNameSorting}>
+              <SelectTrigger className="overflow-hidden w-32 sm:w-40">
+                <SelectValue  placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent >
+                <SelectItem value="none">Featured</SelectItem>
+                <SelectItem  value="price">Price: Low to High</SelectItem>
+                <SelectItem value="-price">Price: High to Low</SelectItem>
+                <SelectItem value="name">Name: A-Z</SelectItem>
+                <SelectItem value="-name">Name: Z-A</SelectItem>
+              </SelectContent>
+            </Select>
         </div>
       </div>
 
@@ -136,10 +117,7 @@ export default function Shop() {
               className="flex items-center gap-1"
             >
               {categoryFilter}
-              <X
-                className="h-3 w-3 ml-1 cursor-pointer"
-                onClick={() => handleFilterCategory('all')}
-              />
+              <button onClick={() => handleFilterCategory('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
             </Badge>
           )}
 
@@ -149,10 +127,7 @@ export default function Shop() {
               className="flex items-center gap-1"
             >
               {frameFilter}
-              <X
-                className="h-3 w-3 ml-1 cursor-pointer"
-                onClick={() => handleFilterFrame('all')}
-              />
+              <button onClick={() => handleFilterFrame('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
             </Badge>
           )}
 
@@ -161,11 +136,10 @@ export default function Shop() {
               variant="secondary"
               className="flex items-center gap-1"
             >
-              Price: ${currentPriceRange[0].toLocaleString()} - ${currentPriceRange[1].toLocaleString()}
-              <X
-                className="h-3 w-3 ml-1 cursor-pointer"
-                onClick={handleResetPriceRange}
-              />
+              Price: ৳{currentPriceRange[0].toLocaleString()} - ৳{currentPriceRange[1].toLocaleString()}
+              <button onClick={handleResetPriceRange}>
+                <X className="h-3 w-3 ml-1 cursor-pointer" />
+              </button>
             </Badge>
           )}
 
@@ -233,7 +207,7 @@ export default function Shop() {
                 <div className="hidden lg:block"><GridToggler gridNumber={gridNumber} setGridNumber={setGridNumber} /></div>
                 <div className="lg:hidden"><GridToggler gridNumber={gridNumberSmallDevice} setGridNumber={setGridNumberSmallDevice} totalGrid={2} increaseBy={1} /></div>
               </div>
-              
+
 
               <LayoutGroup>
                 <motion.div
