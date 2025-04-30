@@ -57,8 +57,8 @@ const BottomNavbar: FC = () => {
         dispatch(logout())
     }
     return (
-        <nav className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t bg-background shadow-sm">
-            <ul className="flex justify-between items-center px-4 py-2">
+        <section className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t bg-background shadow-sm">
+            <ul className="flex justify-between items-center py-2">
                 {navItems
                     .filter((item) => item.show !== false)
                     .map((item) => {
@@ -112,7 +112,7 @@ const BottomNavbar: FC = () => {
                     </DropdownMenu>
                 </li>}
             </ul>
-        </nav>
+        </section>
     );
 };
 
