@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ForwardRefExoticComponent, RefAttributes } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
     Home,
@@ -7,7 +7,8 @@ import {
     PhoneCall,
     Wrench,
     LogOut,
-    User2
+    User2,
+    LucideProps
 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -16,9 +17,9 @@ import Profile from "@/components/profile";
 interface NavLinkItem {
     label: string;
     href: string;
-    icon: ReactNode;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
     show?: boolean;
-    isFocus?:boolean;
+    isFocus?: boolean;
 }
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 const BottomNavbar: FC = () => {
@@ -29,30 +30,30 @@ const BottomNavbar: FC = () => {
         {
             label: "Home",
             href: "/",
-            icon: <Home className="h-5 w-5" />,
+            icon: Home,
         },
 
         {
             label: "Services",
             href: "/services",
-            icon: <Wrench className="h-5 w-5" />,
+            icon: Wrench,
         },
         {
             label: "Shop",
             href: "/shop",
-            icon: <ShoppingBag className="h-5 w-5" />,
+            icon: ShoppingBag,
             isFocus: true,
         },
         {
             label: "Contact",
             href: "/contact",
-            icon: <PhoneCall className="h-5 w-5" />,
+            icon: PhoneCall,
         },
 
         {
             label: "Account",
             href: "/auth/login",
-            icon: <User2 className="h-5 w-5" />,
+            icon: User2,
             show: user ? false : true
         },
     ];
@@ -68,15 +69,15 @@ const BottomNavbar: FC = () => {
                         const isActive = location.pathname === item.href;
 
                         return (
-                            <li 
-                            className={`${item.isFocus && `mt-[-35px]  border-t w-14 aspect-square flex justify-center items-center rounded-full ${isActive ? 'bg-primary text-white' : 'bg-background'}`} ${isActive ? "text-primary" : "text-muted-foreground"
-                                        }`}
-                            key={item.href}>
+                            <li
+                                className={`${item.isFocus && `mt-[-35px]  border-t w-14 aspect-square flex justify-center  items-center rounded-full ${isActive ? 'bg-primary text-white ' : 'bg-background'}`} ${isActive ? "text-primary" : "text-muted-foreground"
+                                    }`}
+                                key={item.href}>
                                 <Link
                                     to={item.href}
                                     className={`flex flex-col items-center text-xs font-medium transition-colors `}
                                 >
-                                    {item.icon}
+                                    <item.icon className={`w-5 h-5 ${item.isFocus ? (isActive ? 'fill-white text-primary': 'fill-muted-foreground text-white') : (isActive && 'fill-primary')} `} />
                                     <span>{item.label}</span>
                                 </Link>
                             </li>

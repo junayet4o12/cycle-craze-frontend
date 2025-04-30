@@ -10,6 +10,7 @@ import Profile from "@/components/profile";
 import { useTheme } from "@/providers/theme-provider";
 import MyCartBtn from "./MyCartBtn";
 import Shop_FilterSheet from "../shop/Shop_FilterSheet";
+import MyWishlistBtn from "./MyWishlistBtn";
 
 interface NavItem {
     label: string;
@@ -117,10 +118,11 @@ const Navbar: FC = () => {
                     {/* Mobile Navigation */}
                     <div className="md:hidden flex items-center gap-2">
                         {/* Cart Button for Mobile */}
+                       <MyWishlistBtn/>
                         <MyCartBtn />
 
                         <ModeToggle />
-                        <Shop_FilterSheet/>
+                        <Shop_FilterSheet />
                     </div>
                 </div>
             </section>

@@ -16,6 +16,7 @@ import Cart from "@/pages/base-pages/Cart";
 import Checkout from "@/pages/base-pages/Checkout";
 import OP_Success from "@/pages/base-pages/OrderSuccess/OP_Success";
 import COD_Success from "@/pages/base-pages/OrderSuccess/COD_Success";
+import Wishlist from "@/pages/base-pages/Wishlist";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart />
+            },
+            {
+                path: 'wishlist',
+                element: <Wishlist />
             },
             {
                 path: 'checkout',
