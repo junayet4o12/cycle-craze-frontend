@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/auth/authSlice'
 import cartReducer from './features/cart/cartSlice'
+import wishlistReducer from './features/wishlist/wishlistSlice'
 import { baseApi } from './api/baseApi'
 import {
   persistReducer,
@@ -21,14 +22,20 @@ const cartPersistConfig = {
   key: 'cart',
   storage,
 }
+const wishlistPersistConfig = {
+  key: 'wishlist',
+  storage
+}
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer)
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer)
+const persistedWishlistReducer = persistReducer(wishlistPersistConfig, wishlistReducer)
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     auth: persistedAuthReducer,
     cart: persistedCartReducer,
+    wishlist: persistedWishlistReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     serializableCheck: {

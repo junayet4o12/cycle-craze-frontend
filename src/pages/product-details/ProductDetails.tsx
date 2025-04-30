@@ -1,5 +1,7 @@
+import PD_Descriptions from "@/components/modules/product-details/PD_Descriptions";
 import PD_ImageSlider from "@/components/modules/product-details/PD_ImageSlider";
 import PD_RightSideDetails from "@/components/modules/product-details/PD_RightSideDetails";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useProductQuery } from "@/redux/features/product/productApi";
 import { useParams } from "react-router-dom";
@@ -92,6 +94,7 @@ export default function ProductDetails() {
 
                 <PD_ImageSlider images={productData?.images || []} />
                 {productData && <PD_RightSideDetails product={productData} />}
+                {productData && <div className="md:col-span-2"><PD_Descriptions product={productData} /></div>}
 
             </div>
 
