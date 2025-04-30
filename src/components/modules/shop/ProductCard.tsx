@@ -8,7 +8,7 @@ import { ShoppingCart, Info } from "lucide-react";
 export default function ProductCard({ product }: { product: IProduct }) {
   return (
     <Link to={`/product-details/${product._id}`}>
-      <Card className="overflow-hidden group transition-all duration-300 hover:shadow-lg pt-0">
+      <Card className="overflow-hidden group transition-all duration-300 hover:shadow-lg pt-0 gap-y-2 sm:gap-y-6">
         <div className="relative bg-gray-50 py-1 flex justify-center items-center overflow-hidden">
           <img 
             src={product.images?.[0]} 
@@ -33,12 +33,12 @@ export default function ProductCard({ product }: { product: IProduct }) {
             {product.brand || product.category}
           </p>
           {/* Product name */}
-          <h5 className="line-clamp-1 hover:text-primary transition-colors">
+          <h5 className="line-clamp-1 hover:text-primary transition-colors text-sm sm:text-lg">
             {product.name}
           </h5>
           {/* Price section */}
           <div className="sm:mt-2 flex items-center gap-2">
-            <p className="font-bold">৳{product.price.toLocaleString()}</p>
+            <p className="font-bold text-sm">৳{product.price.toLocaleString()}</p>
           </div>
         </CardContent>
         

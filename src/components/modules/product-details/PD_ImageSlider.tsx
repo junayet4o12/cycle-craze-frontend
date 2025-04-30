@@ -57,7 +57,7 @@ const PD_ImageSlider = ({ images }: { images: string[] }) => {
             <div className='flex flex-wrap gap-2 py-3 items-center justify-center'>
                 {
                     images.map((item, idx) => <div onClick={() => setCurrentIndex(idx)} className={`border-2 transition-all cursor-pointer duration-300 ${idx === currentIndex ? ' border-primary' : 'border-transparent'} p-1 rounded-md`} key={idx}>
-                        <img className='w-20 h-12  object-cover rounded-sm' src={item} alt="" />
+                        <img className='w-16 sm:w-20 aspect-[5/3]  object-cover rounded-sm' src={item} alt="" />
                     </div>)
                 }
             </div>

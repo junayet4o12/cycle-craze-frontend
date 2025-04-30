@@ -1,8 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import BottomNavbar from '../modules/bottom-navbar/BottomNavbar';
 
 export default function AuthLayout() {
     return (
         <>
+        <BottomNavbar/>
             <div className="w-full relative">
 
                 <div className='grid md:grid-cols-2 !px-0'>

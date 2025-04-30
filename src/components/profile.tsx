@@ -17,9 +17,9 @@ export default function Profile() {
     };
 
     return (
-        <div className="">
+        <div className="w-full h-full overflow-hidden">
             {isLoading && (
-               <Skeleton className="h-8 w-8 rounded-full" />
+               <Skeleton className="aspect-square w-full rounded-full" />
             )}
             
             {isError && (
@@ -39,7 +39,7 @@ export default function Profile() {
                     <img 
                         src={profile} 
                         alt="Profile"
-                        className={`w-full h-full object-cover rounded-full transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+                        className={`w-full aspect-square object-cover rounded-full transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
                         onLoad={handleImageLoaded}
                         onError={handleImageError}
                     />

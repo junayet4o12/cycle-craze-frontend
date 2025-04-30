@@ -36,11 +36,11 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
         setQuantity(1)
     }
     return (
-        <Card className="w-full border-none shadow-none">
-            <CardContent className="p-6">
+        <Card className="w-full border-none shadow-none py-4">
+            <CardContent className="px-6">
                 {/* Product Name and Badge */}
                 <div className="flex items-start justify-between mb-4">
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
+                    <h3 className="font-bold">{product.name}</h3>
                     {product.quantity > 0 ? (
                         <Badge className="bg-green-100 text-green-800 hover:bg-green-100">In Stock</Badge>
                     ) : (
@@ -50,7 +50,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
 
                 {/* Price */}
                 <div className="mb-6">
-                    <p className="text-2xl font-bold text-primary">৳{product.price}</p>
+                    <p className="text-lg md:text-2xl font-bold text-primary">৳{product.price}</p>
                 </div>
 
                 <Separator className="mb-6" />
@@ -87,7 +87,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
                         </span>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-row gap-3">
                         <Button onClick={handleAddToCart} className="flex-1">Add to Cart</Button>
                         <Button variant="secondary" className="flex-1">Buy it now</Button>
                     </div>
@@ -97,10 +97,10 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
 
                 {/* Action buttons */}
                 <div className="flex items-center justify-between">
-                    <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    {/* <Button variant="ghost" size="sm" className="flex items-center gap-2">
                         <Scale size={18} />
                         <span>Compare</span>
-                    </Button>
+                    </Button> */}
                     <Button variant="ghost" size="sm" className="flex items-center gap-2">
                         <Heart size={18} />
                         <span>Wishlist</span>
