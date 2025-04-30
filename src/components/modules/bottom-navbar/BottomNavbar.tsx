@@ -77,7 +77,7 @@ const BottomNavbar: FC = () => {
                             </li>
                         );
                     })}
-                {user && <li className="w-12 h-12 p-1 border-2 rounded-full">
+                {user && <li className="w-10 h-10 p-1 border-2 rounded-full">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <div className="cursor-pointer"><Profile /></div>
