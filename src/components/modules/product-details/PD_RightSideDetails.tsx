@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Facebook, Twitter, Instagram, Share2, Heart, Scale, Ruler } from "lucide-react"
+import { Facebook, Twitter, Instagram, Share2, Heart, Ruler } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
