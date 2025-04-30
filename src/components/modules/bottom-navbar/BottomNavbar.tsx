@@ -65,7 +65,7 @@ const BottomNavbar: FC = () => {
                         const isActive = location.pathname === item.href;
 
                         return (
-                            <li key={item.href} className="w-16">
+                            <li className="" key={item.href}>
                                 <Link
                                     to={item.href}
                                     className={`flex flex-col items-center text-xs font-medium transition-colors ${isActive ? "text-primary" : "text-muted-foreground"
@@ -77,41 +77,39 @@ const BottomNavbar: FC = () => {
                             </li>
                         );
                     })}
-                {user && <li className="w-16">
-                    <div className="w-12 h-12 p-1 border-2 rounded-full">
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <div className="cursor-pointer"><Profile /></div>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-56">
-                                <Link to="/profile">
-                                    <DropdownMenuItem className="cursor-pointer">
-                                        <User className="mr-2 h-4 w-4" />
-                                        <span>My Profile</span>
-                                    </DropdownMenuItem>
-                                </Link>
-                                {/* {user.role === 'user' &&  */}
-                                <Link to="/my-orders">
-                                    <DropdownMenuItem className="cursor-pointer">
-                                        <span>My Orders</span>
-                                    </DropdownMenuItem>
-                                </Link>
-                                {/* } */}
-                                {
-                                    user && user.role === 'admin' ? <Link to="/dashboard">
-                                        <DropdownMenuItem className="cursor-pointer">
-                                            <span>Dashboard</span>
-                                        </DropdownMenuItem>
-                                    </Link> : ''
-                                }
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" onClick={handleLogout}>
-                                    <LogOut className="mr-2 h-4 w-4" />
-                                    <span>Log out</span>
+                {user && <li className="w-12 h-12 p-1 border-2 rounded-full">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <div className="cursor-pointer"><Profile /></div>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-56">
+                            <Link to="/profile">
+                                <DropdownMenuItem className="cursor-pointer">
+                                    <User className="mr-2 h-4 w-4" />
+                                    <span>My Profile</span>
                                 </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
+                            </Link>
+                            {/* {user.role === 'user' &&  */}
+                            <Link to="/my-orders">
+                                <DropdownMenuItem className="cursor-pointer">
+                                    <span>My Orders</span>
+                                </DropdownMenuItem>
+                            </Link>
+                            {/* } */}
+                            {
+                                user && user.role === 'admin' ? <Link to="/dashboard">
+                                    <DropdownMenuItem className="cursor-pointer">
+                                        <span>Dashboard</span>
+                                    </DropdownMenuItem>
+                                </Link> : ''
+                            }
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" onClick={handleLogout}>
+                                <LogOut className="mr-2 h-4 w-4" />
+                                <span>Log out</span>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </li>}
             </ul>
         </nav>
