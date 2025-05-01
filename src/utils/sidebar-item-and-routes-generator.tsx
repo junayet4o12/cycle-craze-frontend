@@ -1,6 +1,7 @@
 import Analytics from '@/pages/dashboards/Analytics';
 import ManageOrders from '@/pages/dashboards/ManageOrders';
 import ManageProducts from '@/pages/dashboards/ManageProducts';
+import ManageUsers from '@/pages/dashboards/ManageUsers';
 import { DashBoardItemsData, SidebarItems } from '@/types';
 import {
     BarChart2,
@@ -22,7 +23,7 @@ const dashBoardItemsData: DashBoardItemsData[] = [
         title: 'Manage user',
         icon: <Users size={18} />,
         path: 'manage-user',
-        component: <p>manage-user</p>
+        component: <ManageUsers/>
     },
     {
         title: 'Manage Products',
