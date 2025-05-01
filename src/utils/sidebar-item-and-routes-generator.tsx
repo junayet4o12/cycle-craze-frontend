@@ -1,17 +1,10 @@
 import Analytics from '@/pages/dashboards/Analytics';
-import Dashboard from '@/pages/dashboards/Dashboard';
 import ManageOrders from '@/pages/dashboards/ManageOrders';
 import ManageProducts from '@/pages/dashboards/ManageProducts';
 import { DashBoardItemsData, SidebarItems } from '@/types';
 import {
     BarChart2,
-    Compass,
-    ShoppingBag,
-    MessageCircle,
-    Settings,
-    HelpCircle,
     Users,
-    LayoutDashboard,
     PackageSearch,
     SquareChartGantt,
 } from 'lucide-react';
@@ -20,47 +13,10 @@ import {
 
 const dashBoardItemsData: DashBoardItemsData[] = [
     {
-        title: 'Dashboard',
-        icon: <LayoutDashboard size={18} />,
-        path: '/dashboard',
-        component: <Dashboard />
-    },
-    {
         title: 'Analytics',
         icon: <BarChart2 size={18} />,
         path: 'analytics',
         component: <Analytics />
-    },
-    {
-        title: 'Explore',
-        icon: <Compass size={18} />,
-        path: 'explore',
-        component: <p>Explore</p>
-    },
-    {
-        title: 'Shop',
-        icon: <ShoppingBag size={18} />,
-        path: 'shop',
-        component: <p>Shop</p>
-    },
-    {
-        title: 'Chat',
-        icon: <MessageCircle size={18} />,
-        path: 'chat',
-        component: <p>Chat</p>
-    },
-    {
-        title: 'Settings',
-        icon: <Settings size={18} />,
-        path: 'settings',
-        section: 'Tools',
-        component: <p>Settings</p>
-    },
-    {
-        title: 'Help',
-        icon: <HelpCircle size={18} />,
-        path: 'help',
-        component: <p>Help</p>
     },
     {
         title: 'Manage user',
