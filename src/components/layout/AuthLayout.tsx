@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import BottomNavbar from '../modules/bottom-navbar/BottomNavbar';
+import ScrollToTop from '../ScrollToTop';
 
 export default function AuthLayout() {
     return (
         <>
+        <ScrollToTop/>
         <BottomNavbar/>
             <div className="w-full relative">
 

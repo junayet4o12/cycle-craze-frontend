@@ -19,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider>
           <RouterProvider router={router} />
+          
           <Toaster />
         </ThemeProvider>
       </PersistGate>
