@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Skeleton } from "@/components/ui/skeleton";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useProductQuery } from "@/redux/features/product/productApi";
 import { removeFromWishList } from "@/redux/features/wishlist/wishlistSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { WishlistProductType } from "@/types";
@@ -15,7 +17,11 @@ type PropsType = {
     setCheckedProducts: Dispatch<SetStateAction<WishlistProductType[]>>
 }
 export default function WishlistRow({ product, checkedProducts, setCheckedProducts }: PropsType) {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    const { data, isLoading } = useProductQuery({ productId: product._id, args: [{ name: 'fields', value: 'price,quantity' }] }, {
+        skip: !product._id
+    })
+
     const isChecked = checkedProducts.find(item => item._id === product._id)?._id ? true : false
     const handleCheckedChange = () => {
         if (isChecked) {
@@ -34,6 +40,7 @@ export default function WishlistRow({ product, checkedProducts, setCheckedProduc
             <TableCell >
                 <div className="flex justify-center items-center"> <Checkbox checked={isChecked} onCheckedChange={handleCheckedChange} /></div>
             </TableCell>
+
             <TableCell>
                 <div className="flex items-center space-x-4 relative">
                     <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden">
@@ -51,6 +58,12 @@ export default function WishlistRow({ product, checkedProducts, setCheckedProduc
                         <p className="text-xs text-gray-500">{product.brand}</p>
                     </div>
                 </div>
+            </TableCell>
+            <TableCell>
+                {isLoading ? <Skeleton className="w-16 h-5" /> : <p>{data?.data?.quantity}</p>}
+            </TableCell>
+            <TableCell>
+                {isLoading ? <Skeleton className="w-16 h-5" /> : <p>৳{data?.data?.price}</p>}
             </TableCell>
             <TableCell>
                 {new Date(product.addedTime).toLocaleString('en-US', {

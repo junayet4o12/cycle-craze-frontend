@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Check } from "lucide-react";
 import { productCategories, productFrameMaterial } from "@/constant/product.const";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -57,11 +60,11 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       {/* Categories */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-foreground">Categories</h3>
+          <h3 className="text-sm font-medium text-foreground">Categories</h3>
           {categoryFilter && (
             <Button
               variant="ghost"
@@ -73,26 +76,44 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
             </Button>
           )}
         </div>
-        <div className="flex flex-wrap gap-2">
-          {['all', ...productCategories].map((category) => (
-            <Button
-              key={category}
-              variant={categoryFilter === category || (category === 'all' && !categoryFilter) ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleFilterCategory(category as any)}
+        <ScrollArea className="pr-4 h-52">
+          <div className="space-y-1">
+            <div 
+              key="all"
+              onClick={() => handleFilterCategory('all')}
+              className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md cursor-pointer hover:bg-muted ${!categoryFilter ? 'bg-muted' : ''}`}
             >
-              {category}
-            </Button>
-          ))}
-        </div>
+              <span>All Categories</span>
+              {!categoryFilter && <Check size={16} className="text-primary" />}
+            </div>
+            {productCategories.map((category) => (
+              <div 
+                key={category}
+                onClick={() => handleFilterCategory(category)}
+                className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md cursor-pointer hover:bg-muted ${categoryFilter === category ? 'bg-muted' : ''}`}
+              >
+                <span>{category}</span>
+                {categoryFilter === category && <Check size={16} className="text-primary" />}
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+        {categoryFilter && (
+          <div className="flex items-center pt-2">
+            <span className="text-sm text-muted-foreground mr-2">Selected:</span>
+            <Badge variant="secondary" className="text-xs font-medium">
+              {categoryFilter}
+            </Badge>
+          </div>
+        )}
       </div>
 
       <Separator />
 
       {/* Price Range */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-foreground">Price Range</h3>
+          <h3 className="text-sm font-medium text-foreground">Price Range</h3>
           <Button
             variant="ghost"
             size="sm"
@@ -112,9 +133,15 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
           className="py-2"
         />
 
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>৳{priceRange[0].toLocaleString()}</span>
-          <span>৳{priceRange[1].toLocaleString()}</span>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-1 px-2 bg-muted rounded-md">
+            <div className="text-xs text-muted-foreground">Min</div>
+            <div className="font-medium text-sm">৳{priceRange[0].toLocaleString()}</div>
+          </div>
+          <div className="p-1 px-2 bg-muted rounded-md">
+            <div className="text-xs text-muted-foreground">Max</div>
+            <div className="font-medium text-sm">৳{priceRange[1].toLocaleString()}</div>
+          </div>
         </div>
 
         <Button onClick={handlePriceRangeFilter} size="sm" className="w-full">
@@ -125,9 +152,9 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
       <Separator />
 
       {/* Frame Material */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-foreground">Frame Materials</h3>
+          <h3 className="text-sm font-medium text-foreground">Frame Materials</h3>
           {frameFilter && (
             <Button
               variant="ghost"
@@ -139,18 +166,36 @@ export default function Shop_FilterPanel({ setPriceRange, priceRange }: PropsTyp
             </Button>
           )}
         </div>
-        <div className="flex flex-wrap gap-2">
-          {['all', ...productFrameMaterial].map((material) => (
-            <Button
-              key={material}
-              variant={frameFilter === material || (material === 'all' && !frameFilter) ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleFilterFrame(material as any)}
+        <ScrollArea className="h-44 pr-4">
+          <div className="space-y-1">
+            <div 
+              key="all"
+              onClick={() => handleFilterFrame('all')}
+              className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md cursor-pointer hover:bg-muted ${!frameFilter ? 'bg-muted' : ''}`}
             >
-              {material}
-            </Button>
-          ))}
-        </div>
+              <span>All Materials</span>
+              {!frameFilter && <Check size={16} className="text-primary" />}
+            </div>
+            {productFrameMaterial.map((material) => (
+              <div 
+                key={material}
+                onClick={() => handleFilterFrame(material)}
+                className={`flex items-center justify-between px-2 py-1.5 text-sm rounded-md cursor-pointer hover:bg-muted ${frameFilter === material ? 'bg-muted' : ''}`}
+              >
+                <span>{material}</span>
+                {frameFilter === material && <Check size={16} className="text-primary" />}
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+        {frameFilter && (
+          <div className="flex items-center pt-2">
+            <span className="text-sm text-muted-foreground mr-2">Selected:</span>
+            <Badge variant="secondary" className="text-xs font-medium">
+              {frameFilter}
+            </Badge>
+          </div>
+        )}
       </div>
     </div>
   );

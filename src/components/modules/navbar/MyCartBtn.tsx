@@ -61,7 +61,7 @@ export default function MyCartBtn() {
                         {cartProducts.length > 0 && (
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-50">
+                                    <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-red-50">
                                         <Trash2Icon className="mr-2 h-4 w-4" />
                                         Clear Cart
                                     </Button>

@@ -7,8 +7,8 @@ const productApi = baseApi.injectEndpoints({
     products: builder.query({
       query: (args: TQueryParams[] | undefined) => {
         const params = new URLSearchParams();
-        
-        
+
+
         if (args) {
           args.forEach((item) => {
             params.append(item.name as string, item.value as string);
@@ -31,11 +31,20 @@ const productApi = baseApi.injectEndpoints({
 
     // GET /products/:productId
     product: builder.query({
-      query: (productId: string) => ({
-        url: `/products/${productId}`,
-        method: "GET",
-      }),
-      providesTags: (_result, _error, productId) => [{ type: "Products", id: productId }],
+      query: ({ productId, args }: { productId: string; args?: TQueryParams[] | undefined; }) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item) => {
+            params.append(item.name as string, item.value as string);
+          })
+        }
+        return {
+          url: `/products/${productId}`,
+          method: "GET",
+          params: params
+        }
+      },
+      providesTags: ["Products"],
       transformResponse: (response: TResponseRedux<IProduct>) => {
 
         return {

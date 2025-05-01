@@ -82,93 +82,94 @@ export default function Shop() {
     setPriceRange([0, 100000]);
   };
   return (
-    <section className="py-8">
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-        <div className="flex w-full gap-5 justify-between">
-          <div className="w-full max-w-96">
-            <SearchItems placeholder="Search Products..." />
-          </div>
+    <section className="py-8 flex gap-6">
+      <div className="hidden md:block w-64 shrink-0 relative">
+        <Card className="sticky top-24">
+          <CardContent className="px-4">
+            <h2 className="text-lg font-semibold mb-6">Filters</h2>
+            <Shop_FilterPanel priceRange={priceRange} setPriceRange={setPriceRange} />
+          </CardContent>
+        </Card>
+      </div>
 
-          <Select  value={sort} onValueChange={handleNameSorting}>
+
+      {/* Active filters */}
+
+
+      <div className="relative w-full">
+        {/* Desktop Filters Sidebar */}
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8 sticky top-16 pt-8 -mt-8 z-20 bg-background pb-2">
+          <div className="flex w-full gap-5 justify-between">
+            <div className="w-full max-w-96">
+              <SearchItems placeholder="Search Products..." />
+            </div>
+
+            <Select value={sort} onValueChange={handleNameSorting}>
               <SelectTrigger className="overflow-hidden w-32 sm:w-40">
-                <SelectValue  placeholder="Sort by" />
+                <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent >
                 <SelectItem value="none">Featured</SelectItem>
-                <SelectItem  value="price">Price: Low to High</SelectItem>
+                <SelectItem value="price">Price: Low to High</SelectItem>
                 <SelectItem value="-price">Price: High to Low</SelectItem>
                 <SelectItem value="name">Name: A-Z</SelectItem>
                 <SelectItem value="-name">Name: Z-A</SelectItem>
               </SelectContent>
             </Select>
+          </div>
         </div>
-      </div>
-
-      {/* Active filters */}
-      {(categoryFilter || searchParams.get('priceRange') || frameFilter) && (
-        <div className="flex flex-wrap items-center gap-2 mb-6">
-          <Badge variant="outline" className="bg-muted/50">
-            Active Filters:
-          </Badge>
-
-          {categoryFilter && (
-            <Badge
-              variant="secondary"
-              className="flex items-center gap-1"
-            >
-              {categoryFilter}
-              <button onClick={() => handleFilterCategory('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
+        {(categoryFilter || searchParams.get('priceRange') || frameFilter) && (
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            <Badge variant="outline" className="bg-muted/50">
+              Active Filters:
             </Badge>
-          )}
 
-          {frameFilter && (
-            <Badge
-              variant="secondary"
-              className="flex items-center gap-1"
+            {categoryFilter && (
+              <Badge
+                variant="secondary"
+                className="flex items-center gap-1"
+              >
+                {categoryFilter}
+                <button onClick={() => handleFilterCategory('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
+              </Badge>
+            )}
+
+            {frameFilter && (
+              <Badge
+                variant="secondary"
+                className="flex items-center gap-1"
+              >
+                {frameFilter}
+                <button onClick={() => handleFilterFrame('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
+              </Badge>
+            )}
+
+            {searchParams.get('priceRange') && (
+              <Badge
+                variant="secondary"
+                className="flex items-center gap-1"
+              >
+                Price: ৳{currentPriceRange[0].toLocaleString()} - ৳{currentPriceRange[1].toLocaleString()}
+                <button onClick={handleResetPriceRange}>
+                  <X className="h-3 w-3 ml-1 cursor-pointer" />
+                </button>
+              </Badge>
+            )}
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleClearAllFilters}
+              className="text-xs h-7"
             >
-              {frameFilter}
-              <button onClick={() => handleFilterFrame('all')}><X className="h-3 w-3 ml-1 cursor-pointer" /></button>
-            </Badge>
-          )}
-
-          {searchParams.get('priceRange') && (
-            <Badge
-              variant="secondary"
-              className="flex items-center gap-1"
-            >
-              Price: ৳{currentPriceRange[0].toLocaleString()} - ৳{currentPriceRange[1].toLocaleString()}
-              <button onClick={handleResetPriceRange}>
-                <X className="h-3 w-3 ml-1 cursor-pointer" />
-              </button>
-            </Badge>
-          )}
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClearAllFilters}
-            className="text-xs h-7"
-          >
-            Clear All
-          </Button>
-        </div>
-      )}
-
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Desktop Filters Sidebar */}
-        <div className="hidden md:block w-64 shrink-0 relative">
-          <Card className="sticky top-24">
-            <CardContent className="px-4">
-              <h2 className="text-lg font-semibold mb-6">Filters</h2>
-              <Shop_FilterPanel priceRange={priceRange} setPriceRange={setPriceRange} />
-            </CardContent>
-          </Card>
-        </div>
-
+              Clear All
+            </Button>
+          </div>
+        )}
         {/* Products Grid */}
         <div className="flex-1">
           {isLoadingData ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={`grid grid-cols-${gridNumberSmallDevice} lg:grid-cols-${gridNumber} gap-6 `}>
               {Array(6).fill(0).map((_, i) => (
                 <Card key={i} className="overflow-hidden">
                   <div className="p-4">

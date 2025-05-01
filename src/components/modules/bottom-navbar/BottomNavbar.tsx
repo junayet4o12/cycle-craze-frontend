@@ -8,7 +8,7 @@ import {
     Wrench,
     LogOut,
     User2,
-    LucideProps
+    LucideProps,
 } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";

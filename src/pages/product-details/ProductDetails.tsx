@@ -10,7 +10,7 @@ export default function ProductDetails() {
     const { id } = useParams();
     console.log(typeof id === 'string');
 
-    const { data, isLoading, isFetching } = useProductQuery(id as string, {
+    const { data, isLoading, isFetching } = useProductQuery({ productId: id as string }, {
         skip: !id
     })
     if (isLoading || isFetching) {
