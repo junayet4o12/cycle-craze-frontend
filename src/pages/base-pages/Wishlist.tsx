@@ -20,11 +20,20 @@ import {
     TableHead,
     TableHeader,
     TableRow
-  } from "@/components/ui/table";
+} from "@/components/ui/table";
 import WishlistRow from "@/components/modules/wishlist/WishlistRow";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import { WishlistProductType } from "@/types";
 export default function Wishlist() {
+    const [checkedProducts, setCheckedProducts] = useState<WishlistProductType[]>([])
     const dispatch = useAppDispatch()
     const wishlistProducts = useAppSelector(selectCurrentWishlistProducts)
+    const finalCheckedProducts = checkedProducts.filter(item=> {
+        const isItemExist = wishlistProducts.find(p=> p._id === item._id)
+        return isItemExist ? true : false
+    });
+    
     if (wishlistProducts.length === 0) {
         return (
             <section className="py-8 px-4 max-w-4xl mx-auto text-center">
@@ -39,6 +48,16 @@ export default function Wishlist() {
     const handleClearWishlist = () => {
         dispatch(clearWishlist())
     }
+    const handleCheckedChange = (value: boolean) => {
+        if (value) {
+            setCheckedProducts(wishlistProducts)
+        } else {
+            setCheckedProducts([])
+        }
+
+    }
+    const isChecked = finalCheckedProducts.length === wishlistProducts.length;
+    
     return (
         <section className="py-8">
             <div className="mb-6 flex items-center justify-between">
@@ -68,6 +87,9 @@ export default function Wishlist() {
                     <Table>
                         <TableHeader>
                             <TableRow>
+                                <TableHead className="min-w-[70px] w-[70px]">
+                                   <div className="w-full flex justify-center items-center"> <Checkbox checked={isChecked} onCheckedChange={handleCheckedChange} /></div>
+                                </TableHead>
                                 <TableHead className="w-[300px]">Product</TableHead>
                                 <TableHead>Date Added</TableHead>
                                 <TableHead className="w-[80px]">Actions</TableHead>
@@ -75,7 +97,7 @@ export default function Wishlist() {
                         </TableHeader>
                         <TableBody>
                             {wishlistProducts.map((product) => (
-                                <WishlistRow key={product._id} product={product} />
+                                <WishlistRow key={product._id} product={product} checkedProducts={finalCheckedProducts} setCheckedProducts={setCheckedProducts}  />
                             ))}
                         </TableBody>
                     </Table>

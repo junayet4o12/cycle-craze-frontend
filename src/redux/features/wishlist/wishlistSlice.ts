@@ -15,13 +15,13 @@ const wishlistSlice = createSlice({
     name: 'wishList',
     initialState,
     reducers: {
-        addToWishList: (state, action: PayloadAction<WishlistProductType>) => {
+        addToWishList: (state, action: PayloadAction<Omit<WishlistProductType, 'addedTime'>>) => {
             const product = action.payload;
             const existing = state.products.find(item => item?._id === product._id);
             if (existing) {
                 toast.message('Already added to wishlist!')
             } else {
-                state.products.push(product)
+                state.products.push({...product, addedTime: new Date().toISOString()})
                 toast.success('Added to wishlist!')
             }
         },

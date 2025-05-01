@@ -65,9 +65,11 @@ const Navbar: FC = () => {
 
                         }
                         {/* Cart Button */}
+                        <MyWishlistBtn/>
                         <MyCartBtn />
 
                         {/* Authentication */}
+                        <ModeToggle />
                         {user ? (
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
@@ -112,7 +114,7 @@ const Navbar: FC = () => {
                             </Link>
                         )}
                         {/* Theme toggle button */}
-                        <ModeToggle />
+                       
                     </nav>
 
                     {/* Mobile Navigation */}

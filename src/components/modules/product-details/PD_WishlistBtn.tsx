@@ -10,7 +10,7 @@ export default function PD_WishlistBtn({ data }: { data: Omit<WishlistProductTyp
     const wishlistProduct = useAppSelector(selectCurrentWishlistProducts);
     const isInWIshlist = wishlistProduct.find(item => item._id === data._id)
     const handleAddToWishList = () => {
-        dispatch(addToWishList({ ...data, addedTime: new Date() }))
+        dispatch(addToWishList(data))
     }
     return (
         <Button onClick={handleAddToWishList} variant="ghost" size="sm" className="flex items-center gap-2">

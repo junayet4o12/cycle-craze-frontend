@@ -78,7 +78,7 @@ export default function Sidebar() {
                       "flex items-center rounded-md text-sm h-10",
                       collapsed ? "justify-center px-3.5 w-max" : "justify-start px-3 w-full",
                       isActive
-                        ? "bg-muted text-[#E63946] font-semibold"
+                        ? "bg-muted text-foreground font-semibold"
                         : "hover:bg-muted"
                     )
                   }

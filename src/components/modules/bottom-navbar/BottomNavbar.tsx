@@ -70,14 +70,14 @@ const BottomNavbar: FC = () => {
 
                         return (
                             <li
-                                className={`${item.isFocus && `mt-[-35px]  border-t w-14 aspect-square flex justify-center  items-center rounded-full ${isActive ? 'bg-primary text-white ' : 'bg-background'}`} ${isActive ? "text-primary" : "text-muted-foreground"
+                                className={`${item.isFocus && `mt-[-35px]  border-t w-14 aspect-square flex justify-center  items-center rounded-full ${isActive ? 'bg-primary text-white ' : 'bg-background'}`} ${isActive ? "text-foreground" : "text-muted-foreground"
                                     }`}
                                 key={item.href}>
                                 <Link
                                     to={item.href}
                                     className={`flex flex-col items-center text-xs font-medium transition-colors `}
                                 >
-                                    <item.icon className={`w-5 h-5 ${item.isFocus ? (isActive ? 'fill-white text-primary': 'fill-muted-foreground text-white') : (isActive && 'fill-primary')} `} />
+                                    <item.icon className={`w-5 h-5 ${item.isFocus ? (isActive ? 'fill-white text-primary': 'fill-muted-foreground text-background') : (isActive && 'fill-foreground')} `} />
                                     <span>{item.label}</span>
                                 </Link>
                             </li>
