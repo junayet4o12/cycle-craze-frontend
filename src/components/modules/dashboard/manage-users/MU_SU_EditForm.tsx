@@ -1,18 +1,17 @@
-import { CardFooter } from "../ui/card";
-import { Button } from "../ui/button";
-import { Save, X } from "lucide-react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { useUpdateMyDataMutation } from "@/redux/features/user/userApi";
-import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
-import { Form } from "../ui/form";
+import { useUpdateUserMutation } from "@/redux/features/user/userApi";
 import { TUserData } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import EditUserFormUi from "@/components/edit-user-form-ui";
+import { CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Save, X } from "lucide-react";
+import { toast } from "sonner";
+import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
-import EditUserFormUi from "../edit-user-form-ui";
-
+import { Form } from "@/components/ui/form";
 const formSchema = z.object({
     name: z.string({ required_error: 'Please enter your name!!' }),
     address: z.string().optional(),
@@ -48,11 +47,10 @@ type UserDataType = {
 
 type PropTypes = {
     userData: TUserData;
-    setIsEditing: Dispatch<SetStateAction<boolean>>
+    setIsOpen: Dispatch<SetStateAction<boolean>>
 }
-
-export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
-    const [updateMyData, { isLoading }] = useUpdateMyDataMutation()
+export default function MU_SU_EditForm({ userData, setIsOpen }: PropTypes) {
+    const [updateMyData, { isLoading }] = useUpdateUserMutation()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -81,42 +79,39 @@ export default function EditProfileForm({ userData, setIsEditing }: PropTypes) {
                 }
             }
 
-            await updateMyData(userNewData).unwrap();
-            toast.success('Profile updated successfully!', { id: toastId, duration: 2000 });
-            setIsEditing(false);
+            await updateMyData({ userId: userData._id, updatedData: userNewData }).unwrap();
+            toast.success('User updated successfully!', { id: toastId, duration: 2000 });
+            setIsOpen(false);
         } catch (err) {
             console.error(err);
             toast.error(errorMessageGenerator(err), { id: toastId });
         }
     };
     const handleCancel = () => {
-        setIsEditing(false);
+        setIsOpen(false);
     };
     return (
-        <>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <EditUserFormUi form={form} isLoading={isLoading} userData={userData} />
-                    <CardFooter className="flex justify-end gap-2">
-                        <Button
-                            variant="outline"
-                            onClick={handleCancel}
-                            className="flex items-center gap-1"
-                        >
-                            <X size={16} />
-                            Cancel
-                        </Button>
-                        <Button
-                            className="flex items-center gap-1"
-                            disabled={isLoading}
-                        >
-                            <Save size={16} />
-                            {isLoading ? "Saving..." : "Save Changes"}
-                        </Button>
-                    </CardFooter>
-                </form>
-            </Form>
-
-        </>
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <EditUserFormUi form={form} isLoading={isLoading} userData={userData} />
+                <CardFooter className="flex justify-end gap-2">
+                    <Button
+                        variant="outline"
+                        onClick={handleCancel}
+                        className="flex items-center gap-1"
+                    >
+                        <X size={16} />
+                        Cancel
+                    </Button>
+                    <Button
+                        className="flex items-center gap-1"
+                        disabled={isLoading}
+                    >
+                        <Save size={16} />
+                        {isLoading ? "Saving..." : "Save Changes"}
+                    </Button>
+                </CardFooter>
+            </form>
+        </Form>
     );
 }

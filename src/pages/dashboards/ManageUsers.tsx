@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import DefaultPagination from "@/components/default-pagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import MU_SingleUser from "@/components/modules/dashboard/manage-users/MU_SingleUser";
 
 export default function ManageUsers() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -116,49 +117,14 @@ export default function ManageUsers() {
                             <TableHead>Email</TableHead>
                             <TableHead>Contact Info</TableHead>
                             <TableHead>Role</TableHead>
-                            <TableHead>Status</TableHead>
+                            <TableHead>Block</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {users.length > 0 ? (
                             users.map((user, index) => (
-                                <TableRow key={user._id}>
-                                    <TableCell>{index + 1}</TableCell>
-                                    <TableCell>
-                                        <img
-                                            src={user.profile || "/default-user.png"}
-                                            alt="Profile"
-                                            className="w-10 h-10 rounded-full object-cover"
-                                        />
-                                    </TableCell>
-                                    <TableCell>{user.name}</TableCell>
-                                    <TableCell>{user.email}</TableCell>
-                                    <TableCell>{user.contactNumber || "N/A"}</TableCell>
-                                    <TableCell>
-                                        <Badge variant="secondary" className="capitalize">
-                                            {user.role}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge
-                                            variant={user.isBlock ? "destructive" : "default"}
-                                            className="capitalize"
-                                        >
-                                            {user.isBlock ? "Blocked" : "Active"}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right">
-                                        <div className="flex justify-end gap-2">
-                                            <Button variant="outline" size="sm">
-                                                Edit
-                                            </Button>
-                                            <Button variant="destructive" size="sm">
-                                                Delete
-                                            </Button>
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
+                                <MU_SingleUser user={user} index={index} key={user._id} />
                             ))
                         ) : (
                             <TableRow>
