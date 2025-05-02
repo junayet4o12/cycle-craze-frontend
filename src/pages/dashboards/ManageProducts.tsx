@@ -1,4 +1,4 @@
-import { ChevronsUpDown, Package} from "lucide-react";
+import { ChevronsUpDown, Package } from "lucide-react";
 import { useState } from "react";
 
 import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table";
@@ -86,45 +86,50 @@ export default function ManageProducts() {
       </div>
 
       {/* Filters */}
-     <div className="space-y-3">
+      <div className="space-y-3">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <SearchItems placeholder="Search Products..." />
-          <Select value={sort} onValueChange={handleSorting}>
-            <SelectTrigger className="w-40 ml-auto">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="none">Featured</SelectItem>
-              <SelectItem value="price">Price: Low to High</SelectItem>
-              <SelectItem value="-price">Price: High to Low</SelectItem>
-              <SelectItem value="name">Name: A-Z</SelectItem>
-              <SelectItem value="-name">Name: Z-A</SelectItem>
-            </SelectContent>
-  
-          </Select>
-  
-        </div>
-        <div className="w-48 ml-auto">
-          <div className="w-full">
-            <div className="text-xs text-muted-foreground mb-2 flex justify-between">
-              <span>৳{priceRange[0]}</span>
-              <span>৳{priceRange[1]}</span>
+          <div className="flex justify-end gap-4">
+
+
+            <div className="w-48">
+              <div className="w-full">
+                <div className="text-xs text-muted-foreground mb-2 flex justify-between">
+                  <span>৳{priceRange[0]}</span>
+                  <span>৳{priceRange[1]}</span>
+                </div>
+                <Slider
+                  value={priceRange}
+                  onValueChange={handlePriceRangeChange}
+                  min={0}
+                  max={100000}
+                  step={10}
+                  className="w-full"
+                />
+              </div>
+              <div className="text-end flex mt-2 justify-end">
+                <Button onClick={handleResetPriceRange} variant={"ghost"} size={"sm"}>Reset</Button>
+                <Button onClick={handlePriceRangeFilter} variant={"outline"} size={"sm"}>Apply</Button>
+              </div>
             </div>
-            <Slider
-              value={priceRange}
-              onValueChange={handlePriceRangeChange}
-              min={0}
-              max={100000}
-              step={10}
-              className="w-full"
-            />
-          </div>
-          <div className="text-end flex mt-2 justify-end">
-            <Button onClick={handleResetPriceRange} variant={"ghost"} size={"sm"}>Reset</Button>
-            <Button onClick={handlePriceRangeFilter} variant={"outline"} size={"sm"}>Apply</Button>
+            <Select value={sort} onValueChange={handleSorting}>
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Featured</SelectItem>
+                <SelectItem value="price">Price: Low to High</SelectItem>
+                <SelectItem value="-price">Price: High to Low</SelectItem>
+                <SelectItem value="name">Name: A-Z</SelectItem>
+                <SelectItem value="-name">Name: Z-A</SelectItem>
+              </SelectContent>
+
+            </Select>
+
           </div>
         </div>
-     </div>
+
+      </div>
 
       {/* Table */}
       <div className="">

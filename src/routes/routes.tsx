@@ -17,6 +17,8 @@ import Checkout from "@/pages/base-pages/Checkout";
 import OP_Success from "@/pages/base-pages/OrderSuccess/OP_Success";
 import COD_Success from "@/pages/base-pages/OrderSuccess/COD_Success";
 import Wishlist from "@/pages/base-pages/Wishlist";
+import OrderCancel from "@/pages/base-pages/OrderCancel";
+import OrderFail from "@/pages/base-pages/OrderFail";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
             {
                 path: 'checkout/OP/success/:tranId',
                 element: <OP_Success />
+            },
+            {
+                path: 'checkout/OP/cancel',
+                element: <OrderCancel />
+            },
+            {
+                path: 'checkout/OP/fail',
+                element: <OrderFail />
             },
             {
                 path: 'checkout/COD/success/:id',
