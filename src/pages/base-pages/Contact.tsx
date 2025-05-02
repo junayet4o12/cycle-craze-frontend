@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
   Phone,
@@ -8,8 +7,6 @@ import ContactInfoCard from "@/components/modules/contact/ContactInfoCard";
 import HoursCard from "@/components/modules/contact/HoursCard";
 import SocialCard from "@/components/modules/contact/SocialCard";
 import ContactForm from "@/components/modules/contact/ContactForm";
-import AppointmentForm from "@/components/modules/contact/AppointmentForm";
-import LocationsTab from "@/components/modules/contact/LocationsTab";
 
 // Main Contact Component
 export default function Contact() {
@@ -18,37 +15,19 @@ export default function Contact() {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold tracking-tight">Contact Cycle Craze</h1>
         <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
-          We're here to help with all your cycling needs. Reach out to our team for assistance,
-          inquiries, or to schedule an appointment.
+          We're here to help with all your cycling needs. Reach out to our team for assistance and
+          inquiries.
         </p>
       </div>
 
-      <Tabs defaultValue="contact" className="w-full">
-        <TabsList className="grid grid-cols-3 w-full mb-8">
-          <TabsTrigger value='contact'>Contact Us</TabsTrigger>
-          <TabsTrigger value='appointment'>Book Appointment</TabsTrigger>
-          <TabsTrigger value='locations'>Locations</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="contact">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ContactForm />
-            <div className="space-y-6">
-              <ContactInfoCard />
-              <HoursCard />
-              <SocialCard />
-            </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="appointment">
-          <AppointmentForm />
-        </TabsContent>
-
-        <TabsContent value="locations">
-          <LocationsTab />
-        </TabsContent>
-      </Tabs>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <ContactForm />
+        <div className="space-y-6">
+          <ContactInfoCard />
+          <HoursCard />
+          <SocialCard />
+        </div>
+      </div>
 
       <div className="mt-16 text-center">
         <h3 className="mb-4">Need Immediate Assistance?</h3>

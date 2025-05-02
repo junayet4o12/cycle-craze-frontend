@@ -106,13 +106,6 @@ const orderApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Orders"],
     }),
-
-    totalRevenue: builder.query({
-      query: () => ({
-        url: "/orders/revenue",
-        method: "GET",
-      }),
-    }),
   }),
 });
 
@@ -123,7 +116,6 @@ export const {
   useUpdateOrderMutation,
   useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
-  useTotalRevenueQuery,
   useCheckoutMutation,
   useOrderByTranIdQuery
 } = orderApi;
