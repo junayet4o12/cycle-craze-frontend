@@ -154,8 +154,6 @@ export default function ManageOrders() {
                 </TableBody>
             </Table>
             }
-
-
             {
                 meta && <DefaultPagination meta={meta} />
             }

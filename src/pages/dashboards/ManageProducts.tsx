@@ -77,7 +77,7 @@ export default function ManageProducts() {
   return (
     <div className="container mx-auto py-6 space-y-6">
       {/* Top header */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center -mt-[3px]">
         <div className="flex items-center gap-2">
           <Package className="h-6 w-6" />
           <h1 className="text-2xl font-bold">Manage Products</h1>
@@ -127,7 +127,7 @@ export default function ManageProducts() {
      </div>
 
       {/* Table */}
-      <div className="rounded-lg border shadow-sm p-4">
+      <div className="">
         {isLoadingData ? (
           <Table>
             <TableHeader>

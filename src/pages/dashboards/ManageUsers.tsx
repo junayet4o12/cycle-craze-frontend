@@ -7,8 +7,6 @@ import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import DefaultPagination from "@/components/default-pagination";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import MU_SingleUser from "@/components/modules/dashboard/manage-users/MU_SingleUser";
 
 export default function ManageUsers() {
