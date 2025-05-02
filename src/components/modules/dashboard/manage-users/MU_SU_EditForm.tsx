@@ -97,6 +97,7 @@ export default function MU_SU_EditForm({ userData, setIsOpen }: PropTypes) {
                 <CardFooter className="flex justify-end gap-2">
                     <Button
                         variant="outline"
+                        type="button"
                         onClick={handleCancel}
                         className="flex items-center gap-1"
                     >
