@@ -1,12 +1,11 @@
+import AnalyticsChart from "@/components/modules/analytics/AnalyticsChart";
 import AnalyticsTop from "@/components/modules/analytics/AnalyticsTop";
-import { useAnalyzeOrdersQuery } from "@/redux/features/analytics/analyticsApi";
+import AnalyticsTopTenProducts from "@/components/modules/analytics/AnalyticsTopTenProducts";
 import { ChartColumnBig } from "lucide-react";
-import AnalyticsChart from "./AnalyticsChart";
 
 
 export default function Analytics() {
-  const { data, isLoading } = useAnalyzeOrdersQuery(undefined);
-  const salesData = data?.data;
+
 
   return (
     <div className="container mx-auto py-6 space-y-6">
@@ -18,12 +17,11 @@ export default function Analytics() {
         </div>
 
       </div>
-      {
-        salesData && <>
-        <AnalyticsTop isLoading={isLoading} data={salesData} />
-        <AnalyticsChart data={salesData} />
-        </>
-      }
+      <AnalyticsTop />
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2"> <AnalyticsChart /></div>
+        <AnalyticsTopTenProducts/>
+      </div>
     </div>
   );
 }

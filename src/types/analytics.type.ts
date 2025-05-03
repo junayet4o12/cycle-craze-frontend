@@ -7,14 +7,13 @@ export type TRevenueData = {
 export type TOverYearData = {
   totalRevenue: number;
   totalOrders: number;
-  month: string; // e.g., "2025-04"
+  month: string;
 };
 
 export type TOrdersData = {
   total: number;
   lastMonthTotal: number;
   percentageChange: number;
-  overYearData: TOverYearData[];
 };
 
 export type TUsersData = {
@@ -29,3 +28,30 @@ export type SalesData = {
   ordersData: TOrdersData;
   usersData: TUsersData;
 };
+
+export type Last12MonthsAnalyticsData = {
+  users: {
+    users: number;
+    month: string; // Format: YYYY-MM
+  }[];
+  orders: {
+    orders: number;
+    month: string; // Format: YYYY-MM
+  }[];
+  revenue: {
+    totalRevenue: number;
+    month: string; // Format: YYYY-MM
+  }[];
+};
+
+
+export type ProductSalesSummary = {
+  totalQuantitySold: number;
+  totalRevenue: number;
+  productId: string;
+  name: string;
+  images: string[];
+  brand: string;
+};
+
+export type ProductSalesList = ProductSalesSummary[];

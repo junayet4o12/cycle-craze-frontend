@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/api/baseApi";
-import { SalesData, TResponseRedux } from "@/types";
+import { Last12MonthsAnalyticsData, ProductSalesList, SalesData, TResponseRedux } from "@/types";
 
 const analyticsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -14,13 +14,13 @@ const analyticsApi = baseApi.injectEndpoints({
             }),
         }),
 
-        // 2. Get Last 12 Month Users Data Endpoint
-        getLast12MonthUsersData: builder.query({
+        // 2. Get Last 12 Months Analytics Data Endpoint
+        getLast12MonthsAnalyticsData: builder.query({
             query: () => ({
-                url: "/analytics/over-year-users",
+                url: "/analytics/over-year-analytics",
                 method: "GET",
             }),
-            transformResponse: (response: TResponseRedux<SalesData>) => ({
+            transformResponse: (response: TResponseRedux<Last12MonthsAnalyticsData>) => ({
                 data: response.data,
             }),
         }),
@@ -31,7 +31,7 @@ const analyticsApi = baseApi.injectEndpoints({
                 url: "/analytics/top-ten-products",
                 method: "GET",
             }),
-            transformResponse: (response: TResponseRedux<SalesData>) => ({
+            transformResponse: (response: TResponseRedux<ProductSalesList>) => ({
                 data: response.data,
             }),
         }),
@@ -40,6 +40,6 @@ const analyticsApi = baseApi.injectEndpoints({
 
 export const {
     useAnalyzeOrdersQuery,
-    useGetLast12MonthUsersDataQuery,
+    useGetLast12MonthsAnalyticsDataQuery,
     useGetTopTenProductsQuery
 } = analyticsApi;
