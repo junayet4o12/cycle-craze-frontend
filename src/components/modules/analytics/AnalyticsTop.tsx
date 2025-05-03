@@ -9,18 +9,18 @@ export default function AnalyticsTop() {
   const data = salesData?.data;
   if (isLoading) {
     return <div className="flex gap-4">
-      <Skeleton className="w-[240px] h-[115px]" />
-      <Skeleton className="w-[240px] h-[115px]" />
-      <Skeleton className="w-[240px] h-[115px]" />
-      <Skeleton className="w-[240px] h-[115px]" />
+      <Skeleton className="w-full h-[115px]" />
+      <Skeleton className="w-full h-[115px]" />
+      <Skeleton className="w-full h-[115px]" />
+      <Skeleton className="w-full h-[115px]" />
     </div >
   }
   return (
-    <div className="flex gap-4 flex-wrap">
+    <div className="flex gap-4">
       {/* revenue  */}
       {
         data && <>
-          <div className="w-[240px]">
+          <div className="w-full">
             <Card>
               <CardHeader>
                 <CardTitle>
@@ -38,7 +38,7 @@ export default function AnalyticsTop() {
               </CardHeader>
             </Card>
           </div>
-          <div className="w-[240px]">
+          <div className="w-full">
             <Card>
               <CardHeader>
                 <CardTitle>
@@ -56,7 +56,7 @@ export default function AnalyticsTop() {
               </CardHeader>
             </Card>
           </div>
-          <div className="w-[240px]">
+          <div className="w-full">
             <Card>
               <CardHeader>
                 <CardTitle>

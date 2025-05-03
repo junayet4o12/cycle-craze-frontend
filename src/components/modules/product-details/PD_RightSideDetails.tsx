@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Facebook, Twitter, Instagram, Share2,  Ruler } from "lucide-react"
+import { Facebook, Twitter, Instagram, Share2, Ruler } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -8,10 +8,12 @@ import { Input } from "@/components/ui/input"
 
 import { CartProduct, IProduct } from "@/types"
 import { useAppDispatch } from "@/redux/hooks"
-import { addProduct } from "@/redux/features/cart/cartSlice"
+import { addProduct, clearCart } from "@/redux/features/cart/cartSlice"
 import PD_WishlistBtn from "./PD_WishlistBtn"
+import { useNavigate } from "react-router-dom"
 
 export default function PD_RightSideDetails({ product }: { product: IProduct }) {
+    const navigate = useNavigate()
     const [quantity, setQuantity] = useState(1)
     const dispatch = useAppDispatch()
     const incrementQuantity = () => {
@@ -35,6 +37,11 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
         dispatch(addProduct({ product: cartProduct, quantity: product.quantity }))
 
         setQuantity(1)
+    }
+    const handleBuyItNow = () => {
+        dispatch(clearCart())
+        handleAddToCart()
+        navigate('/checkout')
     }
     const wishListData = {
         _id: product._id,
@@ -96,7 +103,7 @@ export default function PD_RightSideDetails({ product }: { product: IProduct }) 
 
                     <div className="flex flex-row gap-3">
                         <Button onClick={handleAddToCart} className="flex-1">Add to Cart</Button>
-                        <Button variant="secondary" className="flex-1">Buy it now</Button>
+                        <Button onClick={handleBuyItNow} variant="secondary" className="flex-1">Buy it now</Button>
                     </div>
                 </div>
 

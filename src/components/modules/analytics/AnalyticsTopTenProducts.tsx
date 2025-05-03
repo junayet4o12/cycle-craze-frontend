@@ -28,10 +28,7 @@ export default function AnalyticsTopTenProducts() {
 
   return (
     <Card className="w-full max-w-md p-4">
-      <h2 className="text-lg font-semibold">Recent Sales</h2>
-      <p className="text-sm text-muted-foreground">
-        Top ten Sold Products.
-      </p>
+      <h2 className="text-lg font-semibold"> Top ten Sold Products.</h2>
       <CardContent className="p-0">
         {productsData.map((product, index) => (
           <div

@@ -15,15 +15,7 @@ import {
 } from "@/components/ui/select";
 import { useGetLast12MonthsAnalyticsDataQuery } from "@/redux/features/analytics/analyticsApi";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis, BarChart, Bar } from "recharts";
-
-// Loading Skeleton Component
-const LoadingSkeleton = () => (
-    <div className="w-full h-[300px] bg-gray-300 animate-pulse rounded-lg">
-        <div className="h-3 bg-gray-400 w-2/4 mb-2"></div>
-        <div className="h-3 bg-gray-400 w-3/4 mb-2"></div>
-        <div className="h-3 bg-gray-400 w-1/2 mb-2"></div>
-    </div>
-);
+import AnalyticsChartSkeletonLoader from "./AnalyticsChartSkeletonLoader";
 
 type ChartKey = "orders" | "revenue" | "users";
 type ChartView = "line" | "bar";
@@ -50,39 +42,7 @@ export default function AnalyticsChart() {
         : "line";
 
     if (isLoading) {
-        return (
-            <Card>
-                <CardContent>
-                    <div className="flex items-center justify-between mb-6">
-                        <h4>Overview</h4>
-                        <div className="flex gap-4">
-                            <Select value={chartType} onValueChange={(val) => handleSelectChange("chartType", val)}>
-                                <SelectTrigger className="w-[150px]">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="revenue">Revenue</SelectItem>
-                                    <SelectItem value="orders">Orders</SelectItem>
-                                    <SelectItem value="users">Users</SelectItem>
-                                </SelectContent>
-                            </Select>
-
-                            <Select value={chartView} onValueChange={(val) => handleSelectChange("chartView", val)}>
-                                <SelectTrigger className="w-[120px]">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="line">Trend View</SelectItem>
-                                    <SelectItem value="bar">Analysis View</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-                    {/* Skeleton Loader */}
-                    <LoadingSkeleton />
-                </CardContent>
-            </Card>
-        );
+        return <AnalyticsChartSkeletonLoader />; 
     }
 
     const last12MonthsAnalyticsData = data?.data;

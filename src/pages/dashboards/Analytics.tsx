@@ -17,10 +17,14 @@ export default function Analytics() {
         </div>
 
       </div>
-      <AnalyticsTop />
+
       <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-2"> <AnalyticsChart /></div>
-        <AnalyticsTopTenProducts/>
+        <div className="col-span-2 space-y-4">
+          <AnalyticsTop />
+          <AnalyticsChart />
+
+        </div>
+        <AnalyticsTopTenProducts />
       </div>
     </div>
   );

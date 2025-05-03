@@ -22,12 +22,11 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { order_status } from "@/constant/order.const";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import MO_StatusBadge from "@/components/modules/dashboard/manage-orders/MO_StatusBadge";
 
 
 export default function MyOrders() {
@@ -40,19 +39,6 @@ export default function MyOrders() {
       month: 'long',
       day: 'numeric'
     });
-  };
-
-  const getStatusBadgeVariant = (status: typeof order_status[number]): "default" | "secondary" | "destructive" | "outline" => {
-    switch (status) {
-      case 'PENDING':
-        return "secondary";
-      case 'SHIPPED':
-        return "default";
-      case 'DELIVERED':
-        return "outline";
-      default:
-        return "default";
-    }
   };
 
   if (isLoading) {
@@ -108,13 +94,11 @@ export default function MyOrders() {
                 <CardTitle className="text-lg">
                   Order #{order._id.substring(order._id.length - 8)}
                 </CardTitle>
-                <Badge variant={getStatusBadgeVariant(order.status as typeof order_status[number])}>
-                  {order.status}
-                </Badge>
+                <MO_StatusBadge  status={order.status} />
               </div>
               <CardDescription className="flex justify-between">
                 <span>Placed on {formatDate(order.createdAt)}</span>
-                <span className="font-medium">৳{order.totalPrice.toFixed(2)}</span>
+                <span className="font-medium">৳{(order.totalPrice + order.deliveryCharge).toFixed(2)}</span>
               </CardDescription>
             </CardHeader>
 
@@ -173,10 +157,17 @@ export default function MyOrders() {
                           </TableBody>
                         </Table>
                       </div>
-
+                      <div className="flex justify-between font-medium px-2 text-muted-foreground">
+                        <span>Subtotal</span>
+                        <span>৳{order.totalPrice.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between font-medium px-2 text-muted-foreground">
+                        <span>Delivery Charge</span>
+                        <span>৳{order.deliveryCharge.toFixed(2)}</span>
+                      </div>
                       <div className="flex justify-between font-medium px-2">
                         <span>Total</span>
-                        <span>৳{order.totalPrice.toFixed(2)}</span>
+                        <span>৳{(order.deliveryCharge + order.totalPrice).toFixed(2)}</span>
                       </div>
                     </div>
                   </AccordionContent>
