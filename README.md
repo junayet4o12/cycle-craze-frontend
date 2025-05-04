@@ -180,8 +180,7 @@ cycle-craze/
    ```
  VITE_CLOUDINARY_CLOUD_NAME=doc50jlhc
  VITE_CLOUDINARY_IMAGE_PRESET=cycle-craze-images
- # VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
- VITE_BACKEND_API=http://localhost:5000/api
+ VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
    ```
 
 4. Start the development server:
