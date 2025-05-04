@@ -18,7 +18,7 @@ export default function PD_Share() {
     const openInstagram = () => {
         // Instagram doesn't allow direct sharing via URL
         window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
-    };
+    }; 
 
     const shareNative = () => {
         if (navigator.share) {
