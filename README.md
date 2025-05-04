@@ -178,9 +178,10 @@ cycle-craze/
 3. Set up environment variables:
    Create a `.env.local` file in the project root with the following variables:
    ```
-   VITE_CLOUDINARY_CLOUD_NAME=Your Cloudinary Cloud Name
-   VITE_CLOUDINARY_IMAGE_PRESET=Your Cloudinary Image Preset
-   VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
+ VITE_CLOUDINARY_CLOUD_NAME=doc50jlhc
+ VITE_CLOUDINARY_IMAGE_PRESET=cycle-craze-images
+ # VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
+ VITE_BACKEND_API=http://localhost:5000/api
    ```
 
 4. Start the development server:
