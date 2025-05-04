@@ -180,7 +180,7 @@ cycle-craze/
    ```
    VITE_CLOUDINARY_CLOUD_NAME=Your Cloudinary Cloud Name
    VITE_CLOUDINARY_IMAGE_PRESET=Your Cloudinary Image Preset
-   VITE_BACKEND_API="your_backend_api"/api
+   VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
    ```
 
 4. Start the development server:
