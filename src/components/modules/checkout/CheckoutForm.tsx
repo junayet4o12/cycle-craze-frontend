@@ -73,7 +73,6 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
             }
            
         } catch (error) {
-            console.log(error);
 
             toast.error(errorMessageGenerator(error), { id: toastId })
         }

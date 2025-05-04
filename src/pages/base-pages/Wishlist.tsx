@@ -64,7 +64,6 @@ export default function Wishlist() {
     }
     const isChecked = finalCheckedProducts.length === wishlistProducts.length;
     const handleAddToCart = async (products: WishlistProductType[]) => {
-        console.log(products);
 
         const addToCartProduct: { product: CartProduct; quantity: number; }[] = []
         setIsLoading(true)
@@ -93,7 +92,6 @@ export default function Wishlist() {
         }
         if (addToCartProduct.length) {
             for (const item of addToCartProduct) {
-                console.log(item);
 
                 dispatch(addProduct(item))
             }

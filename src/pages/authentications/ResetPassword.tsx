@@ -69,8 +69,7 @@ export default function ResetPassword() {
             await resetPassword(passwordChangingData).unwrap();
 
             toast.success('Password has been reset successfully!', { id: toastId, duration: 2000 });
-        } catch (err) {
-            console.log(err);
+        } catch {
 
             toast.error('Failed to reset password. The link may have expired.', { id: toastId });
         }
