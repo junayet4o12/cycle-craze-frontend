@@ -63,24 +63,21 @@ export default function OD_OrderData({ orderData }: { orderData: IOrder }) {
                                     className="flex justify-between items-center p-4 border rounded-lg"
                                 >
                                     <div className="flex gap-4">
-                                        <div className="w-20 h-20 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+                                        <div className=" w-16 md:w-20 min-w-16 md:min-w-20 h-12 md:h-16 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
                                             {item.product.images && item.product.images[0] ? (
                                                 <img
                                                     src={item.product.images[0]}
                                                     alt={item.name}
-                                                    className="w-full h-full object-cover"
+                                                    className="w-full h-full object-cover "
                                                 />
                                             ) : (
                                                 <Package className="text-muted-foreground" />
                                             )}
                                         </div>
                                         <div>
-                                            <h4 className="font-medium">{item.name}</h4>
+                                            <h6 className="font-medium line-clamp-1">{item.name}</h6>
                                             <p className="text-muted-foreground text-sm">
                                                 {item.product.brand} · {item.product.category}
-                                            </p>
-                                            <p className="text-muted-foreground text-sm">
-                                                {item.product.frameMaterial} · {item.product.wheelSize}" Wheel
                                             </p>
                                         </div>
                                     </div>

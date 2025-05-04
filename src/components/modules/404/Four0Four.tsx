@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home, ListFilter, ShoppingCart } from "lucide-react";
+import { ArrowLeft,ListFilter, ShoppingCart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
