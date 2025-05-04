@@ -28,23 +28,27 @@ A modern, responsive e-commerce frontend for the Bi-Cycle Store built with React
 
 Cycle Craze is a comprehensive bicycle e-commerce platform providing an intuitive shopping experience for cycling enthusiasts. This repository contains the frontend application that interfaces with our [Bi-Cycle Store Backend](https://github.com/junayet4o12/bi-cicle-backend).
 
-## Key Features
+# Key Features
 
-- **🌓 Theme System** - Toggle between light, dark, and system themes for comfortable browsing
-- **📱 Mobile Optimization** - Bottom navigation bar for mobile users with intuitive interface
-- **🔍 Product Discovery** - Advanced filtering, search, and product gallery with zoom functionality
-- **❤️ Wishlist Management** - Save favorite products for later and easily add to cart
-- **🛒 Seamless Shopping** - Streamlined cart and checkout experience prioritizing speed and ease
-- **💳 Flexible Payment Options** - SSLCommerz integration for online payments and cash on delivery
-- **📦 Order Tracking** - Comprehensive order history and status monitoring for users
-- **📊 Admin Dashboard** - Powerful analytics, product, order, and user management
-- **🖼️ Product Gallery** - Interactive image management with drag-and-drop reordering
-- **⚡ Performance Focused** - Optimized for speed and responsiveness across all devices
-- **🔐 Secure Authentication** - JWT-based security with protected routes
+| Category | Feature | Description |
+|----------|---------|-------------|
+| **User Experience** | 🌓 Theme System | Toggle between light, dark, and system themes for optimal viewing in any environment. Enhances accessibility and reduces eye strain. |
+| | 📱 Mobile Optimization | Responsive design with intuitive bottom navigation for mobile users, ensuring seamless experience across all device sizes. |
+| | ⚡ Performance | Optimized load times and rendering with efficient resource management for lightning-fast interactions on all devices. |
+| **Shopping Experience** | 🔍 Advanced Product Discovery | Comprehensive filtering, search capabilities, and interactive product galleries with zoom functionality for detailed product examination. |
+| | ❤️ Wishlist Management | Personalized collections where users can save products for future consideration with one-click transfer to shopping cart. |
+| | 🛒 Streamlined Checkout | Intuitive, multi-step checkout process designed to minimize friction and maximize conversion rates. |
+| **Payment & Fulfillment** | 💳 Payment Options | SSLCommerz integration for secure online transactions with multiple payment methods, plus cash on delivery support. |
+| | 📦 Order Management | Real-time order tracking and comprehensive order history accessible through user accounts. |
+| **Administration** | 📊 Powerful Dashboard | Centralized control center with analytics, inventory management, and user administration capabilities. |
+| | 🖼️ Content Management | Drag-and-drop product gallery management with visual reordering and batch operations for efficient catalog maintenance. |
+| | 📈 Sales Analytics | Detailed reporting on sales performance, customer behavior, and inventory metrics to guide business decisions. |
+| **Security** | 🔐 Authentication System | JWT-based secure authentication with role-based access control and protected routes. |
+| | 🛡️ Data Protection | Implementation of security best practices for handling sensitive customer and payment information. |
 
 ## Live Demo
 
-Experience the application: [Cycle Craze](https://cycle-craze.vercel.app)
+Experience the application: [Cycle Craze](https://cycle-craze-frontend.vercel.app)
 
 ## Technology Stack
 
@@ -85,37 +89,70 @@ Experience the application: [Cycle Craze](https://cycle-craze.vercel.app)
 
 ```
 cycle-craze/
-├── public/            # Static assets
+├── public/            # Static assets (images, icons, etc.)
+│   └── ...            # Public files accessible via URL
+
 ├── src/
-│   ├── assets/        # Images, fonts, and static resources
+│   ├── assets/        # Project-specific assets (icons, images, etc.)
 │   ├── components/    # Reusable UI components
-│   │   ├── ui/        # Base UI components
-│   │   └── common/    # Higher-level shared components
-│   ├── features/      # Feature-based modules
-│   │   ├── auth/      # Authentication related components
-│   │   ├── products/  # Product catalog components
-│   │   ├── cart/      # Shopping cart functionality
-│   │   ├── checkout/  # Checkout process
-│   │   └── admin/     # Admin dashboard components
-│   ├── hooks/         # Custom React hooks
-│   ├── layouts/       # Page layout components
-│   ├── lib/           # Utility functions and libraries
-│   ├── pages/         # Route-level page components
-│   ├── redux/         # Redux state management
-│   │   ├── slices/    # Redux Toolkit slices
-│   │   └── store.ts   # Redux store configuration
-│   ├── services/      # API service integrations
-│   ├── styles/        # Global styles and themes
-│   ├── types/         # TypeScript type definitions
-│   ├── utils/         # Helper functions
-│   ├── App.tsx        # Root application component
-│   ├── main.tsx       # Entry point
-│   └── routes.tsx     # Application routes
-├── .env.local         # Environment variables
-├── index.html         # HTML entry point
-├── tsconfig.json      # TypeScript configuration
-├── vite.config.ts     # Vite configuration
-└── tailwind.config.js # Tailwind CSS configuration
+│   │   ├── layout/    
+│   │   └── ui/        
+│   ├── config/        
+│   ├── constant/      
+│   ├── hooks/         
+│   ├── lib/           
+│   ├── modules/       # Feature-specific modules
+│   │   ├── 404/
+│   │   ├── analytics/
+│   │   ├── badge/
+│   │   ├── bottom-navbar/
+│   │   ├── cart/
+│   │   ├── checkout/
+│   │   ├── contact/
+│   │   ├── dashboard/
+│   │   ├── editor/
+│   │   ├── footer/
+│   │   ├── home/
+│   │   ├── navbar/
+│   │   ├── Order_Success/
+│   │   ├── order-details/
+│   │   ├── product-details/
+│   │   ├── services/
+│   │   ├── shop/
+│   │   ├── wishlist/
+│   ├── pages/         
+│   ├── private.routes/
+│   ├── profile/       
+│   ├── providers/     
+│   ├── redux/         
+│   ├── api/           
+│   │   └── features/  
+│   ├── routes/        
+│   ├── schemas/       
+│   ├── styles/        
+│   ├── types/         
+│   ├── utils/         
+│   ├── fonts.css
+│   ├── index.css
+│   ├── main.tsx
+│   ├── quill-better-table.d.ts
+│   ├── swiper.d.ts
+│   └── vite-env.d.ts
+
+├── .env.local         
+├── .gitignore
+├── components.json
+├── eslint.config.js
+├── index.html         
+├── package.json       
+├── package-lock.json  
+├── README.md          
+├── tsconfig.json       
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vercel.json        
+├── vite.config.ts     
+
 ```
 
 ## Getting Started
@@ -128,8 +165,8 @@ cycle-craze/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/cycle-craze.git
-   cd cycle-craze
+   git clone https://github.com/junayet4o12/cycle-craze-frontend.git
+   cd cycle-craze-frontend
    ```
 
 2. Install dependencies:
@@ -142,9 +179,9 @@ cycle-craze/
 3. Set up environment variables:
    Create a `.env.local` file in the project root with the following variables:
    ```
-   VITE_CLOUDINARY_CLOUD_NAME=doc50jlhc
-   VITE_CLOUDINARY_IMAGE_PRESET=cycle-craze-image
-   VITE_BACKEND_API=https://bi-cicle-backend.vercel.app/api
+   VITE_CLOUDINARY_CLOUD_NAME=Your Cloudinary Cloud Name
+   VITE_CLOUDINARY_IMAGE_PRESET=Your Cloudinary Image Preset
+   VITE_BACKEND_API="your_backend_api"/api
    ```
 
 4. Start the development server:
