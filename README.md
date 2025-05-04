@@ -64,7 +64,6 @@ Experience the application: [Cycle Craze](https://cycle-craze-frontend.vercel.ap
 - <img src="https://embla-carousel.vercel.app/favicon.ico" width="16" height="16" /> **Embla Carousel** - Touch-friendly carousel
 - <img src="https://swiperjs.com/images/favicon.png" width="16" height="16" /> **Swiper** - Modern mobile touch slider
 - <img src="https://sonner.emilkowal.ski/favicon.ico" width="16" height="16" /> **Sonner** - Toast notifications
-- <img src="https://sweetalert2.github.io/images/favicon.png" width="16" height="16" /> **SweetAlert2** - Beautiful alerts and modals
 
 ### State Management
 - <img src="https://redux.js.org/img/favicon/favicon.ico" width="16" height="16" /> **Redux Toolkit** - Modern Redux with simplified logic
