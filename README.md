@@ -30,16 +30,17 @@ Cycle Craze is a comprehensive bicycle e-commerce platform providing an intuitiv
 
 ## Key Features
 
-- **Responsive Design** - Optimized for all device sizes
-- **User Authentication** - Secure login/signup with JWT
-- **Product Catalog** - Advanced filtering and search capabilities
-- **Shopping Cart** - Real-time cart management with Redux
-- **Checkout Process** - Seamless payment integration with SSLCommerz
-- **Order Management** - Track and manage order history
-- **Admin Dashboard** - Comprehensive admin tools with analytics
-- **Dark/Light Mode** - Theme customization with next-themes
-- **Drag and Drop** - Intuitive interfaces with dnd-kit
-- **Form Handling** - Robust forms with React Hook Form and Zod validation
+- **🌓 Theme System** - Toggle between light, dark, and system themes for comfortable browsing
+- **📱 Mobile Optimization** - Bottom navigation bar for mobile users with intuitive interface
+- **🔍 Product Discovery** - Advanced filtering, search, and product gallery with zoom functionality
+- **❤️ Wishlist Management** - Save favorite products for later and easily add to cart
+- **🛒 Seamless Shopping** - Streamlined cart and checkout experience prioritizing speed and ease
+- **💳 Flexible Payment Options** - SSLCommerz integration for online payments and cash on delivery
+- **📦 Order Tracking** - Comprehensive order history and status monitoring for users
+- **📊 Admin Dashboard** - Powerful analytics, product, order, and user management
+- **🖼️ Product Gallery** - Interactive image management with drag-and-drop reordering
+- **⚡ Performance Focused** - Optimized for speed and responsiveness across all devices
+- **🔐 Secure Authentication** - JWT-based security with protected routes
 
 ## Live Demo
 
@@ -48,37 +49,37 @@ Experience the application: [Cycle Craze](https://cycle-craze.vercel.app)
 ## Technology Stack
 
 ### Core
-- **React 19** - Latest React with improved performance
-- **TypeScript** - Type-safe development
-- **Vite** - Next generation frontend tooling
+- <img src="https://reactjs.org/favicon.ico" width="16" height="16" /> **React 19** - Latest React with improved performance
+- <img src="https://www.typescriptlang.org/favicon-32x32.png" width="16" height="16" /> **TypeScript** - Type-safe development
+- <img src="https://vitejs.dev/logo.svg" width="16" height="16" /> **Vite** - Next generation frontend tooling
 
 ### UI/UX
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **Radix UI** - Accessible component primitives
-- **Framer Motion** - Animation library
-- **Embla Carousel** - Touch-friendly carousel
-- **Swiper** - Modern mobile touch slider
-- **Sonner** - Toast notifications
-- **SweetAlert2** - Beautiful alerts and modals
+- <img src="https://tailwindcss.com/favicons/favicon-16x16.png" width="16" height="16" /> **Tailwind CSS 4** - Utility-first CSS framework
+- <img src="https://www.radix-ui.com/favicon.ico" width="16" height="16" /> **Radix UI** - Accessible component primitives
+- <img src="https://framer.com/favicon.ico" width="16" height="16" /> **Framer Motion** - Animation library
+- <img src="https://embla-carousel.vercel.app/favicon.ico" width="16" height="16" /> **Embla Carousel** - Touch-friendly carousel
+- <img src="https://swiperjs.com/images/favicon.png" width="16" height="16" /> **Swiper** - Modern mobile touch slider
+- <img src="https://sonner.emilkowal.ski/favicon.ico" width="16" height="16" /> **Sonner** - Toast notifications
+- <img src="https://sweetalert2.github.io/images/favicon.png" width="16" height="16" /> **SweetAlert2** - Beautiful alerts and modals
 
 ### State Management
-- **Redux Toolkit** - Modern Redux with simplified logic
-- **Redux Persist** - Persist and rehydrate Redux store
+- <img src="https://redux.js.org/img/favicon/favicon.ico" width="16" height="16" /> **Redux Toolkit** - Modern Redux with simplified logic
+- <img src="https://redux.js.org/img/favicon/favicon.ico" width="16" height="16" /> **Redux Persist** - Persist and rehydrate Redux store
 
 ### Data Fetching
-- **Axios** - Promise-based HTTP client
+- <img src="https://axios-http.com/assets/favicon.ico" width="16" height="16" /> **Axios** - Promise-based HTTP client
 
 ### Form Handling
-- **React Hook Form** - Performant form handling
-- **Zod** - TypeScript-first schema validation
+- <img src="https://react-hook-form.com/favicon.ico" width="16" height="16" /> **React Hook Form** - Performant form handling
+- <img src="https://zod.dev/logo.svg" width="16" height="16" /> **Zod** - TypeScript-first schema validation
 
 ### Additional Tools
-- **date-fns** - Date manipulation library
-- **jwt-decode** - JWT token decoder
-- **React Router DOM** - Routing solution
-- **Recharts** - Composable charting library
-- **React Dropzone** - File upload utility
-- **React Quill** - Rich text editor
+- <img src="https://date-fns.org/favicon.ico" width="16" height="16" /> **date-fns** - Date manipulation library
+- <img src="https://jwt.io/img/favicon/favicon-16x16.png" width="16" height="16" /> **jwt-decode** - JWT token decoder
+- <img src="https://reactrouter.com/favicon.ico" width="16" height="16" /> **React Router DOM** - Routing solution
+- <img src="https://recharts.org/favicon.ico" width="16" height="16" /> **Recharts** - Composable charting library
+- <img src="https://react-dropzone.js.org/favicon.ico" width="16" height="16" /> **React Dropzone** - File upload utility
+- <img src="https://quilljs.com/assets/images/favicon.ico" width="16" height="16" /> **React Quill** - Rich text editor
 
 ## Project Architecture
 
