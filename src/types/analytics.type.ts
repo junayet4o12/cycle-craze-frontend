@@ -52,6 +52,7 @@ export type ProductSalesSummary = {
   name: string;
   images: string[];
   brand: string;
+  price: number;
 };
 
 export type ProductSalesList = ProductSalesSummary[];

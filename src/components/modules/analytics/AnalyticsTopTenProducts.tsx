@@ -1,10 +1,10 @@
-import { useGetTopTenProductsQuery } from "@/redux/features/analytics/analyticsApi";
+import { useGetTopSellingProductsQuery } from "@/redux/features/analytics/analyticsApi";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AnalyticsTopTenProducts() {
-  const { data, isLoading } = useGetTopTenProductsQuery(undefined);
+  const { data, isLoading } = useGetTopSellingProductsQuery(undefined);
 
   if (isLoading) {
     return (
@@ -46,8 +46,8 @@ export default function AnalyticsTopTenProducts() {
               </div>
             </div>
             <div className="text-sm font-semibold text-right">
-                Sold: {product.totalQuantitySold} <br />
-            <p className="text-muted-foreground text-sm">৳{product.totalRevenue.toFixed(2)}</p>
+              Sold: {product.totalQuantitySold} <br />
+              <p className="text-muted-foreground text-sm">৳{product.totalRevenue.toFixed(2)}</p>
             </div>
           </div>
         ))}

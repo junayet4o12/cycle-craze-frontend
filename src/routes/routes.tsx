@@ -19,11 +19,14 @@ import COD_Success from "@/pages/base-pages/OrderSuccess/COD_Success";
 import Wishlist from "@/pages/base-pages/Wishlist";
 import OrderCancel from "@/pages/base-pages/OrderCancel";
 import OrderFail from "@/pages/base-pages/OrderFail";
+import Four0Four from "@/components/modules/404/Four0Four";
+import OrderDetails from "@/pages/order-details/OrderDetails";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout />,
+        errorElement: <Four0Four/>,
         children: [
             {
                 path: '',
@@ -36,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: 'product-details/:id',
                 element: <ProductDetails />
+            },
+            {
+                path: 'order-details/:id',
+                element: <OrderDetails />
             },
             {
                 path: 'services',
@@ -83,11 +90,13 @@ const router = createBrowserRouter([
     {
         path: 'auth',
         element: <AuthLayout />,
+        errorElement: <Four0Four/>,
         children: authRoutes
     },
     {
         path: '/dashboard',
         element: <ProtectedRoutes AdminRoutes={true}><DashboardLayout /></ProtectedRoutes>,
+        errorElement: <Four0Four/>,
         children: dashboardRoutes
     },
 

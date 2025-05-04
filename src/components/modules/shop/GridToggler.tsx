@@ -15,8 +15,7 @@ interface TripleToggleProps {
 export function GridToggler({ className, gridNumber, setGridNumber, totalGrid = 3, increaseBy = 2 }: TripleToggleProps) {
 
     const handleToggle = (index: number) => {
-        const newIndex = gridNumber === index ? -1 : index
-        setGridNumber(newIndex)
+        setGridNumber(index)
     }
 
     return (
@@ -34,7 +33,7 @@ export function GridToggler({ className, gridNumber, setGridNumber, totalGrid = 
                 >
                     <div className="flex items-center justify-center gap-1">
                         {[...Array(index + increaseBy)].map((_, i) => (
-                            <div key={i} className={cn("h-1 w-1", gridNumber === index + increaseBy ? "bg-foreground" : "bg-foreground/30")} />
+                            <div key={i} className={cn("h-1 w-1 min-w-1", gridNumber === index + increaseBy ? "bg-foreground" : "bg-foreground/30")} />
                         ))}
                     </div>
                 </Toggle>

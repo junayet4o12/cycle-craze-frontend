@@ -1,17 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { useProductsQuery } from "@/redux/features/product/productApi";
 import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
+import { useGetTopSellingProductsQuery } from "@/redux/features/analytics/analyticsApi";
 
 export default function BestSellingProducts() {
-    const { data, isLoading, isFetching } = useProductsQuery([
-        { name: "limit", value: "4" },
-        { name: "fields", value: "name,images,price" },
-    ]);
+    const { data , isLoading, isFetching } = useGetTopSellingProductsQuery({ name: 'limit', value: '5' });
+
 
     const bikes = data?.data;
 
@@ -69,8 +67,8 @@ export default function BestSellingProducts() {
                     >
                         {bikes?.map((bike, idx) => (
                             <SwiperSlide key={idx}>
-                                <Link to={`/product-details/${bike._id}`}>
-                                    <Card className="group relative overflow-hidden border bg-background shadow-sm transition-all duration-300 hover:shadow-md rounded-2xl">
+                                <Link to={`/product-details/${bike.productId}`}>
+                                    <Card className="group relative overflow-hidden border bg-background shadow-sm transition-all duration-300 hover:shadow-md">
                                         <CardContent className="p-4">
                                             <div className="relative h-40 rounded-xl overflow-hidden">
                                                 <img

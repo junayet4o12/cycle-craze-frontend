@@ -72,7 +72,6 @@ export default function CheckoutForm({ userData }: { userData: TUserData | undef
                 window.location.replace(result.data)
             }
            
-            toast.success('Checkout succeeded..', { id: toastId })
         } catch (error) {
             console.log(error);
 

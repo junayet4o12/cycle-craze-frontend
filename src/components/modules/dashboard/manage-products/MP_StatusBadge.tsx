@@ -32,7 +32,7 @@ const StatusBadge = ({ quantity }: { quantity: number }) => {
   return (
     <Badge
       variant="outline"
-      className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full transition-all ${config.className}`}
+      className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full transition-all ${config.className} h-max`}
     >
       {config.icon}
       <span className="capitalize">{status}</span>

@@ -26,11 +26,18 @@ const analyticsApi = baseApi.injectEndpoints({
         }),
 
         // 3. Get Top 10 Products Endpoint
-        getTopTenProducts: builder.query({
-            query: () => ({
-                url: "/analytics/top-ten-products",
-                method: "GET",
-            }),
+        getTopSellingProducts: builder.query({
+            query: (args: { name: string, value: string } | undefined) => {
+                const params = new URLSearchParams();
+                if (args) {
+                    params.append(args.name as string, args.value as string);
+                }
+                return {
+                    url: "/analytics/top-selling-products",
+                    method: "GET",
+                    params: params
+                }
+            },
             transformResponse: (response: TResponseRedux<ProductSalesList>) => ({
                 data: response.data,
             }),
@@ -41,5 +48,5 @@ const analyticsApi = baseApi.injectEndpoints({
 export const {
     useAnalyzeOrdersQuery,
     useGetLast12MonthsAnalyticsDataQuery,
-    useGetTopTenProductsQuery
+    useGetTopSellingProductsQuery
 } = analyticsApi;
