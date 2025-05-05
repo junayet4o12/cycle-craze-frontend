@@ -1,8 +1,7 @@
 import { Facebook, Twitter, Instagram, Youtube, MapPin, Mail } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import { useTheme } from "@/providers/theme-provider";
+import Subscribe from "./Subscribe";
 
 export default function Footer() {
     const { theme } = useTheme();
@@ -91,19 +90,7 @@ export default function Footer() {
                             <p className="text-sm text-muted-foreground">
                                 Stay updated with our latest collections, offers, and more!
                             </p>
-                            <div className="flex flex-col space-y-2">
-                                <div className="flex">
-                                    <Input
-                                        type="email"
-                                        placeholder="Your email"
-                                        className="rounded-r-none focus-visible:ring-0 border-r-0"
-                                    />
-                                    <Button type="submit" className="rounded-l-none bg-red-600 hover:bg-red-700 text-white">
-                                        SUBSCRIBE
-                                    </Button>
-                                </div>
-                                <p className="text-xs text-muted-foreground">* We promise not to spam your inbox.</p>
-                            </div>
+                           <Subscribe/>
                         </div>
                     </div>
                 </div>

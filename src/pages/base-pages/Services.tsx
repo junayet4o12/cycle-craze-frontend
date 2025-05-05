@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import RepairServices from '@/components/modules/services/RepairServices';
 import CustomServices from '@/components/modules/services/CustomServices';
 import RentalServices from '@/components/modules/services/RentalServices';
+import { Link } from 'react-router-dom';
 
 export default function Services() {
     return (
@@ -39,8 +40,8 @@ export default function Services() {
                     Drop in or schedule an appointment for priority service.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <Button size="lg">Schedule Service</Button>
-                    <Button variant="outline" size="lg">Contact Us</Button>
+                  
+                   <Link to={'/contact'}> <Button variant="outline" size="lg">Contact Us</Button></Link>
                 </div>
             </div>
         </section>
