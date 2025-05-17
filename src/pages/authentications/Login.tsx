@@ -47,7 +47,6 @@ export default function Login() {
         try {
             const res = await login(data).unwrap();
             const user = verifyToken(res.data.accessToken) as TUser;
-            console.log(data,user);
             
             dispatch(setUser({
                 user,
