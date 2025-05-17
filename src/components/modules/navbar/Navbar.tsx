@@ -3,14 +3,15 @@ import { LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import {  selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Profile from "@/components/profile";
 import { useTheme } from "@/providers/theme-provider";
 import MyCartBtn from "./MyCartBtn";
 import Shop_FilterSheet from "../shop/Shop_FilterSheet";
 import MyWishlistBtn from "./MyWishlistBtn";
+import { useHandleLogout } from "@/hooks/useHandleLogout";
 
 interface NavItem {
     label: string;
@@ -25,11 +26,9 @@ const navItems: NavItem[] = [
 
 const Navbar: FC = () => {
     const { theme } = useTheme();
-    const dispatch = useAppDispatch();
+   const handleLogout = useHandleLogout()
     const user = useAppSelector(selectCurrentUser);
-    const handleLogout = () => {
-        dispatch(logout())
-    }
+   
 
     const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 

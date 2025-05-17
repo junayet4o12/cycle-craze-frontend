@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { TUserData } from "@/types";
+import { TUserDataBackend } from "@/types";
 import { HomeIcon, PhoneIcon, UserRoundPen } from "lucide-react";
 import UserRoleBadge from "./UserRoleBadge";
 import { Switch } from "@/components/ui/switch";
-import { useToggleUserStateMutation } from "@/redux/features/user/userApi";
+import { useToggleUserRoleMutation, useToggleUserStateMutation } from "@/redux/features/user/userApi";
 import { errorMessageGenerator } from "@/utils/errorMessageGenerator";
 import { toast } from "sonner";
 import {
@@ -18,21 +18,35 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import MU_SU_EditForm from "./MU_SU_EditForm";
+import { dateToStringDate } from "@/utils/dateToStringDate";
+import useIsAdmin from "@/hooks/useIsAdmin";
 
-export default function MU_SingleUser({ user, index }: { user: TUserData; index: number }) {
-    const [toggleState, { isLoading }] = useToggleUserStateMutation()
+export default function MU_SingleUser({ user, index }: { user: TUserDataBackend; index: number }) {
+    const [toggleState, { isLoading: isToggleStateLoading }] = useToggleUserStateMutation()
+    const [toggleRole, { isLoading: isToggleRoleLoading }] = useToggleUserRoleMutation()
+    const [, isAdminLoading, isSuperAdmin] = useIsAdmin()
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+
     const handleUserBlockStatusChange = async () => {
         const toastId = toast.loading('Changing Block Status...')
         try {
             await toggleState(user._id).unwrap();
-
             toast.success('Block Status Changed Successfully!!', { id: toastId })
         } catch (error) {
-
             toast.error(errorMessageGenerator(error), { id: toastId })
         }
     }
+
+    const handleUserRoleChange = async () => {
+        const toastId = toast.loading('Changing User Role...')
+        try {
+            await toggleRole(user._id).unwrap();
+            toast.success('User Role Changed Successfully!!', { id: toastId })
+        } catch (error) {
+            toast.error(errorMessageGenerator(error), { id: toastId })
+        }
+    }
+
     return (
         <TableRow>
             <TableCell>{index + 1}</TableCell>
@@ -59,12 +73,20 @@ export default function MU_SingleUser({ user, index }: { user: TUserData; index:
                     </div>
                 </div>
             </TableCell>
+            <TableCell>{dateToStringDate(user.createdAt || '')}</TableCell>
             <TableCell>
-                <UserRoleBadge role={user.role} />
+                <div className="flex items-center gap-2">
+                    <UserRoleBadge role={user.role} />
+                    {!isAdminLoading && isSuperAdmin && <Switch
+                        disabled={isToggleRoleLoading}
+                        checked={user.role === 'admin'}
+                        onCheckedChange={handleUserRoleChange}
+                    />}
+                </div>
             </TableCell>
             <TableCell>
                 <Switch
-                    disabled={isLoading}
+                    disabled={isToggleStateLoading}
                     checked={user.isBlock}
                     onCheckedChange={handleUserBlockStatusChange}
                 />
@@ -87,7 +109,6 @@ export default function MU_SingleUser({ user, index }: { user: TUserData; index:
                             </DialogHeader>
                         </DialogContent>
                     </Dialog>
-
                 </div>
             </TableCell>
         </TableRow>

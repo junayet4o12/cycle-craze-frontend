@@ -1,4 +1,4 @@
-import { TQueryParams, TResponseRedux, TUserData } from "@/types";
+import { TQueryParams, TResponseRedux,  TUserDataBackend } from "@/types";
 import { baseApi } from "../../api/baseApi";
 
 const userApi = baseApi.injectEndpoints({
@@ -19,7 +19,7 @@ const userApi = baseApi.injectEndpoints({
         };
       },
       providesTags: ["User"],
-      transformResponse: (response: TResponseRedux<TUserData[]>) => ({
+      transformResponse: (response: TResponseRedux<TUserDataBackend[]>) => ({
         data: response.data,
         meta: response.meta,
       }),
@@ -32,7 +32,7 @@ const userApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["User"],
-      transformResponse: (response: TResponseRedux<TUserData>) => ({
+      transformResponse: (response: TResponseRedux<TUserDataBackend>) => ({
         data: response.data,
       }),
     }),
@@ -54,7 +54,7 @@ const userApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       providesTags: (_result, _error, id) => [{ type: "User", id }],
-      transformResponse: (response: TResponseRedux<TUserData>) => ({
+      transformResponse: (response: TResponseRedux<TUserDataBackend>) => ({
         data: response.data,
       }),
     }),
@@ -80,6 +80,13 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    toggleUserRole: builder.mutation({
+      query: (userId: string) => ({
+        url: `/users/${userId}/toggle-role`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["User"],
+    }),
 
     // POST /users
     createUser: builder.mutation({
@@ -101,4 +108,5 @@ export const {
   useUpdateMyDataMutation,
   useToggleUserStateMutation,
   useCreateUserMutation,
+  useToggleUserRoleMutation
 } = userApi;

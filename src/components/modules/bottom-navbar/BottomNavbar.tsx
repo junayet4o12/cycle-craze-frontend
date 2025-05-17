@@ -10,8 +10,8 @@ import {
     User2,
     LucideProps,
 } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import Profile from "@/components/profile";
 
 interface NavLinkItem {
@@ -22,10 +22,11 @@ interface NavLinkItem {
     isFocus?: boolean;
 }
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useHandleLogout } from "@/hooks/useHandleLogout";
 const BottomNavbar: FC = () => {
     const location = useLocation();
     const user = useAppSelector(selectCurrentUser);
-    const dispatch = useAppDispatch()
+    const handleLogout = useHandleLogout()
     const navItems: NavLinkItem[] = [
         {
             label: "Home",
@@ -57,9 +58,6 @@ const BottomNavbar: FC = () => {
             show: user ? false : true
         },
     ];
-    const handleLogout = () => {
-        dispatch(logout())
-    }
     return (
         <section className="fixed bottom-0 inset-x-0 z-40 md:hidden border-t bg-background shadow-sm">
             <ul className="flex justify-between items-center py-2">

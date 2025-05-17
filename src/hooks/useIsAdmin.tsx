@@ -10,5 +10,6 @@ export default function useIsAdmin() {
         skip: !token
     });
     const isAdmin = user && data?.data?.role === 'admin'
-    return [isAdmin, isAdminLoading] as const
+    const isSuperAdmin = user && data?.data?.isSuperAdmin
+    return [isAdmin, isAdminLoading, isSuperAdmin] as const
 }

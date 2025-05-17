@@ -9,16 +9,15 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link, NavLink } from 'react-router-dom';
 import { useTheme } from '@/providers/theme-provider';
-import { useAppDispatch } from '@/redux/hooks';
-import { logout } from '@/redux/features/auth/authSlice';
 import { dashboardItems } from '@/utils/sidebar-item-and-routes-generator';
 import { SidebarItems } from '@/types';
 import { SidebarModeToggle } from '@/components/sidebar-mode-toggle';
+import { useHandleLogout } from '@/hooks/useHandleLogout';
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const { theme } = useTheme();
-  const dispatch = useAppDispatch()
+  const handleLogout = useHandleLogout()
   const sidebarItems: SidebarItems[] = dashboardItems.sidebarItems
 
   const toggleSidebar = () => {
@@ -28,9 +27,6 @@ export default function Sidebar() {
 
   const logoUrl = theme === 'dark' ? '/logo.png' : theme === 'light' ? '/logo-black.png' : isSystemDark ? '/logo.png' : '/logo-black.png'
 
-  const handleLogout = () => {
-    dispatch(logout())
-  }
   return (
     <div className={cn(
       "flex flex-col h-screen border-r transition-all duration-300",

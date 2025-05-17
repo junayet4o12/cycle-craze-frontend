@@ -66,6 +66,7 @@ export default function ManageUsers() {
                             <TableHead>Name</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Contact Info</TableHead>
+                            <TableHead>Signed up At</TableHead>
                             <TableHead>Role</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
@@ -114,6 +115,7 @@ export default function ManageUsers() {
                             <TableHead>Name</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Contact Info</TableHead>
+                             <TableHead>Signed up At</TableHead>
                             <TableHead>Role</TableHead>
                             <TableHead>Block</TableHead>
                             <TableHead className="text-right">Actions</TableHead>

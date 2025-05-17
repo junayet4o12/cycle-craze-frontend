@@ -22,6 +22,7 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
     let result = await baseQuery(args, api, extraOptions);
+    
     if (result?.error?.status === 404) {
         const err = result?.error as any
         toast.error(errorMessageGenerator(err))
@@ -41,6 +42,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
             }))
 
         } else {
+            await fetch(`${backend_api}/auth/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        })
             api.dispatch(logout())
         }
         result = await baseQuery(args, api, extraOptions);
